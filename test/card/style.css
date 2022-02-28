@@ -1,50 +1,10 @@
-*{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
-body{
-    background: hsl(0, 0%, 80%);
+body {
+    background-color: #100e17;
     font-family: 'Open Sans', sans-serif;
-}
-
-/* SECTION style start */
-
-section{
-    padding:1rem 5%;
-    min-height: 100vh;
-}
-
-section .heading{
-    font-size: 37px;
-    padding-bottom: 20px;
-    color:#111;
-    text-transform: uppercase;
-}
-
-section .heading span{
-    color: cadetblue;
-    font-size: 45px;
-    text-transform: uppercase;
-}
-/* SECTION Style end */
-
-/* HOME section start */
-.home{
-    background-image: url(../images/bg-home.jpg);
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-attachment: fixed;
-    opacity: 99%;
-}
-/* HOME section end */
-
-
-/* SERVICE section start */
+  }
   
-.service .container {
-    /* position: absolute; */
+ .container {
+    position: absolute;
     height: 600px;
     width: 1200px;
     top: 120px;
@@ -52,7 +12,7 @@ section .heading span{
     display: flex;
   }
   
-  .service .card {
+  .card {
     display: flex;
     height: 560px;
     width: 400px;
@@ -65,22 +25,22 @@ section .heading span{
     left: 0px;
   }
   
-  .service .card:not(:first-child) {
+  .card:not(:first-child) {
       margin-left: -50px;
   }
   
-  .service .card:hover {
+  .card:hover {
     transform: translateY(-20px);
     transition: 0.4s ease-out;
   }
   
-  .service .card:hover ~ .card {
+  .card:hover ~ .card {
     position: relative;
     left: 50px;
     transition: 0.4s ease-out;
   }
   
-  .service .title {
+  .title {
     color: white;
     font-weight: 300;
     position: absolute;
@@ -88,7 +48,7 @@ section .heading span{
     top: 15px;
   }
   
-  .service .bar {
+  .bar {
     position: absolute;
     top: 100px;
     left: 20px;
@@ -96,13 +56,13 @@ section .heading span{
     width: 150px;
   }
   
-  .service .emptybar {
+  .emptybar {
     background-color: #2e3033;
     width: 100%;
     height: 100%;
   }
   
-  .service .filledbar {
+  .filledbar {
     position: absolute;
     top: 0px;
     z-index: 3;
@@ -113,18 +73,18 @@ section .heading span{
     transition: 0.6s ease-out;
   }
   
-  .service .card:hover .filledbar {
+  .card:hover .filledbar {
     width: 120px;
     transition: 0.4s ease-out;
   }
   
-  .service .circle {
+  .circle {
     position: absolute;
     top: 150px;
     left: calc(50% - 60px);
   }
   
-  .service .stroke {
+  .stroke {
     stroke: white;
     stroke-dasharray: 360;
     stroke-dashoffset: 360;
@@ -136,11 +96,7 @@ section .heading span{
     stroke-width: 2px;
   }
   
-    .service .card:hover .stroke {
+  .card:hover .stroke {
     stroke-dashoffset: 100;
     transition: 0.6s ease-out;
   }
-
-/* SERVICE section end */
-
-/* Card SERVICE  */
