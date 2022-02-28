@@ -1,0 +1,79 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background: hsl(0, 0%, 80%);
+}
+
+/* SECTION style start */
+
+section{
+    padding:1rem 5%;
+    min-height: 100vh;
+}
+
+section .heading{
+    font-size: 37px;
+    padding-bottom: 20px;
+    color:#111;
+    text-transform: uppercase;
+}
+
+section .heading span{
+    color: cadetblue;
+    font-size: 45px;
+    text-transform: uppercase;
+}
+/* SECTION Style end */
+
+
+/* HOME section start */
+.home{
+    background: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    opacity: 60%;
+}
+/* HOME section end */
+
+
+/* SERVICE section start */
+.service .container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.service .container .box{
+    background: white;
+    width: 350px;
+    height: 650px;
+    margin: 25px 20px;
+    border-radius: 25px;
+}
+
+.service .container .box h3{
+    padding: 10px 0px 0px 45px;
+    font-size: 26px;
+}
+
+.service .container .box p{
+    padding: 12px;
+    font-size: 18px;
+    color: hsl(0, 0%, 35%);
+}
+
+.service .container .box:hover{
+    background-color: blanchedalmond;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.5s ease-out;
+    box-shadow: 8px 8px 10px hsl(0, 0%, 40%);
+    border-style: double;
+}
+/* SERVICE section end */
+
