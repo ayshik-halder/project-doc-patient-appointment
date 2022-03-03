@@ -1,136 +1,309 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DocEasy</title>
-    
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="A product landing page for a medication reminder app created for the FreeCodeCamp's Responsive Web Design Certification." />
+  <title></title>
 </head>
+
 <body>
-<!-- project1 -->
+  < <header id="header">
+    <div class="logo">
+      <a href="#hero">
+        <img class="logo-img" id="header-img" src="assets/images/doceasy-logo.svg" alt="DocEasy logo" />
+      </a>
+    </div>
 
-<!-- Navbar start -->
-
-<header class="navbar">
-  <nav>
-      <div class="webname">DocEasy</div>
-      <input type="checkbox" name="" id="btn">
-      <label for="btn" class="check">!!!</label>
-      <input type="submit" name="" value="Q" id="submit">
-      <input type="search" name="" id="search" placeholder="Search Doctors">
+    <nav id="nav-bar">
       <ul>
-          <li><a href="#home">home</a></li>
-          <li><a href="#service">service</a></li>
-          <li><a href="#about">about us</a></li>
-          <li><a href="#">contact</a></li>
-          <li><a href="#">login</a></li>
+        <li><a class="nav-link" href="#why">Why</a></li>
+        <li><a class="nav-link" href="#features">Features</a></li>
+        <li><a class="nav-link" href="#">Login</a></li>
+        <li><a class="nav-link" href="#register">Register</a></li>
+        <li><a class="nav-link" href="#team">Team</a></li>
+        <li><a class="nav-link" href="#contact">Contact Us</a></li>
+        <input type="search" class = "form-control" name="" id="search" placeholder="Search Doctors" />
+        <input type="submit" name="" value="Q" id="submit" />
       </ul>
-  </nav>
-</header>
-<!-- Navbar end -->
+    </nav>
+    </header>
 
-<!-- Home start -->
-    <section class="home" id="home">
-
-    </section>
-<!-- Home end -->
-
-<!-- Service start -->
-    <section class="service" id="service">
-        <h1 class="heading"> <span> our </span> services </h1>
-        <div class="container">
-            <div class="card">
-              <h3 class="title">Card 1</h3>
-              <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-              </div>
-              
-            </div>
-            <div class="card">
-              <h3 class="title">Card 2</h3>
-              <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-              </div>
-              
-            </div>
-            <div class="card">
-              <h3 class="title">Card 3</h3>
-              <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-              </div>
-              
-            </div>
-            <div class="card">
-              <h3 class="title">Card 4</h3>
-              <div class="bar">
-                <div class="emptybar"></div>
-                <div class="filledbar"></div>
-              </div>
-              
+    <main>
+      <section id="hero">
+        <div class="grid">
+          <div class="column-60">
+            <h1>Need doctors at your fingertips?</h1>
+            <p id="description">
+              Spend less time elsewhere and book your first appointment here!
+            </p>
+            <button class="btn">Login</button>
+          </div>
+          <div class="columnx-40">
+            <div class="image-div">
+              <img id="hero-img" src="assets/images/doceasy-home-img.svg" alt="DocEasy mobile app" width="520"
+                height="288" />
             </div>
           </div>
-    </section>
-<!-- Service end -->
+        </div>
+      </section>
 
-<!-- About us start-->
-    <section class="about" id="about">
-        <h1 class="heading"> about <span> us </span></h1>
-        <figure class="abouts">
-            <div class="profile-image"><img src="#" alt="#" /></div>
-            <figcaption>
+      <section id="why">
+        <h2>Why you should choose DocEasy</h2>
+        <div class="container">
+          <div class="card">
+            <div class="icon">
+              <img src="assets/images/easyToUse.svg" alt="easy to use icon" />
+            </div>
+            <div class="desc">
+              <h3>Easy to Use</h3>
+              <p>
+                Manage your appointments with our user-friendly website. Book
+                convenient appointments and stay connected to your caregivers.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="icon">
+              <img src="assets/images/dataPrivacy.svg" alt="data privacy icon" />
+            </div>
+            <div class="desc">
+              <h3>Data Privacy</h3>
+              <p>
+                Let nobody know what you and your doctors know. We don't hand
+                over personal data to third parties.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="icon">
+              <img src="assets/images/research.svg" alt="data privacy icon" />
+            </div>
+            <div class="desc">
+              <h3>Peace of Mind</h3>
+              <p>
+                We use our expertise to improve the healthcare system. Book only
+                doctors verified by us.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="register">
+        <h2>Register Yourself at DocEasy</h2>
+        <div class="container">
+          <!-- Patient Login  -->
+          <div class="card" id="patient">
+            <div class="product-logo">
+              <img class="logo-img" src="assets/images/doceasy-patient-logo.svg" alt="DocEasy logo" />
+            </div>
+            <div class="desc">
+              <h3>Features</h3>
+              <ol>
+                <li>Easily personalise your details</li>
+                <li>User</li>
+                <li>Doctor appointment manager</li>
+                <li>
+                  Track health measurements for various medical conditions
+                </li>
+                <li>Weekly & monthly med reports to share with your doctor</li>
+              </ol>
+            </div>
+            <button class="btn">Register</button>
+          </div>
+          <!-- Doctor Login  -->
+          <div class="card" id="doctor">
+            <div class="product-logo">
+              <img class="logo-img" src="assets/images/doceasy-doctor-logo.svg" alt="DocEasy for doctors logo" />
+            </div>
+            <div class="desc">
+              <h3>Features</h3>
+              <ol>
+                <li>Know your Patients</li>
+                <li>Manage and keep track of patient's appointments</li>
+                <li>Choose your clinic address</li>
+                <li>Personalise area of expertise and qualifications</li>
+                <li>Cross-device syncing</li>            
+              </ol>
+            </div>
+            <button class="btn">Register</button>
+          </div>
+        </div>
+      </section>
+      <section id="features">
+        <h2>Awesome Key Features</h2>
+        <div class="grid">
+          <div class="column-40">
+            <div class="image-div">
+              <img src="" alt="doceasy-ffeature" width="270" height="497" />
+            </div>
+          </div>
+
+          <div class="column-60">
+            <ol>
+              <li>
+                <h3 id="pills">Feature1</h3>
+                <p>
+                  xyz
+                </p>
+              </li>
+              <li>
+                <h3 id="med-report">Feature1</h3>
+                <p>
+                  xyz
+                </p>
+              </li>
+              <li>
+                <h3 id="family">Feature1</h3>
+                <p>
+                  xyz
+                </p>
+              </li>
+              <li>
+                <h3 id="doctor-icon">Feature1</h3>
+                <p>
+                 xyz
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section id="info">
+        <div>
+          <h2>Medication Adherence</h2>
+          <p>
+            Medication adherence is the extent to which a person’s behaviour
+            (taking medication, following a diet, and/or executing lifestyle
+            changes) corresponds with agreed recommendations from a health care
+            provider
+          </p>
+          <p>
+            A World Health Organization report on adherence to long-term
+            therapies suggests that patients adhere to only 50% of drugs
+            prescribed for chronic diseases in developed nations, a figure that
+            is even lower in developing countries.
+          </p>
+        </div>
+        <!-- <iframe
+          id="video"
+          height="315"
+          src="https://www.youtube.com/embed/jccBSbyActg?rel=0&amp;controls=0&amp;showinfo=0"
+          allowfullscreen
+        ></iframe> -->
+      </section>
+
+      <!-- Team Member  -->
+      <section id="team">
+        <h2>Meet our Founders</h2>
+
+        <div class="container">
+          <div class="card">
+            <div class="icon">
+              <img src="" alt="ayshik-img" />
+            </div>
+            <div class="desc">
               <h3>Ayshik Halder</h3>
-              <h5>Project Lead</h5>
-              <p>Which is worse, that everyone has his price, or that the price is always so low.</p>
-              <div class="icons"><a href="#"><i class="ion-social-reddit"></i></a>
-                <a href="#"> <i class="ion-social-twitter"></i></a>
+              <p>
+              <b>Project Lead</b>
+                Full Stack
+              </p>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="card">
+              <div class="icon">
+                <img src="" alt="dolon-img" />
               </div>
-            </figcaption>
-          </figure>
-          <figure class="abouts">
-            <div class="profile-image"><img src="#" alt="#" /></div>
-            <figcaption>
-              <h3>Dolon Roy</h3>
-              <h5>Support UI/UX</h5>
-              <p>I'm killing time while I wait for life to shower me with meaning and happiness.</p>
-              <div class="icons"><a href="#"><i class="ion-social-reddit"></i></a>
-                <a href="#"> <i class="ion-social-twitter"></i></a>
+              <div class="desc">
+                <h3>Dolon Roy</h3>
+                <p>
+                  Database Administrator 
+                </p>
               </div>
-            </figcaption>
-          </figure>
-          <figure class="abouts">
-            <div class="profile-image"><img src="#" alt="#" /></div>
-            <figcaption>
+            </div>
+          <div class="card">
+            <div class="icon">
+              <img src="" alt="arif-img" />
+            </div>
+            <div class="desc">
               <h3>Sk. Arif</h3>
-              <h5>Public Relations</h5>
-              <p>The only skills I have the patience to learn are those that have no real application in life. </p>
-              <div class="icons"><a href="#"><i class="ion-social-reddit"></i></a>
-                <a href="#"> <i class="ion-social-twitter"></i></a>
-              </div>
-            </figcaption>
-          </figure>
-          <figure class="abouts">
-            <div class="profile-image"><img src="#" alt="#" /></div>
-            <figcaption>
+              <p>
+                Support Frontend Dev
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="icon">
+              <img src="" alt="sutista-img" />
+            </div>
+            <div class="desc">
               <h3>Sutista Guin</h3>
-              <h5>Public Relations</h5>
-              <p>The only skills I have the patience to learn are those that have no real application in life. </p>
-              <div class="icons"><a href="#"><i class="ion-social-reddit"></i></a>
-                <a href="#"> <i class="ion-social-twitter"></i></a>
+              <p>
+               Support Frontend Dev
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <div class="grid">
+          <div class="column-60">
+            <!-- add link in action  -->
+            <form id="form" action="#">
+              <div class="form-group">
+                <label id="name-label" for="name">Name</label>
+                <input type="text" name="name" class="form-control" id="name" placeholder="Name" required />
               </div>
-            </figcaption>
-          </figure>
-        
-    </section>
-<!-- About us end -->
+              <div class="form-group">
+                <label id="email-label" for="email">Email</label>
+                <input name="email" class="form-control" id="email" type="email" placeholder="Email address" required />
+              </div>
+              <div class="form-group">
+                <p>Message</p>
+                <textarea id="message" class="input-textarea" name="message"
+                  placeholder="Enter your message here..."></textarea>
+              </div>
+              <div class="form-group">
+                <label id="submit-label" for="submit"></label>
+                <input id="submit" type="submit" value="Submit" class="btn" />
+              </div>
+            </form>
+          </div>
 
+          <div class="column-40">
+            <div class="image-div">
+              <img src="assets/images/contact.svg" alt="Contact icon" width="472" height="495" />
+            </div>
+          </div>
+        </div>
+      </section>
 
-<script src="assets\js\script.js"></script>
+      <footer>
+        <div id="footer-logo">
+          <img class="logo-img" src="assets/images/doceasy-logo-white.svg" alt="Doceasy logo" />
+        </div>
+        <div id="footer-info">
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Customer Support</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div id="copyright">Copyright 2022, DocEasy</div>
+        </div>
+      </footer>
+    </main>
 </body>
+
 </html>
