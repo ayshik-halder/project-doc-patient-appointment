@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 html {
@@ -387,6 +388,7 @@ nav li {
 }
 
 .desc > ol > li {
+  font-size: 1.6rem;
   padding-left: 8px;
   text-align: left;
 }
