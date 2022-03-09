@@ -360,7 +360,6 @@ nav li {
 
 #register .card {
   width: 35%;
-  cursor: pointer;
 }
 
 @media (max-width: 800px) {
@@ -381,6 +380,7 @@ nav li {
 
 #register .btn {
   justify-self: flex-end;
+  cursor: pointer;
 }
 
 .desc > ol {
