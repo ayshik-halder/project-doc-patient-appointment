@@ -5,7 +5,7 @@
  $dbpass = "user1";
  $db = "doceasy";
 
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($dbhost, $dbuser, $dbpass,$db);
 
 // Check connection
 if ($conn->connect_error) {
