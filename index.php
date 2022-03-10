@@ -144,7 +144,7 @@
       <div class="grid">
         <div class="column-40">
           <div class="image-div">
-            <img src="/assets/images/doceasy/doceasy-feature.png" alt="doceasy-ffeature" width="330" height="507" />
+            <img src="/assets/images/doceasy/doceasy-feature.png" alt="doceasy-feature" width="330" height="507" />
           </div>
         </div>
 
@@ -308,7 +308,7 @@
       </div>
       <div id="footer-info">
         <ul>
-          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="http://localhost/phpmyadmin">PhpMyAdmin</a></li>
           <li><a href="#">Customer Support</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
