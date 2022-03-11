@@ -1,61 +1,25 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Mar 11, 2022 at 10:14 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `doceasy`
 --
---
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `Admin_Id` int(2) UNSIGNED NOT NULL,
-  `User_Name` varchar(10) NOT NULL,
-  `Password` varchar(10) NOT NULL,
-  `First_Name` varchar(15) NOT NULL,
-  `Last_Name` varchar(10) NOT NULL,
-  `Email` varchar(20) NOT NULL,
-  `Phn_No` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `appointment`
---
-
-CREATE TABLE `appointment` (
-  `Appointment_ID` int(6) UNSIGNED NOT NULL,
-  `Patient_ID` int(6) UNSIGNED NOT NULL,
-  `Doctor_ID` int(5) UNSIGNED NOT NULL,
-  `Clinic_ID` tinyint(2) UNSIGNED NOT NULL,
-  `Patient_Name` varchar(25) NOT NULL,
-  `Doctor_Name` varchar(25) NOT NULL,
-  `Department` varchar(30) NOT NULL,
-  `Date_Time` datetime NOT NULL,
-  `Approved_OR_Not` bit(1) NOT NULL,
-  `Clinic_Address` varchar(200) NOT NULL,
-  `Clinic_Name` varchar(30) NOT NULL,
-  `Pin_Code` int(6) UNSIGNED NOT NULL,
-  `Problem` varchar(200) NOT NULL,
-  `Massage` varchar(200) DEFAULT NULL,
-  `Fees` int(4) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `clinic`
---
-
-CREATE TABLE `clinic` (
-  `Clinic_ID` tinyint(2) UNSIGNED NOT NULL,
-  `Address` varchar(50) NOT NULL,
-  `City` varchar(15) NOT NULL,
-  `Pin_Code` int(6) UNSIGNED NOT NULL,
-  `Contact_No` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -64,72 +28,29 @@ CREATE TABLE `clinic` (
 --
 
 CREATE TABLE `doctor` (
-  `Doctor_Id` int(5) UNSIGNED NOT NULL,
-  `Clinic_ID` tinyint(2) UNSIGNED NOT NULL,
-  `User_Name` varchar(10) NOT NULL,
-  `Password` varchar(10) NOT NULL,
-  `First_Name` varchar(15) NOT NULL,
-  `Last_Name` varchar(10) NOT NULL,
-  `DOB` date NOT NULL,
-  `Age` tinyint(2) UNSIGNED NOT NULL,
-  `Gender` tinytext NOT NULL,
-  `Specialization` varchar(30) NOT NULL,
-  `Degree` text NOT NULL,
-  `Experience` tinyint(2) UNSIGNED NOT NULL,
-  `Phn_No` int(10) UNSIGNED NOT NULL,
-  `Email` varchar(20) NOT NULL,
-  `Clinic_Name` varchar(20) NOT NULL,
-  `Clinic_Address` varchar(200) NOT NULL,
-  `Pin_Code` int(6) UNSIGNED NOT NULL,
-  `Date` date NOT NULL,
-  `Start_Time` time NOT NULL,
-  `End_Time` time NOT NULL,
-  `Fees` int(4) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `feedback`
---
-
-CREATE TABLE `feedback` (
-  `Name` varchar(30) NOT NULL,
-  `Email` varchar(20) NOT NULL,
-  `Massage` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `patient`
---
-
-CREATE TABLE `patient` (
-  `User_Id` int(6) NOT NULL,
-  `User_Name` varchar(10) NOT NULL,
-  `Password` varchar(10) NOT NULL,
-  `First_Name` varchar(20) NOT NULL,
-  `Last_Name` varchar(10) NOT NULL,
-  `DOB` date NOT NULL,
-  `Age` tinyint(4) NOT NULL,
-  `Gender` tinytext NOT NULL,
-  `Phn_No` bigint(10) UNSIGNED NOT NULL,
-  `Email` varchar(25) NOT NULL,
-  `Address` varchar(200) NOT NULL,
-  `Pin_Code` int(6) UNSIGNED NOT NULL,
-  `Allergic` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `schedule`
---
-
-CREATE TABLE `schedule` (
-  `Doctor_ID` int(5) UNSIGNED NOT NULL,
-  `Date_Time` datetime NOT NULL
+  `id` int(4) UNSIGNED NOT NULL,
+  `clinic_id` int(4) UNSIGNED NOT NULL,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `dob` date NOT NULL,
+  `age` int(2) UNSIGNED NOT NULL,
+  `gender` enum('MALE','FEMALE','OTHER') NOT NULL,
+  `specialization` varchar(50) NOT NULL,
+  `degree` varchar(50) NOT NULL,
+  `degree_proof` mediumblob NOT NULL,
+  `experience` int(2) UNSIGNED NOT NULL,
+  `phn_no` int(10) UNSIGNED NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `clinic_name` varchar(100) NOT NULL,
+  `clinic_address` varchar(200) NOT NULL,
+  `clinic_city` varchar(50) NOT NULL,
+  `clinic_pin` int(6) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL,
+  `fee` int(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -137,46 +58,33 @@ CREATE TABLE `schedule` (
 --
 
 --
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`Admin_Id`),
-  ADD UNIQUE KEY `User_Name` (`User_Name`);
-
---
--- Indexes for table `appointment`
---
-ALTER TABLE `appointment`
-  ADD PRIMARY KEY (`Appointment_ID`),
-  ADD UNIQUE KEY `Patient_ID` (`Patient_ID`),
-  ADD UNIQUE KEY `Doctor_ID` (`Doctor_ID`),
-  ADD UNIQUE KEY `Clinic_ID` (`Clinic_ID`);
-
---
--- Indexes for table `clinic`
---
-ALTER TABLE `clinic`
-  ADD PRIMARY KEY (`Clinic_ID`);
-
---
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
-  ADD PRIMARY KEY (`Doctor_Id`),
-  ADD UNIQUE KEY `User_Name` (`User_Name`),
-  ADD UNIQUE KEY `Clinic_ID` (`Clinic_ID`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clinic_id` (`clinic_id`);
 
 --
--- Indexes for table `patient`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `patient`
-  ADD PRIMARY KEY (`User_Id`),
-  ADD UNIQUE KEY `User_Name` (`User_Name`);
 
 --
--- Indexes for table `schedule`
+-- AUTO_INCREMENT for table `doctor`
 --
-ALTER TABLE `schedule`
-  ADD PRIMARY KEY (`Doctor_ID`,`Date_Time`);
+ALTER TABLE `doctor`
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `doctor`
+--
+ALTER TABLE `doctor`
+  ADD CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
