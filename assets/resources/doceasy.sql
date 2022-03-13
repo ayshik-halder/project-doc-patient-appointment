@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2022 at 10:27 AM
+-- Generation Time: Mar 13, 2022 at 02:18 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `doceasy`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(1) UNSIGNED NOT NULL,
+  `username` varchar(10) NOT NULL,
+  `password` varchar(10) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
+  `phn_no` int(10) UNSIGNED NOT NULL,
+  `email` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -153,6 +168,10 @@ CREATE TABLE `feedback` (
 CREATE TABLE `management` (
   `id` int(2) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED NOT NULL,
+  `clinic_name` varchar(100) NOT NULL,
+  `clinic_address` varchar(200) NOT NULL,
+  `clinic_city` varchar(50) NOT NULL,
+  `clinic_pin` int(6) UNSIGNED NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -231,6 +250,12 @@ CREATE TABLE `test_reports` (
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
@@ -274,7 +299,8 @@ ALTER TABLE `doc_appointment_schedule`
 -- Indexes for table `management`
 --
 ALTER TABLE `management`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clinic_id` (`clinic_id`);
 
 --
 -- Indexes for table `patient`
@@ -309,6 +335,12 @@ ALTER TABLE `test_reports`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `book_appointment`
@@ -397,6 +429,12 @@ ALTER TABLE `doctor`
 --
 ALTER TABLE `doc_appointment_schedule`
   ADD CONSTRAINT `doc_appointment_schedule_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `management`
+--
+ALTER TABLE `management`
+  ADD CONSTRAINT `management_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `patient_document`
