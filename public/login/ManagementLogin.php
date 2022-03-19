@@ -15,14 +15,14 @@
     <header id="header">
         <div class="logo">
             <a href="/index.php">
-                <img class="logo-img" id="header-img" src="/assets/images/doceasy/doceasy-doctor-logo.svg" alt="DocEasy logo" />
+                <img class="logo-img" id="header-img" src="/assets/images/doceasy/doceasy-logo.svg" alt="DocEasy logo" />
             </a>
         </div>
 
         <nav id="nav-bar">
             <ul>
                 <p>Not yet a user?</p>
-                <li><a class="nav-link" href="/public/register/DocRegister.php"><u> Register </u></a></li>
+                <li><a class="nav-link" href="#"><u> Register </u></a></li>
             </ul>
         </nav>
     </header>
@@ -31,7 +31,7 @@
         <section id="registration">
             <div class="container">
                 <div class="card">
-                    <h2>Doctor Login Form</h2>
+                    <h2>Management Login Form</h2>
                     <div class="grid">
                         <form id="form" action="#">
                             <div class="form-group">
@@ -56,7 +56,7 @@
                             <div class="form-group">
                                 <p>
                                     Not yet a user?
-                                    <a href="/public/register/DocRegister.php"><u> Register </u></a>
+                                    <a href="#"><u> Register </u></a>
                                 </p>
                             </div>
                         </form>

@@ -19,7 +19,7 @@
     <nav id="nav-bar">
       <ul>
         <p>Already a User?</p>
-        <li><a class="nav-link" href="../login/login.php"><u>Login</u></a></li>
+        <li><a class="nav-link" href="/public/login/DocLogin.php"><u>Login</u></a></li>
       </ul>
     </nav>
   </header>
@@ -28,13 +28,13 @@
     <section id="registration">
       <h2>Doctor Registration Form</h2>
       <div class="grid">
-        <form id="form" action="#">
+        <form id="form" action="#" method="POST">
 
           <div class="column-50">
             <!-- add link in action  -->
             <div class="form-group">
               <label id="fname-label" for="first-name"><strong>First Name</strong></label>
-              <input type="text" name="first-name" class="form-control" id="first-name" placeholder="First Name"
+              <input type="text" name="first_name" class="form-control" id="first-name" placeholder="First Name"
                 required />
             </div>
           </div>
@@ -42,7 +42,7 @@
           <div class="column-50">
             <div class="form-group">
               <label id="lname-label" for="last-name"><strong>Last Name</strong></label>
-              <input type="text" name="last-name" class="form-control" id="last-name" placeholder="Last Name"
+              <input type="text" name="last_name" class="form-control" id="last-name" placeholder="Last Name"
                 required />
             </div>
           </div>
@@ -92,7 +92,7 @@
           <div class="column-50">
             <div class="form-group">
               <label id="phn-label" for="phn-no"><strong>Phone Number</strong></label>
-              <input type="tel" name="phn-no" class="form-control" id="phn-no" placeholder="Phone Number" />
+              <input type="tel" name="phn_no" class="form-control" id="phn-no" placeholder="Phone Number" pattern="[0-9]{10}"/>
             </div>
           </div>
 
@@ -106,7 +106,7 @@
           <div class="column-100">
             <div class="form-group">
               <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
-              <input type="text" name="clinic-name" class="form-control" id="clinic-name" placeholder="Clinic Name"
+              <input type="text" name="clinic_name" class="form-control" id="clinic-name" placeholder="Clinic Name"
                 required />
             </div>
           </div>
@@ -114,7 +114,7 @@
           <div class="column-100">
             <div class="form-group">
               <label id="address-label" for="address"><strong>Clinic Address</strong></label>
-              <input type="text" name="address" class="form-control" id="address" placeholder="Clinic Address"
+              <input type="text" name="clinic_address" class="form-control" id="address" placeholder="Clinic Address"
                 required />
             </div>
           </div>
@@ -122,14 +122,14 @@
           <div class="column-50">
             <div class="form-group">
               <label id="city-label" for="city"><strong>City</strong></label>
-              <input type="text" name="city" class="form-control" id="city" placeholder="City" required />
+              <input type="text" name="clinic_city" class="form-control" id="city" placeholder="City" required />
             </div>
           </div>
 
           <div class="column-50">
             <div class="form-group">
               <label id="pin-label" for="pin-code"><strong>Pin Code</strong></label>
-              <input type="number" name="pin-code" class="form-control" id="pin-code" placeholder="Pin-code" required />
+              <input type="number" name="clinic_pin" class="form-control" id="pin-code" placeholder="Pin-code" required />
             </div>
           </div>
 
@@ -151,7 +151,7 @@
           <div class="column-50">
             <div class="form-group">
               <label id="c-password-label" for="c-password"><strong>Confirm Password</strong></label>
-              <input type="password" name="c-password" class="form-control" id="c-password"
+              <input type="password" name="confirm_password" class="form-control" id="c-password"
                 placeholder="Re-enter the Password" required />
             </div>
           </div>
@@ -171,10 +171,46 @@
               </a>
             </div>
           </div>
-
         </form>
       </div>
     </section>
+
+
+    <?php
+
+    require_once('../config.php');
+    if ($_POST) {
+      $first_name = $_POST['first_name'];
+      $last_name = $_POST['last_name'];
+      $dob = $_POST['dob'];
+      $age = $_POST['age'];
+      $gender = $_POST['gender'];
+      $specialization = $_POST['specialization'];
+      $experience = $_POST['experience'];
+      $phn_no = $_POST['phn_no'];
+      $email = $_POST['email'];
+      $clinic_name = $_POST['clinic_name'];
+      $clinic_address = $_POST['clinic_address'];
+      $clinic_city = $_POST['clinic_city'];
+      $clinic_pin = $_POST['clinic_pin'];
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      $confirm_password = $_POST['confirm_password'];
+
+
+      $query = "INSERT INTO doctor(first_name, last_name, dob, age, gender, specialization, experience, phn_no, email, clinic_name, clinic_address, clinic_city, clinic_pin, username, password)
+       VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$clinic_name', '$clinic_address', '$clinic_city', '$clinic_pin', '$username', '$password' )";
+
+      if ($conn->query($query)) {
+        echo "inserted data";
+      } else {
+        echo "failed" . $conn->error;
+      }
+    }
+    $conn->close();
+    
+    ?>
+
 
     <footer>
       <div id="footer-logo">
