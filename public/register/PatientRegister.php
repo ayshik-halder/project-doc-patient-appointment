@@ -166,7 +166,7 @@
         VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$marital_status', '$phn_no', '$email', '$address', '$city', '$pin_code', '$username', '$password' )";
 
         if ($conn->query($query)) {
-          echo "inserted data";
+          header("location: ../dashboard/patientDash.html");
         } else {
           echo "failed" . $conn->error;
         }
@@ -190,7 +190,6 @@
       <h2>Patient Registration Form</h2>
       <div class="grid">
         <form id="form" action="#" method="POST">
-
           <div class="column-50">
             <!-- add link in action  -->
             <div class="form-group">

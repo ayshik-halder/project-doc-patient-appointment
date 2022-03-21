@@ -202,7 +202,7 @@
        VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$clinic_name', '$clinic_address', '$clinic_city', '$clinic_pin', '$username', '$password' )";
 
       if ($conn->query($query)) {
-        echo "inserted data";
+        header("location: ../dashboard/patientDash.html");
       } else {
         echo "failed" . $conn->error;
       }
