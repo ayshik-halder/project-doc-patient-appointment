@@ -33,14 +33,14 @@
                 <div class="card">
                     <h2>Doctor Login Form</h2>
                     <div class="grid">
-                        <form id="form" action="#">
+                        <form id="form" action="" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required />
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" />
                             </div>
                             <div class="form-group">
                                 <label id="password-label" for="password"><strong>Password</strong></label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required />
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" />
                             </div>
                             <div class="form-group">
                                 <div id="button-group">
@@ -55,7 +55,7 @@
 
                             <div class="form-group">
                                 <p>
-                                    Not yet a user?
+                                    Don't have an account?
                                     <a href="/public/register/DocRegister.php"><u> Register </u></a>
                                 </p>
                             </div>

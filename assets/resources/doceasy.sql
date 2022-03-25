@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2022 at 09:43 AM
+-- Generation Time: Mar 25, 2022 at 07:23 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id` int(1) UNSIGNED NOT NULL,
+  `id` int(1) NOT NULL,
   `username` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL,
+  `password` int(10) UNSIGNED NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL
@@ -43,7 +43,7 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `book_appointment` (
-  `id` int(5) UNSIGNED NOT NULL,
+  `id` int(5) NOT NULL,
   `patient_id` int(5) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED NOT NULL,
   `doctor_id` int(4) UNSIGNED NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `doctor` (
   `id` int(4) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED DEFAULT NULL,
   `username` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL,
+  `password` int(10) UNSIGNED NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `dob` date NOT NULL,
@@ -134,13 +134,6 @@ CREATE TABLE `doctor` (
   `end_time` time DEFAULT NULL,
   `fee` int(4) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `doctor`
---
-
-INSERT INTO `doctor` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `clinic_name`, `clinic_address`, `clinic_city`, `clinic_pin`, `date`, `start_time`, `end_time`, `fee`) VALUES
-(2, NULL, 'ftjyf', 'vghvchgv', 'dytd', 'dfyjfdtju', '2022-03-19', 36, 'MALE', 'dty', NULL, NULL, 4, 4294967295, 'fftuu@fj', 'fufuyfv', 'cctyft', 'fukyfuyf', 121212, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -180,7 +173,7 @@ CREATE TABLE `management` (
   `clinic_city` varchar(50) NOT NULL,
   `clinic_pin` int(6) UNSIGNED NOT NULL,
   `username` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL
+  `password` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -192,7 +185,7 @@ CREATE TABLE `management` (
 CREATE TABLE `patient` (
   `id` int(5) UNSIGNED NOT NULL,
   `username` varchar(10) NOT NULL,
-  `password` varchar(10) NOT NULL,
+  `password` int(10) UNSIGNED NOT NULL,
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `dob` date NOT NULL,
@@ -206,21 +199,6 @@ CREATE TABLE `patient` (
   `pin_code` int(6) UNSIGNED NOT NULL,
   `allergic` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `patient`
---
-
-INSERT INTO `patient` (`id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
-(12, 'xd', 'ydcyjhcdy', 'a', 'b', '2022-03-19', 1, 'FEMALE', 'UNMARRIED', 1234567890, 'dhtd@gmail.com', 'yedttrdtdjtdtyd', 'fsdg', 1234567, NULL),
-(13, 'ab', 'abcd', 'Dolon', 'Roy', '2022-03-21', 1, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL),
-(14, 'ab', 'abcd', 'Dolon', 'Roy', '2022-03-21', 1, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL),
-(15, 'ab', 'abcd', 'Dolon', 'Roy', '2022-03-21', 1, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL),
-(16, 'dolon123', 'dolon123', 'Dolon', 'Roy', '2000-01-02', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL),
-(17, 'ayshik', 'ayshik', 'Ayshik', 'Halder', '2000-11-02', 21, 'MALE', 'UNMARRIED', 4294967295, 'halderayshik@gmail.com', 'Howah', 'Domjur', 711405, NULL),
-(18, 'xyz', 'xyz', 'Dolon-sd', 'Roy', '2000-11-02', 21, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL),
-(19, 'testing', 'testing', 'Testing', 'Roy', '2000-11-02', 21, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL),
-(20, 'testing', 'testing', 'Testing', 'Roy', '2000-11-02', 21, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
 
@@ -257,7 +235,7 @@ CREATE TABLE `test` (
 --
 
 CREATE TABLE `test_reports` (
-  `report_no` int(5) UNSIGNED NOT NULL,
+  `report_no` int(5) NOT NULL,
   `ticket_no` int(5) UNSIGNED NOT NULL,
   `test_id` int(4) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED NOT NULL,
@@ -362,13 +340,13 @@ ALTER TABLE `test_reports`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(1) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `book_test`
@@ -404,7 +382,7 @@ ALTER TABLE `management`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -416,7 +394,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `test_reports`
 --
 ALTER TABLE `test_reports`
-  MODIFY `report_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `report_no` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
