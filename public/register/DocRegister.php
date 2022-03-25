@@ -94,14 +94,14 @@
       }
 
       if (!$specialization) {
-        $genderErr = "Mention your specialization";
+        $specializationErr = "Mention your specialization";
         $flag = false;
       } else {
         test_input($specialization);
       }
 
       if (!$experience) {
-        $genderErr = "Experience Year is required";
+        $experienceErr = "Experience Year is required";
         $flag = false;
       } else {
         test_input($experience);
@@ -124,11 +124,11 @@
         test_input($email);
       }
 
-      if (!$clinic_address) {
-        $addressErr = "Specify your Clinic Address";
+      if (!$clinic_name) {
+        $clinicNameErr = "Specify your Clinic Name";
         $flag = false;
       } else {
-        test_input($clinic_address);
+        test_input($clinic_name);
       }
 
 
@@ -197,7 +197,7 @@
     <section id="registration">
       <h2>Doctor Registration Form</h2>
       <div class="grid">
-        <form id="form" action="#" method="POST">
+        <form id="form" action="" method="POST">
 
           <div class="column-50">
             <!-- add link in action  -->
@@ -346,43 +346,6 @@
         </form>
       </div>
     </section>
-
-
-    <?php
-
-    require_once('../config.php');
-    if ($_POST) {
-      $first_name = $_POST['first_name'];
-      $last_name = $_POST['last_name'];
-      $dob = $_POST['dob'];
-      $age = $_POST['age'];
-      $gender = $_POST['gender'];
-      $specialization = $_POST['specialization'];
-      $experience = $_POST['experience'];
-      $phn_no = $_POST['phn_no'];
-      $email = $_POST['email'];
-      $clinic_name = $_POST['clinic_name'];
-      $clinic_address = $_POST['clinic_address'];
-      $clinic_city = $_POST['clinic_city'];
-      $clinic_pin = $_POST['clinic_pin'];
-      $username = $_POST['username'];
-      $password = $_POST['password'];
-      $confirm_password = $_POST['confirm_password'];
-
-
-      $query = "INSERT INTO doctor(first_name, last_name, dob, age, gender, specialization, experience, phn_no, email, clinic_name, clinic_address, clinic_city, clinic_pin, username, password)
-       VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$clinic_name', '$clinic_address', '$clinic_city', '$clinic_pin', '$username', '$password' )";
-
-      if ($conn->query($query)) {
-        header("location: ../dashboard/patientDash.html");
-      } else {
-        echo "failed" . $conn->error;
-      }
-    }
-    $conn->close();
-
-    ?>
-
 
     <footer>
       <div id="footer-logo">

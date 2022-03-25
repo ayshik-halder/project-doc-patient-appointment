@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2022 at 07:23 AM
+-- Generation Time: Mar 25, 2022 at 02:03 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -100,8 +100,16 @@ CREATE TABLE `clinic` (
   `address` varchar(200) NOT NULL,
   `city` varchar(50) NOT NULL,
   `pin_code` int(6) UNSIGNED NOT NULL,
-  `contact_no` int(10) UNSIGNED NOT NULL
+  `contact_no` int(10) UNSIGNED NOT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clinic`
+--
+
+INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `contact_no`, `email`) VALUES
+(2, 'Burdwan Hospital', 'Burdwan Medical College and Hospital; West Bengal', 'burdwan', 713101, 1234567890, 'something@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -167,13 +175,14 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `management` (
   `id` int(2) UNSIGNED NOT NULL,
-  `clinic_id` int(4) UNSIGNED NOT NULL,
-  `clinic_name` varchar(100) NOT NULL,
-  `clinic_address` varchar(200) NOT NULL,
-  `clinic_city` varchar(50) NOT NULL,
-  `clinic_pin` int(6) UNSIGNED NOT NULL,
+  `clinic_id` int(4) UNSIGNED DEFAULT NULL,
   `username` varchar(10) NOT NULL,
-  `password` int(10) UNSIGNED NOT NULL
+  `password` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(20) NOT NULL,
+  `phn_no` int(10) UNSIGNED NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `clinic_name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -358,13 +367,13 @@ ALTER TABLE `book_test`
 -- AUTO_INCREMENT for table `clinic`
 --
 ALTER TABLE `clinic`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `doc_appointment_schedule`
@@ -376,7 +385,7 @@ ALTER TABLE `doc_appointment_schedule`
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `patient`

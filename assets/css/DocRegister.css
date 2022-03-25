@@ -18,6 +18,10 @@ body {
   color: #37383a;
 }
 
+h2 {
+  margin-bottom: 3rem;
+} 
+
 li {
   list-style: none;
 }

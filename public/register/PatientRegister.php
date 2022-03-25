@@ -28,7 +28,7 @@
 
     <?php
 
-    require_once('../config.php');
+    require('../config.php');
 
     $first_name = $last_name = $dob = $age = $gender = $marital_status = $phn_no = $email = $address = $city = $pin_code = $username = $password = $confirm_password = '';
 
@@ -143,8 +143,8 @@
       if (!$username) {
         $usernameErr = "Username is required";
         $flag = false;
-      } elseif (strlen($username) <= 4) {
-        $usernameErr = "Username should be more than 4 characters";
+      } elseif (strlen($username) <= 3) {
+        $usernameErr = "Username should be more than 3 characters";
       } elseif (strlen($username) > 11) {
         $usernameErr = "Username should be less than 11 characters";
       } elseif ($row != null) {
@@ -181,7 +181,6 @@
         VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$marital_status', '$phn_no', '$email', '$address', '$city', '$pin_code', '$username', '$password' )";
 
         if ($conn->query($query)) {
-          // header("location: ../dashboard/patientDash.html");
           header("location:../login/patientLogin.php");
         } else {
           echo "failed" . $conn->error;
@@ -200,13 +199,11 @@
     ?>
 
 
-
     <section id="registration">
       <h2>Patient Registration Form</h2>
       <div class="grid">
         <form id="form" action="" method="POST">
           <div class="column-50">
-            <!-- add link in action  -->
             <div class="form-group">
               <label id="fname-label" for="first-name"><strong>First Name</strong></label>
               <input type="text" name="first_name" class="form-control" id="first-name" placeholder="First Name" value="<?php $first_name; ?>" />
@@ -241,9 +238,9 @@
             <div class="form-group">
               <p><strong>Gender</strong></p>
               <span id="gender-span">
-                <label id="span" for="male"><input type="radio" id="male" name="gender" value="male" value="<?php $gender; ?>" />&nbsp; Male</label>
-                <label id="span" for="female"><input type="radio" id="female" name="gender" value="female" value="<?php $gender; ?>" /> &nbsp; Female</label>
-                <label id="span" for="other"><input type="radio" id="other" name="gender" value="other" value="<?php $gender; ?>" /> &nbsp; Other</label>
+                <label id="span" for="male"><input type="radio" id="male" name="gender" value="<?php $gender; ?>" />&nbsp; Male</label>
+                <label id="span" for="female"><input type="radio" id="female" name="gender" value="<?php $gender; ?>" /> &nbsp; Female</label>
+                <label id="span" for="other"><input type="radio" id="other" name="gender" value="<?php $gender; ?>" /> &nbsp; Other</label>
               </span>
               <small class="error-label"><?php echo $genderErr ?></small>
             </div>
@@ -253,8 +250,8 @@
             <div class="form-group">
               <p><strong>Marital Status</strong></p>
               <span id="marital-span">
-                <label id="span" for="married"><input type="radio" id="married" name="marital_status" value="married" value="<?php $marital_status; ?>" /> &nbsp; Married</label>
-                <label id="span" for="unmarried"><input type="radio" id="unmarried" name="marital_status" value="unmarried" value="<?php $marital_status; ?>" /> &nbsp; Unmarried</label>
+                <label id="span" for="married"><input type="radio" id="married" name="marital_status" value="<?php $marital_status; ?>" /> &nbsp; Married</label>
+                <label id="span" for="unmarried"><input type="radio" id="unmarried" name="marital_status" value="<?php $marital_status; ?>" /> &nbsp; Unmarried</label>
               </span>
               <small class="error-label"><?php echo $maritalStatusErr ?></small>
             </div>
