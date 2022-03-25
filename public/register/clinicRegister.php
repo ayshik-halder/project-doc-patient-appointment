@@ -23,7 +23,7 @@
             </ul>
         </nav>
     </header>
-    
+
     <main>
 
         <?php
@@ -140,3 +140,5 @@
 
     </main>
 </body>
+
+</html>

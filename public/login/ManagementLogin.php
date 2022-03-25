@@ -33,7 +33,7 @@
                 <div class="card">
                     <h2>Management Login Form</h2>
                     <div class="grid">
-                        <form id="form" action="#">
+                        <form id="form" action="../loginConnect/managementLoginConnect.php" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" required />

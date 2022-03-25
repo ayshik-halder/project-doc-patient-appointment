@@ -79,9 +79,6 @@
       if (!$dob) {
         $dobErr = "DOB is required";
         $flag = false;
-      } elseif ($dob == new DateTime(date('dd-mm-yy'))) {
-        $dobErr = "Give your proper DOB";
-        $flag = false;
       } else {
         test_input($dob);
       }
