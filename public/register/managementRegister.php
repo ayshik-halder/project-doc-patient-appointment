@@ -48,6 +48,14 @@ if ($_SESSION["loggedIn"]) {
 
                 $flag = true;
 
+                function test_input($data)
+                {
+                    $data = trim($data);
+                    $data = stripslashes($data);
+                    $data = htmlspecialchars($data);
+                    return $data;
+                }
+
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $first_name = $_POST['first_name'];
@@ -91,6 +99,13 @@ if ($_SESSION["loggedIn"]) {
                         test_input($email);
                     }
 
+                    if ($clinic_name == "Choose Clinic Name") {
+                        $clinicNameErr = "Specify your Clinic Name";
+                        $flag = false;
+                    } else {
+                        test_input($clinic_name);
+                    }
+                    
                     $sql_username = "SELECT * FROM management WHERE username='$username'";
                     $res_username = $conn->query($sql_username);
                     $row = $res_username->fetch_assoc();
@@ -138,13 +153,7 @@ if ($_SESSION["loggedIn"]) {
                     }
                 }
 
-                function test_input($data)
-                {
-                    $data = trim($data);
-                    $data = stripslashes($data);
-                    $data = htmlspecialchars($data);
-                    return $data;
-                }
+
 
                 ?>
 
@@ -187,7 +196,17 @@ if ($_SESSION["loggedIn"]) {
                             <div class="column-100">
                                 <div class="form-group">
                                     <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
-                                    <input type="text" name="clinic_name" class="form-control" id="clinic-name" placeholder="Clinic Name" value="<?php echo $clinic_name; ?>" />
+                                    <select name="clinic_name" id="clinic-name" , class="form-control">
+                                        <option selected>Choose Clinic Name</option>
+
+                                        <?php
+                                        $query_clinic = "SELECT * FROM clinic";
+                                        $result_clinic = $conn->query($query_clinic);
+                                        while ($row = $result_clinic->fetch_array()) {
+                                        ?>
+                                            <option><?php echo $row['clinic_name'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                     <small class="error-label"><?php echo $clinicNameErr ?></small>
                                 </div>
                             </div>
