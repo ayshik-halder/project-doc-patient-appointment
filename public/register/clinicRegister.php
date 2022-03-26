@@ -42,16 +42,16 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
 
-                require_once('../config.php');
+                $clinic_name = $address = $city = $pin_code = $contact_no = $email = '';
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $clinic_name = test_input($_POST['clinic_name']);
-                    $address = test_input($_POST['address']);
-                    $city = test_input($_POST['city']);
-                    $pin_code = test_input($_POST['pin_code']);
-                    $contact_no = test_input($_POST['contact_no']);
-                    $email = test_input($_POST['email']);
+                    $clinic_name = $_POST['clinic_name'];
+                    $address = $_POST['address'];
+                    $city = $_POST['city'];
+                    $pin_code = $_POST['pin_code'];
+                    $contact_no = $_POST['contact_no'];
+                    $email = $_POST['email'];
 
                     $query = "INSERT INTO clinic(clinic_name, address, city, pin_code, contact_no, email)
             VALUES('$clinic_name', '$address', '$city', '$pin_code', '$contact_no', '$email' )";
@@ -61,14 +61,6 @@ if ($_SESSION["loggedIn"]) {
                     } else {
                         echo "failed" . $conn->error;
                     }
-                }
-
-                function test_input($data)
-                {
-                    $data = trim($data);
-                    $data = stripslashes($data);
-                    $data = htmlspecialchars($data);
-                    return $data;
                 }
 
                 ?>

@@ -97,6 +97,9 @@
             if (!$phn_no) {
                 $phnNoErr = "Phone Number is required";
                 $flag = false;
+            } elseif (strlen($phn_no) != 10) {
+                $phnNoErr = "Phone Number must be contain 10 digit";
+                $flag = false;
             } else {
                 test_input($phn_no);
             }
@@ -127,6 +130,9 @@
 
             if (!$pin_code) {
                 $pinCodeErr = "Pin Code is required";
+                $flag = false;
+            } elseif (strlen($pin_code) != 6) {
+                $pinCodeErr = "Pin Code must be contain 6 digit";
                 $flag = false;
             } else {
                 test_input($pin_code);
@@ -350,4 +356,5 @@
 
     </main>
 </body>
+
 </html>

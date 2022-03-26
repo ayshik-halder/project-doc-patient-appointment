@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2022 at 02:03 PM
+-- Generation Time: Mar 26, 2022 at 05:09 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -30,11 +30,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id` int(1) NOT NULL,
   `username` varchar(10) NOT NULL,
-  `password` int(10) UNSIGNED NOT NULL,
+  `password` varchar(10) NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `full_name`, `phn_no`, `email`) VALUES
+(1, 'user1', 'user1', 'Admin', 1234567890, 'admin@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -109,7 +116,8 @@ CREATE TABLE `clinic` (
 --
 
 INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `contact_no`, `email`) VALUES
-(2, 'Burdwan Hospital', 'Burdwan Medical College and Hospital; West Bengal', 'burdwan', 713101, 1234567890, 'something@gmail.com');
+(2, 'Burdwan Hospital', 'Burdwan Medical College and Hospital; West Bengal', 'burdwan', 713101, 1234567890, 'something@gmail.com'),
+(5, 'Kolkata Nursing Home', 'Rajarhat Main Road, Atghara, Newtown, Kolkata, West Bengl', 'Newtown', 700136, 4294967295, 'anything@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -143,6 +151,13 @@ CREATE TABLE `doctor` (
   `fee` int(4) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `doctor`
+--
+
+INSERT INTO `doctor` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `clinic_name`, `clinic_address`, `clinic_city`, `clinic_pin`, `date`, `start_time`, `end_time`, `fee`) VALUES
+(10, NULL, '1234', 123, 'Dolon', 'Roy', '2022-03-24', 12, 'FEMALE', 'Immunology', NULL, NULL, 2, 4294967295, 'rdolon321@gmail.com', 'Burdwan Hospital', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL, NULL, NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -162,9 +177,11 @@ CREATE TABLE `doc_appointment_schedule` (
 --
 
 CREATE TABLE `feedback` (
+  `feedback_no` int(5) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `massage` varchar(400) NOT NULL
+  `message` varchar(500) NOT NULL,
+  `date_time` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -208,6 +225,13 @@ CREATE TABLE `patient` (
   `pin_code` int(6) UNSIGNED NOT NULL,
   `allergic` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `patient`
+--
+
+INSERT INTO `patient` (`id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
+(50, 'rdolon', 12345, 'Dolon', 'Roy', '2002-02-12', 0, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
 
@@ -305,6 +329,12 @@ ALTER TABLE `doc_appointment_schedule`
   ADD KEY `doctor_id` (`doctor_id`,`date_time`);
 
 --
+-- Indexes for table `feedback`
+--
+ALTER TABLE `feedback`
+  ADD PRIMARY KEY (`feedback_no`);
+
+--
 -- Indexes for table `management`
 --
 ALTER TABLE `management`
@@ -349,7 +379,7 @@ ALTER TABLE `test_reports`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `book_appointment`
@@ -367,13 +397,13 @@ ALTER TABLE `book_test`
 -- AUTO_INCREMENT for table `clinic`
 --
 ALTER TABLE `clinic`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `doc_appointment_schedule`
@@ -382,16 +412,22 @@ ALTER TABLE `doc_appointment_schedule`
   MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `feedback`
+--
+ALTER TABLE `feedback`
+  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `test`

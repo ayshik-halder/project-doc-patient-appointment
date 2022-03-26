@@ -1,5 +1,5 @@
 <?php
-include "../config.php";
+require_once "../config.php";
 session_start();
 if ($_SESSION["loggedIn"]) {
 ?>
@@ -42,8 +42,6 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
 
-                require_once('../config.php');
-
                 $first_name = $last_name = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
                 $firstNameErr = $lastNameErr = $phnNoErr = $emailErr = $clinicNameErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
@@ -78,6 +76,9 @@ if ($_SESSION["loggedIn"]) {
 
                     if (!$phn_no) {
                         $phnNoErr = "Phone Number is required";
+                        $flag = false;
+                    } elseif (strlen($phn_no) != 10) {
+                        $phnNoErr = "Phone Number must be contain 10 digit";
                         $flag = false;
                     } else {
                         test_input($phn_no);

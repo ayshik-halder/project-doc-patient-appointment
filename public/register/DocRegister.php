@@ -90,7 +90,7 @@
                 test_input($gender);
             }
 
-            if (!$specialization) {
+            if ($specialization == "Choose your specialized Department") {
                 $specializationErr = "Mention your specialization";
                 $flag = false;
             } else {
@@ -107,6 +107,9 @@
             if (!$phn_no) {
                 $phnNoErr = "Phone Number is required";
                 $flag = false;
+            } elseif (strlen($phn_no) != 10) {
+                $phnNoErr = "Phone Number must be contain 10 digit";
+                $flag = false;
             } else {
                 test_input($phn_no);
             }
@@ -121,7 +124,7 @@
                 test_input($email);
             }
 
-            if (!$clinic_name) {
+            if ($clinic_name == "Choose Clinic Name") {
                 $clinicNameErr = "Specify your Clinic Name";
                 $flag = false;
             } else {
@@ -244,7 +247,16 @@
                     <div class="column-50">
                         <div class="form-group">
                             <label id="specialization-label" for="specialization"><strong>Specialization</strong></label>
-                            <input type="text" name="specialization" class="form-control" id="specialization" placeholder="Department" value="<?php echo $specialization; ?>" />
+                            <select name="specialization" id="specialization" class="form-control">
+                                <option selected>Choose your specialized Department</option>
+                                <?php
+                                $specialization = array('Neurology', 'Dermatology', 'Gynaecology', 'Immunology', 'Ophthalmology', 'Anesthesiology', 'Psychiatry', 'Urology', 'Cardiology', 'Otolaryngology');
+                                sort($specialization, SORT_STRING);
+
+                                foreach ($specialization as $items) { ?>
+                                    <option> <?php echo $items ?></option>
+                                <?php } ?>
+                            </select>
                             <small class="error-label"><?php echo $specializationErr ?></small>
                         </div>
                     </div>
@@ -276,7 +288,17 @@
                     <div class="column-100">
                         <div class="form-group">
                             <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
-                            <input type="text" name="clinic_name" class="form-control" id="clinic-name" placeholder="Clinic Name" value="<?php echo $clinic_name; ?>" />
+                            <select name="clinic_name" id="clinic-name" , class="form-control">
+                                <option selected>Choose Clinic Name</option>
+
+                                <?php
+                                $query_clinic = "SELECT * FROM clinic";
+                                $result_clinic = $conn->query($query_clinic);
+                                while ($row = $result_clinic->fetch_array()) {
+                                ?>
+                                    <option><?php echo $row['clinic_name'] ?></option>
+                                <?php } ?>
+                            </select>
                             <small class="error-label"><?php echo $clinicNameErr ?></small>
                         </div>
                     </div>
