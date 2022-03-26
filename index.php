@@ -45,8 +45,7 @@
         </div>
         <div class="columnx-40">
           <div class="image-div">
-            <img id="hero-img" src="assets/images/doceasy/doceasy-home-img.svg" alt="DocEasy mobile app" width="520"
-              height="288" />
+            <img id="hero-img" src="assets/images/doceasy/doceasy-home-img.svg" alt="DocEasy mobile app" width="520" height="288" />
           </div>
         </div>
       </div>
@@ -272,25 +271,28 @@
       <h2>Contact</h2>
       <div class="grid">
         <div class="column-60">
-          <!-- add link in action  -->
-          <form id="form" action="#">
+          <form id="form" action="/public/feedback/contact.php" method="POST">
+
             <div class="form-group">
               <label id="name-label" for="name">Name</label>
-              <input type="text" name="name" class="form-control" id="name" placeholder="Name" required />
+              <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="<?php $name ?>" required />
             </div>
+
             <div class="form-group">
               <label id="email-label" for="email">Email</label>
-              <input name="email" class="form-control" id="email" type="email" placeholder="Email address" required />
+              <input name="email" class="form-control" id="email" type="email" placeholder="Email address" value="<?php $email ?>" required />
             </div>
+
             <div class="form-group">
               <p>Message</p>
-              <textarea id="message" class="input-textarea" name="message"
-                placeholder="Enter your message here..."></textarea>
+              <textarea id="message" class="input-textarea" name="message" placeholder="Enter your message here..." value="<?php $message ?>" required></textarea>
             </div>
+
             <div class="form-group">
               <label id="submit-label" for="submit"></label>
               <input id="submit" type="submit" value="Submit" class="btn" />
             </div>
+            
           </form>
         </div>
 
@@ -308,7 +310,8 @@
       </div>
       <div id="footer-info">
         <ul>
-          <li><a href="http://localhost/phpmyadmin">PhpMyAdmin</a></li>
+          <li><a href="/public/login/adminLogin.php">Admin Login</a></li>
+          <li><a href="/public/login/ManagementLogin.php">Management Login</a></li>
           <li><a href="#">Customer Support</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>

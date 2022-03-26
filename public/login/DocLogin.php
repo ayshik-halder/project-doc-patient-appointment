@@ -33,7 +33,7 @@
                 <div class="card">
                     <h2>Doctor Login Form</h2>
                     <div class="grid">
-                        <form id="form" action="" method="POST">
+                        <form id="form" action="../loginConnect/doctorLoginConnect.php" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" />
@@ -67,13 +67,13 @@
 
         <footer>
             <div id="footer-logo">
-                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
+                <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
             </div>
             <div id="footer-info">
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Customer Support</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/index.php#contact">Contact</a></li>
                 </ul>
                 <div id="copyright">Copyright &#169; DocEasy 2022</div>
             </div>

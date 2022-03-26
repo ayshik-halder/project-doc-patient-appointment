@@ -24,7 +24,7 @@ if ($_SESSION["loggedIn"]) {
         ?>
             <header id="header">
                 <div class="logo">
-                    <a href="#">
+                    <a href="/index.php">
                         <img class="logo-img" id="header-img" src="/assets/images/doceasy/doceasy-patient-logo.svg" alt="DocEasy logo" />
                     </a>
                 </div>
@@ -47,7 +47,7 @@ if ($_SESSION["loggedIn"]) {
                         <ul>
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">Customer Support</a></li>
-                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="/index.php#contact">Contact</a></li>
                         </ul>
                         <div id="copyright">Copyright &#169; DocEasy 2022</div>
                     </div>

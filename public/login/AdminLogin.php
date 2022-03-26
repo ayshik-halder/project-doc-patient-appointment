@@ -33,7 +33,7 @@
                 <div class="card">
                     <h2>Admin Login Form</h2>
                     <div class="grid">
-                        <form id="form" action="#">
+                        <form id="form" action="../loginConnect/adminLoginConnect.php" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" required />
@@ -53,12 +53,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <p>
-                                    Not yet a user?
-                                    <a href="#"><u> Register </u></a>
-                                </p>
-                            </div>
                         </form>
                     </div>
                 </div>
@@ -67,7 +61,7 @@
 
         <footer>
             <div id="footer-logo">
-                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
+                <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
             </div>
             <div id="footer-info">
                 <ul>

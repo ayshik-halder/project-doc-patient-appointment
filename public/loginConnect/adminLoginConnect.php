@@ -17,15 +17,15 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     $_SESSION["uname"] = $uname;
 
-    $sql = "SELECT * FROM doctor WHERE username='$uname' AND password='$pass'";
+    $sql = "SELECT * FROM admin WHERE username='$uname' AND password='$pass'";
 
     $result = $conn->query($sql);
 	$row = $result->fetch_assoc();
     if($row != null){
         $_SESSION["loggedIn"] = true;
-        header("location: ../dashboard/doctorDash.php");
+        header("location: ../dashboard/adminDash.php");
     }else{
-        header("location: ../login/DocLogin.php");
+        header("location: ../login/adminLogin.php");
     }
 }
 ?>

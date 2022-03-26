@@ -256,7 +256,9 @@ label {
 /* Footer */
 
 footer {
-  margin-top: 100px;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
   padding: 2.5rem 5rem;
   background-color: #2f1e84;
   color: #fff;
@@ -265,10 +267,11 @@ footer {
   align-items: center;
 }
 
-@media (max-width: 660px) {
+@media (max-width: 840px) {
   footer {
     flex-direction: column;
     align-items: center;
+    position: relative;
   }
 }
 

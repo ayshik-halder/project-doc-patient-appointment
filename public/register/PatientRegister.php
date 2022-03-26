@@ -11,7 +11,7 @@
 <body>
     <header id="header">
         <div class="logo">
-            <a href="../../index.php">
+            <a href="/index.php">
                 <img class="logo-img" id="header-img" src="../../assets/images/doceasy/doceasy-patient-logo.svg" alt="DocEasy logo" />
             </a>
         </div>
@@ -244,7 +244,7 @@
                             <p><strong>Marital Status</strong></p>
                             <span id="marital-span">
                                 <label id="span" for="married"><input type="radio" id="married" name="marital_status" value="married" value="<?php $marital_status; ?>" /> &nbsp; Married</label>
-                                <label id="span" for="unmarried"><input type="radio" id="unmarried" name="marital_status" value="unmarried" value="<?php $marital_status; ?>" /> &nbsp; Unmarried</label>
+                                <label id="span" for="unmarried"><input type="radio" id="unmarried" name="marital_status" value="unmarried" checked value="<?php $marital_status; ?>" /> &nbsp; Unmarried</label>
                             </span>
                             <small class="error-label"><?php echo $maritalStatusErr ?></small>
                         </div>
@@ -342,7 +342,7 @@
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
                     <li><a href="#">Customer Support</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="/index.php#contact">Contact</a></li>
                 </ul>
                 <div id="copyright">Copyright &#169; DocEasy 2022</div>
             </div>
