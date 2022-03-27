@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2022 at 05:09 PM
+-- Generation Time: Mar 27, 2022 at 06:14 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -42,6 +42,27 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `password`, `full_name`, `phn_no`, `email`) VALUES
 (1, 'user1', 'user1', 'Admin', 1234567890, 'admin@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_feedback`
+--
+
+CREATE TABLE `admin_feedback` (
+  `feedback_no` int(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `date_time` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin_feedback`
+--
+
+INSERT INTO `admin_feedback` (`feedback_no`, `name`, `email`, `message`, `date_time`) VALUES
+(2, 'Dolon Roy', 'rdolon321@gmail.com', 'hello', '27-03-2022 21:28:38');
 
 -- --------------------------------------------------------
 
@@ -108,16 +129,17 @@ CREATE TABLE `clinic` (
   `city` varchar(50) NOT NULL,
   `pin_code` int(6) UNSIGNED NOT NULL,
   `contact_no` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) NOT NULL
+  `email` varchar(50) NOT NULL,
+  `clinic_upi_id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `clinic`
 --
 
-INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `contact_no`, `email`) VALUES
-(2, 'Burdwan Hospital', 'Burdwan Medical College and Hospital; West Bengal', 'burdwan', 713101, 1234567890, 'something@gmail.com'),
-(5, 'Kolkata Nursing Home', 'Rajarhat Main Road, Atghara, Newtown, Kolkata, West Bengl', 'Newtown', 700136, 4294967295, 'anything@gmail.com');
+INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `contact_no`, `email`, `clinic_upi_id`) VALUES
+(6, 'Burdwan Hospital', 'Burdwan Medical College and Hospital, West Bengal', 'Burdwan', 713101, 1234567890, 'burdwanHospital@gmail.com', 'something@oksbi'),
+(7, 'Kolkata Nursing Home', 'Rajarhat Main Road, Atghara, Newtown, Kolkata, West Bengal', 'Newtown', 700136, 4294967295, 'KolkataHospital@gmail.com', 'anything@oksbi');
 
 -- --------------------------------------------------------
 
@@ -173,20 +195,6 @@ CREATE TABLE `doc_appointment_schedule` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `feedback`
---
-
-CREATE TABLE `feedback` (
-  `feedback_no` int(5) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `message` varchar(500) NOT NULL,
-  `date_time` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `management`
 --
 
@@ -200,6 +208,30 @@ CREATE TABLE `management` (
   `phn_no` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL,
   `clinic_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `management`
+--
+
+INSERT INTO `management` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `phn_no`, `email`, `clinic_name`) VALUES
+(11, NULL, 'user1', 123, 'Dolon', 'Roy', 4294967295, 'rdolon321@gmail.com', 'Burdwan Hospital');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `management_feedback`
+--
+
+CREATE TABLE `management_feedback` (
+  `id` int(5) NOT NULL,
+  `clinic_id` int(4) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `clinic_name` varchar(100) NOT NULL,
+  `message_type` enum('Feedback','Complain') NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `attach_file` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -289,6 +321,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `admin_feedback`
+--
+ALTER TABLE `admin_feedback`
+  ADD PRIMARY KEY (`feedback_no`);
+
+--
 -- Indexes for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
@@ -329,15 +367,16 @@ ALTER TABLE `doc_appointment_schedule`
   ADD KEY `doctor_id` (`doctor_id`,`date_time`);
 
 --
--- Indexes for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD PRIMARY KEY (`feedback_no`);
-
---
 -- Indexes for table `management`
 --
 ALTER TABLE `management`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clinic_id` (`clinic_id`);
+
+--
+-- Indexes for table `management_feedback`
+--
+ALTER TABLE `management_feedback`
   ADD PRIMARY KEY (`id`),
   ADD KEY `clinic_id` (`clinic_id`);
 
@@ -382,6 +421,12 @@ ALTER TABLE `admin`
   MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `admin_feedback`
+--
+ALTER TABLE `admin_feedback`
+  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
@@ -397,13 +442,13 @@ ALTER TABLE `book_test`
 -- AUTO_INCREMENT for table `clinic`
 --
 ALTER TABLE `clinic`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `doc_appointment_schedule`
@@ -412,16 +457,16 @@ ALTER TABLE `doc_appointment_schedule`
   MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `feedback`
---
-ALTER TABLE `feedback`
-  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `management_feedback`
+--
+ALTER TABLE `management_feedback`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `patient`

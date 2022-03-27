@@ -22,7 +22,7 @@
         <nav id="nav-bar">
             <ul>
                 <p>Not yet a user?</p>
-                <li><a class="nav-link" href="#"><u>Contact Admin</u></a></li>
+                <li><a class="nav-link" href="/index.php#contact"><u>Contact Admin</u></a></li>
             </ul>
         </nav>
     </header>
@@ -55,8 +55,8 @@
 
                             <div class="form-group">
                                 <p>
-                                    Not yet a user?
-                                    <a href="#"><u> Register </u></a>
+                                    Don't have an account?
+                                    <a href="/index.php#contact"><u> Contact Admin </u></a>
                                 </p>
                             </div>
                         </form>

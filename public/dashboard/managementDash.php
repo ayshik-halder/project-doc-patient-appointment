@@ -46,9 +46,8 @@ if ($_SESSION["loggedIn"]) {
                     </div>
                     <div id="footer-info">
                         <ul>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Customer Support</a></li>
-                            <li><a href="/index.php#contact">Contact</a></li>
+                            <li><a href="#">Diagnosis Register</a></li>
+                            <li><a href="/index.php#contact">Contact Admin</a></li>
                         </ul>
                         <div id="copyright">Copyright &#169; DocEasy 2022</div>
                     </div>

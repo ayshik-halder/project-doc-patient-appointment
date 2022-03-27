@@ -42,7 +42,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
 
-                $clinic_name = $address = $city = $pin_code = $contact_no = $email = '';
+                $clinic_name = $address = $city = $pin_code = $contact_no = $email = $clinic_upi_id = '';
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -52,9 +52,10 @@ if ($_SESSION["loggedIn"]) {
                     $pin_code = $_POST['pin_code'];
                     $contact_no = $_POST['contact_no'];
                     $email = $_POST['email'];
+                    $clinic_upi_id = $_POST['clinic_upi_id'];
 
-                    $query = "INSERT INTO clinic(clinic_name, address, city, pin_code, contact_no, email)
-            VALUES('$clinic_name', '$address', '$city', '$pin_code', '$contact_no', '$email' )";
+                    $query = "INSERT INTO clinic(clinic_name, address, city, pin_code, contact_no, email, clinic_upi_id)
+            VALUES('$clinic_name', '$address', '$city', '$pin_code', '$contact_no', '$email', '$clinic_upi_id' )";
 
                     if ($conn->query($query)) {
                         header("location:../dashboard/adminDash.php");
@@ -107,6 +108,13 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="email-label" for="email"><strong>Email</strong></label>
                                     <input type="email" name="email" class="form-control" id="email" placeholder="Email address" value="<?php $email; ?>" required />
+                                </div>
+                            </div>
+
+                            <div class="column-100">
+                                <div class="form-group">
+                                    <label id="upi-label" for="upi-id"><strong>Clinic UPI ID</strong></label>
+                                    <input type="text" name="clinic_upi_id" class="form-control" id="upi" placeholder="UPI ID" value="<?php $clinic_upi_id; ?>" required />
                                 </div>
                             </div>
 
