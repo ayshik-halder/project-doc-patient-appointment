@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2022 at 06:14 PM
+-- Generation Time: Mar 27, 2022 at 11:07 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -178,7 +178,7 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `clinic_name`, `clinic_address`, `clinic_city`, `clinic_pin`, `date`, `start_time`, `end_time`, `fee`) VALUES
-(10, NULL, '1234', 123, 'Dolon', 'Roy', '2022-03-24', 12, 'FEMALE', 'Immunology', NULL, NULL, 2, 4294967295, 'rdolon321@gmail.com', 'Burdwan Hospital', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL, NULL, NULL, NULL);
+(10, NULL, 'dolonr', 1234, 'Dolon', 'Roy', '2022-03-24', 12, 'FEMALE', 'Immunology', NULL, NULL, 2, 4294967295, 'rdolon321@gmail.com', 'Burdwan Hospital', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -285,9 +285,8 @@ CREATE TABLE `patient_document` (
 
 CREATE TABLE `test` (
   `id` int(4) UNSIGNED NOT NULL,
-  `clinic_id` int(4) UNSIGNED NOT NULL,
+  `clinic_id` int(4) UNSIGNED DEFAULT NULL,
   `test_type` varchar(50) NOT NULL,
-  `day` date NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
   `fee` int(4) NOT NULL
@@ -478,7 +477,7 @@ ALTER TABLE `patient`
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `test_reports`

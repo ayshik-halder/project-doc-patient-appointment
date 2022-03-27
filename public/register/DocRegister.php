@@ -192,7 +192,6 @@
             return $data;
         }
 
-
         ?>
 
 
@@ -357,7 +356,7 @@
 
                     <div class="column-50">
                         <div class="form-group">
-                            <a href="../../index.php">
+                            <a href="/index.php">
                                 <label id="back-label" for="back"></label>
                                 <input id="back" type="button" value="back" class="btn" />
                             </a>
@@ -369,7 +368,7 @@
 
         <footer>
             <div id="footer-logo">
-                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
+                <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
             </div>
             <div id="footer-info">
                 <ul>
