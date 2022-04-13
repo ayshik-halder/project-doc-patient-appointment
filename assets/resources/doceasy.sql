@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2022 at 11:07 PM
+-- Generation Time: Apr 13, 2022 at 03:56 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -42,27 +42,6 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `password`, `full_name`, `phn_no`, `email`) VALUES
 (1, 'user1', 'user1', 'Admin', 1234567890, 'admin@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `admin_feedback`
---
-
-CREATE TABLE `admin_feedback` (
-  `feedback_no` int(5) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `message` varchar(500) NOT NULL,
-  `date_time` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `admin_feedback`
---
-
-INSERT INTO `admin_feedback` (`feedback_no`, `name`, `email`, `message`, `date_time`) VALUES
-(2, 'Dolon Roy', 'rdolon321@gmail.com', 'hello', '27-03-2022 21:28:38');
 
 -- --------------------------------------------------------
 
@@ -144,6 +123,36 @@ INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `conta
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `clinic_feedback`
+--
+
+CREATE TABLE `clinic_feedback` (
+  `id` int(5) NOT NULL,
+  `clinic_id` int(4) UNSIGNED DEFAULT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `message_type` enum('FEEDBACK','COMPLAIN','QUERY','') NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `attach_file` mediumblob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `doceasy_feedback`
+--
+
+CREATE TABLE `doceasy_feedback` (
+  `feedback_no` int(5) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `date_time` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `doctor`
 --
 
@@ -163,22 +172,11 @@ CREATE TABLE `doctor` (
   `experience` int(2) UNSIGNED NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL,
-  `clinic_name` varchar(100) NOT NULL,
-  `clinic_address` varchar(200) NOT NULL,
-  `clinic_city` varchar(50) NOT NULL,
-  `clinic_pin` int(6) UNSIGNED NOT NULL,
   `date` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `fee` int(4) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `doctor`
---
-
-INSERT INTO `doctor` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `clinic_name`, `clinic_address`, `clinic_city`, `clinic_pin`, `date`, `start_time`, `end_time`, `fee`) VALUES
-(10, NULL, 'dolonr', 1234, 'Dolon', 'Roy', '2022-03-24', 12, 'FEMALE', 'Immunology', NULL, NULL, 2, 4294967295, 'rdolon321@gmail.com', 'Burdwan Hospital', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -206,33 +204,15 @@ CREATE TABLE `management` (
   `first_name` varchar(30) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `clinic_name` varchar(100) NOT NULL
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `management`
 --
 
-INSERT INTO `management` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `phn_no`, `email`, `clinic_name`) VALUES
-(11, NULL, 'user1', 123, 'Dolon', 'Roy', 4294967295, 'rdolon321@gmail.com', 'Burdwan Hospital');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `management_feedback`
---
-
-CREATE TABLE `management_feedback` (
-  `id` int(5) NOT NULL,
-  `clinic_id` int(4) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `clinic_name` varchar(100) NOT NULL,
-  `message_type` enum('Feedback','Complain') NOT NULL,
-  `message` varchar(500) NOT NULL,
-  `attach_file` mediumblob DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `management` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `phn_no`, `email`) VALUES
+(25, 6, 'user1', 123, 'Dolon', 'Roy', 4294967295, 'rdolon321@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -320,12 +300,6 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `admin_feedback`
---
-ALTER TABLE `admin_feedback`
-  ADD PRIMARY KEY (`feedback_no`);
-
---
 -- Indexes for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
@@ -352,6 +326,19 @@ ALTER TABLE `clinic`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `clinic_feedback`
+--
+ALTER TABLE `clinic_feedback`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `clinic_id` (`clinic_id`);
+
+--
+-- Indexes for table `doceasy_feedback`
+--
+ALTER TABLE `doceasy_feedback`
+  ADD PRIMARY KEY (`feedback_no`);
+
+--
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
@@ -369,13 +356,6 @@ ALTER TABLE `doc_appointment_schedule`
 -- Indexes for table `management`
 --
 ALTER TABLE `management`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `clinic_id` (`clinic_id`);
-
---
--- Indexes for table `management_feedback`
---
-ALTER TABLE `management_feedback`
   ADD PRIMARY KEY (`id`),
   ADD KEY `clinic_id` (`clinic_id`);
 
@@ -420,12 +400,6 @@ ALTER TABLE `admin`
   MODIFY `id` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `admin_feedback`
---
-ALTER TABLE `admin_feedback`
-  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
@@ -444,10 +418,22 @@ ALTER TABLE `clinic`
   MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `clinic_feedback`
+--
+ALTER TABLE `clinic_feedback`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `doceasy_feedback`
+--
+ALTER TABLE `doceasy_feedback`
+  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `doc_appointment_schedule`
@@ -459,13 +445,7 @@ ALTER TABLE `doc_appointment_schedule`
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT for table `management_feedback`
---
-ALTER TABLE `management_feedback`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `patient`
@@ -506,6 +486,12 @@ ALTER TABLE `book_test`
   ADD CONSTRAINT `book_test_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `book_test_ibfk_3` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `book_test_ibfk_4` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `clinic_feedback`
+--
+ALTER TABLE `clinic_feedback`
+  ADD CONSTRAINT `clinic_feedback_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `doctor`
