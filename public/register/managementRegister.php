@@ -102,10 +102,8 @@ if ($_SESSION["loggedIn"]) {
                     if ($clinic_name == "Choose Clinic Name") {
                         $clinicNameErr = "Specify your Clinic Name";
                         $flag = false;
-                    } else {
-                        test_input($clinic_name);
                     }
-                    
+
                     $sql_username = "SELECT * FROM management WHERE username='$username'";
                     $res_username = $conn->query($sql_username);
                     $row = $res_username->fetch_assoc();
@@ -142,11 +140,22 @@ if ($_SESSION["loggedIn"]) {
 
                     if ($flag) {
 
-                        $query = "INSERT INTO management(first_name, last_name, phn_no, email, clinic_name, username, password)
-                VALUES('$first_name', '$last_name', '$phn_no', '$email', '$clinic_name', '$username', '$password' )";
+                        $query = "INSERT INTO management(first_name, last_name, phn_no, email, username, password)
+                VALUES('$first_name', '$last_name', '$phn_no', '$email', '$username', '$password' )";
 
                         if ($conn->query($query)) {
-                            header("location:../dashboard/adminDash.php");
+
+                            $query_id = "UPDATE management
+                                       SET clinic_id = (SELECT id
+                                                        FROM clinic
+                                                        WHERE clinic.clinic_name = '$clinic_name')
+                                       WHERE clinic_id IS NULL;";
+
+                            if ($conn->query($query_id)) {
+                                header("Location:../dashboard/adminDash.php");
+                            } else {
+                                echo "failed" . $conn->error;
+                            }
                         } else {
                             echo "failed" . $conn->error;
                         }
@@ -203,8 +212,9 @@ if ($_SESSION["loggedIn"]) {
                                         $query_clinic = "SELECT * FROM clinic";
                                         $result_clinic = $conn->query($query_clinic);
                                         while ($row = $result_clinic->fetch_array()) {
+                                            $clinic_name = $row['clinic_name'];
                                         ?>
-                                            <option><?php echo $row['clinic_name'] ?></option>
+                                            <option><?php echo $clinic_name; ?></option>
                                         <?php } ?>
                                     </select>
                                     <small class="error-label"><?php echo $clinicNameErr ?></small>

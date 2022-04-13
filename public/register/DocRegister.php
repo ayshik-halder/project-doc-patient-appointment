@@ -30,9 +30,9 @@
 
         require_once('../config.php');
 
-        $first_name = $last_name = $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $clinic_address = $clinic_city = $clinic_pin = $username = $password = $confirm_password = '';
+        $first_name = $last_name = $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
-        $firstNameErr = $lastNameErr = $dobErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicNameErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+        $firstNameErr = $lastNameErr = $dobErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
         $flag = true;
 
@@ -48,9 +48,6 @@
             $phn_no = $_POST['phn_no'];
             $email = $_POST['email'];
             $clinic_name = $_POST['clinic_name'];
-            $clinic_address = $_POST['clinic_address'];
-            $clinic_city = $_POST['clinic_city'];
-            $clinic_pin = $_POST['clinic_pin'];
             $username = $_POST['username'];
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
@@ -124,11 +121,9 @@
                 test_input($email);
             }
 
-            if ($clinic_name == "Choose Clinic Name") {
-                $clinicNameErr = "Specify your Clinic Name";
+            if ($clinic_name == "Choose Clinic") {
+                $clinicErr = "Specify your Clinic";
                 $flag = false;
-            } else {
-                test_input($clinic_name);
             }
 
 
@@ -173,11 +168,22 @@
             // submit form if validated successfully
             if ($flag) {
 
-                $query = "INSERT INTO doctor(first_name, last_name, dob, age, gender, specialization, experience, phn_no, email, clinic_name, clinic_address, clinic_city, clinic_pin, username, password)
-        VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$clinic_name', '$clinic_address', '$clinic_city', '$clinic_pin', '$username', '$password' )";
+                $query = "INSERT INTO doctor(first_name, last_name, dob, age, gender, specialization, experience, phn_no, email, username, password)
+                VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$username', '$password' )";
 
                 if ($conn->query($query)) {
-                    header("location:../login/docLogin.php");
+
+                    $query_id = "UPDATE doctor
+                                 SET clinic_id = (SELECT id
+                                                  FROM clinic
+                                                  WHERE clinic.clinic_name = '$clinic_name')
+                                 WHERE clinic_id IS NULL;";
+
+                    if ($conn->query($query_id)) {
+                        header("location:../login/docLogin.php");
+                    } else {
+                        echo "failed" . $conn->error;
+                    }
                 } else {
                     echo "failed" . $conn->error;
                 }
@@ -288,38 +294,18 @@
                         <div class="form-group">
                             <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
                             <select name="clinic_name" id="clinic-name" , class="form-control">
-                                <option selected>Choose Clinic Name</option>
+                                <option selected>Choose Clinic</option>
 
                                 <?php
                                 $query_clinic = "SELECT * FROM clinic";
                                 $result_clinic = $conn->query($query_clinic);
                                 while ($row = $result_clinic->fetch_array()) {
+                                    $clinic_name = $row['clinic_name'];
                                 ?>
-                                    <option><?php echo $row['clinic_name'] ?></option>
+                                    <option><?php echo $clinic_name ?></option>
                                 <?php } ?>
                             </select>
-                            <small class="error-label"><?php echo $clinicNameErr ?></small>
-                        </div>
-                    </div>
-
-                    <div class="column-100">
-                        <div class="form-group">
-                            <label id="address-label" for="address"><strong>Clinic Address</strong></label>
-                            <input type="text" name="clinic_address" class="form-control" id="address" placeholder="Clinic Address" value="<?php echo $clinic_address; ?>" />
-                        </div>
-                    </div>
-
-                    <div class="column-50">
-                        <div class="form-group">
-                            <label id="city-label" for="city"><strong>City</strong></label>
-                            <input type="text" name="clinic_city" class="form-control" id="city" placeholder="City" value="<?php echo $clinic_city; ?>" />
-                        </div>
-                    </div>
-
-                    <div class="column-50">
-                        <div class="form-group">
-                            <label id="pin-label" for="pin-code"><strong>Pin Code</strong></label>
-                            <input type="number" name="clinic_pin" class="form-control" id="pin-code" placeholder="Pin-code" value="<?php echo $clinic_pin; ?>" />
+                            <small class="error-label"><?php echo $clinicErr ?></small>
                         </div>
                     </div>
 
