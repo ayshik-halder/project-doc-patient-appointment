@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     date_default_timezone_set('Asia/Kolkata');
     $date = date('d-m-Y H:i:s');
 
-    $query = "INSERT INTO admin_feedback(name, email, message, date_time) 
+    $query = "INSERT INTO doceasy_feedback(name, email, message, date_time) 
     VALUES('$name', '$email', '$message', '$date')";
 
 

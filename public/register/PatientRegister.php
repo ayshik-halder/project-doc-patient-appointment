@@ -30,16 +30,15 @@
 
         require('../config.php');
 
-        $first_name = $last_name = $dob = $age = $gender = $marital_status = $phn_no = $email = $address = $city = $pin_code = $username = $password = $confirm_password = '';
+        $full_name = $dob = $age = $gender = $marital_status = $phn_no = $email = $address = $city = $pin_code = $username = $password = $confirm_password = '';
 
-        $firstNameErr = $lastNameErr = $dobErr = $genderErr = $maritalStatusErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+        $nameErr = $dobErr = $genderErr = $maritalStatusErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
         $flag = true;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-            $first_name = $_POST['first_name'];
-            $last_name = $_POST['last_name'];
+            $full_name = $_POST['full_name'];
             $dob = $_POST['dob'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
@@ -53,25 +52,16 @@
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
-            if (!$first_name) {
-                $firstNameErr = "First name is required";
+            if (!$full_name) {
+                $nameErr = "First name is required";
                 $flag = false;
-            } elseif (!preg_match("/^[a-zA-Z ]*$/", $first_name)) {
-                $firstNameErr = "only letters and white spaces allowed";
+            } elseif (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
+                $nameErr = "only letters and white spaces allowed";
                 $flag = false;
             } else {
-                test_input($first_name);
+                test_input($full_name);
             }
 
-            if (!$last_name) {
-                $lastNameErr = "Last name is required";
-                $flag = false;
-            } elseif (!preg_match("/^[a-zA-Z ]*$/", $last_name)) {
-                $lastNameErr = "only letters and white spaces allowed";
-                $flag = false;
-            } else {
-                test_input($last_name);
-            }
 
             if (!$dob) {
                 $dobErr = "DOB is required";
@@ -178,8 +168,8 @@
             // submit form if validated successfully
             if ($flag) {
 
-                $query = "INSERT INTO patient(first_name, last_name, dob, age, gender, marital_status, phn_no, email, address, city, pin_code, username, password)
-                VALUES('$first_name', '$last_name', '$dob', '$age', '$gender', '$marital_status', '$phn_no', '$email', '$address', '$city', '$pin_code', '$username', '$password' )";
+                $query = "INSERT INTO patient(full_name, dob, age, gender, marital_status, phn_no, email, address, city, pin_code, username, password)
+                VALUES('$full_name', '$dob', '$age', '$gender', '$marital_status', '$phn_no', '$email', '$address', '$city', '$pin_code', '$username', '$password' )";
 
                 if ($conn->query($query)) {
                     header("location:../login/patientLogin.php");
@@ -202,26 +192,19 @@
             <h2>Patient Registration Form</h2>
             <div class="grid">
                 <form id="form" action="" method="POST">
-                    <div class="column-50">
+                    
+                    <div class="column-100">
                         <div class="form-group">
-                            <label id="fname-label" for="first-name"><strong>First Name</strong></label>
-                            <input type="text" name="first_name" class="form-control" id="first-name" placeholder="First Name" value="<?php $first_name; ?>" />
-                            <small class="error-label"><?php echo $firstNameErr ?></small>
-                        </div>
-                    </div>
-
-                    <div class="column-50">
-                        <div class="form-group">
-                            <label id="lname-label" for="last-name"><strong>Last Name</strong></label>
-                            <input type="text" name="last_name" class="form-control" id="last-name" placeholder="Last Name" value="<?php $last_name; ?>" />
-                            <small class="error-label"><?php echo $lastNameErr ?></small>
+                            <label id="name-label" for="full-name"><strong>Full Name</strong></label>
+                            <input type="text" name="full_name" class="form-control" id="full-name" placeholder="Full Name" value="<?php $full_name; ?>" />
+                            <small class="error-label"><?php echo $nameErr ?></small>
                         </div>
                     </div>
 
                     <div class="column-50">
                         <div class="form-group">
                             <label id="dob-label" for="dob"><strong>DOB</strong></label>
-                            <input type="date" name="dob" class="form-control" id="dob" placeholder="date of Birth" value="<?php $dob; ?>" />
+                            <input type="date" name="dob" class="form-control" id="dob" value="<?php $dob; ?>" />
                             <small class="error-label"><?php echo $dobErr ?></small>
                         </div>
                     </div>

@@ -42,9 +42,9 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
 
-                $first_name = $last_name = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
+                $full_name = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
-                $firstNameErr = $lastNameErr = $phnNoErr = $emailErr = $clinicNameErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+                $nameErr = $phnNoErr = $emailErr = $clinicNameErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
                 $flag = true;
 
@@ -58,8 +58,7 @@ if ($_SESSION["loggedIn"]) {
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-                    $first_name = $_POST['first_name'];
-                    $last_name = $_POST['last_name'];
+                    $full_name = $_POST['full_name'];
                     $phn_no = $_POST['phn_no'];
                     $email = $_POST['email'];
                     $clinic_name = $_POST['clinic_name'];
@@ -68,18 +67,14 @@ if ($_SESSION["loggedIn"]) {
                     $confirm_password = $_POST['confirm_password'];
 
 
-                    if (!$first_name) {
-                        $firstNameErr = "First name is required";
+                    if (!$full_name) {
+                        $nameErr = "First name is required";
+                        $flag = false;
+                    } elseif (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
+                        $nameErr = "only letters and white spaces allowed";
                         $flag = false;
                     } else {
-                        test_input($first_name);
-                    }
-
-                    if (!$last_name) {
-                        $lastNameErr = "Last name is required";
-                        $flag = false;
-                    } else {
-                        test_input($last_name);
+                        test_input($full_name);
                     }
 
                     if (!$phn_no) {
@@ -140,8 +135,8 @@ if ($_SESSION["loggedIn"]) {
 
                     if ($flag) {
 
-                        $query = "INSERT INTO management(first_name, last_name, phn_no, email, username, password)
-                VALUES('$first_name', '$last_name', '$phn_no', '$email', '$username', '$password' )";
+                        $query = "INSERT INTO management(full_name, phn_no, email, username, password)
+                VALUES('$full_name', '$phn_no', '$email', '$username', '$password' )";
 
                         if ($conn->query($query)) {
 
@@ -170,19 +165,12 @@ if ($_SESSION["loggedIn"]) {
                     <h2>Management Registration Form</h2>
                     <div class="grid">
                         <form id="form" action="" method="POST">
-                            <div class="column-50">
-                                <div class="form-group">
-                                    <label id="fname-label" for="first-name"><strong>First Name</strong></label>
-                                    <input type="text" name="first_name" class="form-control" id="first-name" placeholder="First Name" value="<?php $first_name; ?>" />
-                                    <small class="error-label"><?php echo $firstNameErr ?></small>
-                                </div>
-                            </div>
 
-                            <div class="column-50">
+                            <div class="column-100">
                                 <div class="form-group">
-                                    <label id="lname-label" for="last-name"><strong>Last Name</strong></label>
-                                    <input type="text" name="last_name" class="form-control" id="last-name" placeholder="Last Name" value="<?php $last_name; ?>" />
-                                    <small class="error-label"><?php echo $lastNameErr ?></small>
+                                    <label id="name-label" for="full-name"><strong>Full Name</strong></label>
+                                    <input type="text" name="full_name" class="form-control" id="full-name" placeholder="Full Name" value="<?php $full_name; ?>" />
+                                    <small class="error-label"><?php echo $nameErr ?></small>
                                 </div>
                             </div>
 

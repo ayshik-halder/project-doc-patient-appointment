@@ -16,7 +16,7 @@ if ($_SESSION["loggedIn"]) {
     <body>
         <?php
         $uname =  $_SESSION["uname"];
-        $sql = "SELECT * FROM management WHERE username='$uname'";
+        $sql = "SELECT * FROM management,clinic WHERE clinic.id = management.clinic_id AND username='$uname'";
 
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
@@ -32,7 +32,7 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
-                        <li><a class="nav-link" href="#"><?php echo $row["first_name"] . " " . $row["last_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
                         <li><a class="nav-link" href="../logout/managementLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -52,22 +52,26 @@ if ($_SESSION["loggedIn"]) {
                     return $data;
                 }
 
-                $test_type = $start_time = $end_time = $fee = '';
+                $clinic_id = $row["clinic_id"];
 
-                $testTypeErr = $startTimeErr = $endTimeErr = $feeErr = '';
+                $test_type = $start_time = $end_time = $min_fee = $max_fee = '';
+
+                $testTypeErr = $startTimeErr = $endTimeErr = $minFeeErr = $maxFeeErr = '';
 
                 $flag = true;
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+                    // $clinic_id = $_POST[$row['clinic_id']];
                     $test_type = $_POST['test_type'];
                     $start_time = $_POST['start_time'];
                     $end_time = $_POST['end_time'];
-                    $fee = $_POST['fee'];
+                    $min_fee = $_POST['minimum_fee'];
+                    $max_fee = $_POST['maximum_fee'];
 
 
-                    if (!$test_type) {
-                        $testTypeErr = "Diagnosis Type is required";
+                    if ($test_type == "Choose Test Type") {
+                        $testTypeErr = "Mention Diagnosis Test Type";
                         $flag = false;
                     } else {
                         test_input($test_type);
@@ -87,17 +91,24 @@ if ($_SESSION["loggedIn"]) {
                         test_input($end_time);
                     }
 
-                    if (!$fee) {
-                        $feeErr = "Diagnosis Fee is required";
+                    if (!$min_fee) {
+                        $minFeeErr = "Diagnosis Fee is required";
                         $flag = false;
                     } else {
-                        test_input($fee);
+                        test_input($min_fee);
+                    }
+
+                    if (!$max_fee) {
+                        $maxFeeErr = "Diagnosis Fee is required";
+                        $flag = false;
+                    } else {
+                        test_input($max_fee);
                     }
 
                     // submit form if validated successfully
                     if ($flag) {
-                        $query = "INSERT INTO test(test_type, start_time, end_time, fee)
-                        VALUE('$test_type', '$start_time', '$end_time', '$fee')";
+                        $query = "INSERT INTO test(clinic_id, test_type, start_time, end_time, minimum_fee, maximum_fee)
+                        VALUE('$clinic_id', '$test_type', '$start_time', '$end_time', '$min_fee', '$max_fee')";
 
                         if ($conn->query($query)) {
                             header("location:../dashboard/managementDash.php");
@@ -119,8 +130,17 @@ if ($_SESSION["loggedIn"]) {
 
                             <div class="column-100">
                                 <div class="form-group">
-                                    <label id="type-label" for="test-type"><strong>Diagnosis Type</strong></label>
-                                    <input type="text" name="test_type" class="form-control" id="test-type" placeholder="Diagnosis Type" value="<?php echo $test_type; ?>" />
+                                    <label id="test-type-label" for="test-type"><strong>Diagnosis Type</strong></label>
+                                    <select name="test_type" id="test-type" class="form-control">
+                                        <option selected>Choose Test Type</option>
+                                        <?php
+                                        $test_type = array('Blood Test', 'CT Scan', 'ECG', 'PET Scan', 'Ultrasound', 'X-rays', 'Ultrasonography', 'Urine Test', 'MRI Scan');
+                                        sort($test_type, SORT_STRING);
+
+                                        foreach ($test_type as $items) { ?>
+                                            <option> <?php echo $items ?></option>
+                                        <?php } ?>
+                                    </select>
                                     <small class="error-label"><?php echo $testTypeErr ?></small>
                                 </div>
                             </div>
@@ -141,11 +161,19 @@ if ($_SESSION["loggedIn"]) {
                                 </div>
                             </div>
 
-                            <div class="column-100">
+                            <div class="column-50">
                                 <div class="form-group">
-                                    <label id="fee-label" for="fee"><strong>Fee</strong></label>
-                                    <input type="text" name="fee" class="form-control" id="fee" placeholder="Diagnosis Fee" value="<?php echo $fee; ?>" />
-                                    <small class="error-label"><?php echo $feeErr ?></small>
+                                    <label id="min-fee-label" for="fee"><strong>Minimum Fees</strong></label>
+                                    <input type="text" name="minimum_fee" class="form-control" id="minimum-fee" placeholder="Minimum Diagnosis Fee" value="<?php echo $min_fee; ?>" />
+                                    <small class="error-label"><?php echo $minFeeErr ?></small>
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="max-fee-label" for="fee"><strong>Maximum Fees</strong></label>
+                                    <input type="text" name="maximum_fee" class="form-control" id="maximum-fee" placeholder="Maximum Diagnosis Fee" value="<?php echo $max_fee; ?>" />
+                                    <small class="error-label"><?php echo $maxFeeErr ?></small>
                                 </div>
                             </div>
 

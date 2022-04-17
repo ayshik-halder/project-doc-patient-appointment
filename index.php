@@ -138,6 +138,7 @@
         </div>
       </div>
     </section>
+    
     <section id="features">
       <h2>Awesome Key Features</h2>
       <div class="grid">
@@ -271,7 +272,7 @@
       <h2>Contact</h2>
       <div class="grid">
         <div class="column-60">
-          <form id="form" action="/public/feedback/contact.php" method="POST">
+          <form id="form" action="/public/feedback/doceasy_feedback.php" method="POST">
 
             <div class="form-group">
               <label id="name-label" for="name">Name</label>

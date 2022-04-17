@@ -52,7 +52,7 @@
                 </div>
 
 
-                <!-- Doctor Register  -->
+                <!-- Doctor Login  -->
                 <div class="card" id="doctor">
                     <div class="product-logo">
                         <img class="logo-img" src="../../assets/images/doceasy/doceasy-doctor-logo.svg"

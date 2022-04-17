@@ -31,7 +31,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
-                        <li><a class="nav-link" href="#"><?php echo $row["first_name"] . " " . $row["last_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["specialization"];  ?></a></li>
                         <li><a class="nav-link" href="../logout/docLogout.php">Logout</a></li>
                     </ul>

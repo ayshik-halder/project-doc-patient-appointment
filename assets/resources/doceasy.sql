@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2022 at 03:56 AM
+-- Generation Time: Apr 17, 2022 at 10:37 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -55,18 +55,11 @@ CREATE TABLE `book_appointment` (
   `clinic_id` int(4) UNSIGNED NOT NULL,
   `doctor_id` int(4) UNSIGNED NOT NULL,
   `schedule_id` int(5) UNSIGNED NOT NULL,
-  `date_time` datetime NOT NULL,
-  `patient_name` varchar(50) NOT NULL,
-  `doctor_name` varchar(50) NOT NULL,
-  `department` varchar(50) NOT NULL,
+  `date_time` varchar(50) NOT NULL,
   `approval_status` enum('PENDING','APPROVED','DECLINE','EXPIRE') NOT NULL DEFAULT 'PENDING',
-  `clinic_name` varchar(100) NOT NULL,
-  `clinic_address` varchar(200) NOT NULL,
-  `clinic_pin` int(6) UNSIGNED NOT NULL,
   `problem` varchar(100) DEFAULT NULL,
   `doctor_massage` varchar(100) DEFAULT NULL,
-  `doctor_fee` int(4) UNSIGNED NOT NULL,
-  `doctor_appointment_slip` mediumblob NOT NULL
+  `doctor_appointment_slip` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -78,21 +71,11 @@ CREATE TABLE `book_appointment` (
 CREATE TABLE `book_test` (
   `ticket_no` int(5) UNSIGNED NOT NULL,
   `test_id` int(4) UNSIGNED NOT NULL,
-  `patient_id` int(5) UNSIGNED NOT NULL,
+  `patient_id` int(5) UNSIGNED DEFAULT NULL,
   `clinic_id` int(4) UNSIGNED NOT NULL,
-  `reffered` enum('YES','NO') NOT NULL,
-  `doctor_id` int(4) UNSIGNED DEFAULT NULL,
-  `patient_name` varchar(50) NOT NULL,
-  `test_type` varchar(50) NOT NULL,
-  `doctor_name` varchar(50) DEFAULT NULL,
-  `clinic_name` varchar(100) NOT NULL,
-  `clinic_address` varchar(200) NOT NULL,
-  `clinic_pin` int(6) NOT NULL,
   `date` date NOT NULL,
-  `time` time NOT NULL,
   `approval_status` enum('PENDING','APPROVED','DECLINE','EXPIRE') NOT NULL DEFAULT 'PENDING',
-  `test_fee` int(4) UNSIGNED NOT NULL,
-  `test_appointment_slip` mediumblob NOT NULL
+  `test_appointment_slip` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -150,6 +133,13 @@ CREATE TABLE `doceasy_feedback` (
   `date_time` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `doceasy_feedback`
+--
+
+INSERT INTO `doceasy_feedback` (`feedback_no`, `name`, `email`, `message`, `date_time`) VALUES
+(1, 'Dolon Roy', 'rdolon321@gmail.com', 'hii\r\n', '15-04-2022 14:30:02');
+
 -- --------------------------------------------------------
 
 --
@@ -157,12 +147,11 @@ CREATE TABLE `doceasy_feedback` (
 --
 
 CREATE TABLE `doctor` (
-  `id` int(4) UNSIGNED NOT NULL,
+  `d_id` int(4) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED DEFAULT NULL,
   `username` varchar(10) NOT NULL,
   `password` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
   `dob` date NOT NULL,
   `age` int(2) UNSIGNED NOT NULL,
   `gender` enum('MALE','FEMALE','OTHER') NOT NULL,
@@ -172,11 +161,20 @@ CREATE TABLE `doctor` (
   `experience` int(2) UNSIGNED NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL,
-  `date` date DEFAULT NULL,
   `start_time` time DEFAULT NULL,
   `end_time` time DEFAULT NULL,
   `fee` int(4) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doctor`
+--
+
+INSERT INTO `doctor` (`d_id`, `clinic_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `start_time`, `end_time`, `fee`) VALUES
+(29, 7, 'anuvab5', 123654, 'Anuvab Roy', '1990-03-23', 32, 'MALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'anuvab1990@gmail.com', '09:00:01', '13:30:00', 300),
+(30, 6, 'chitra3', 2580, 'Chitra Mondal', '1993-10-02', 29, 'FEMALE', 'Gynaecology', NULL, NULL, 3, 4294967295, 'chitra93@gmail.com', '10:30:00', '12:30:00', 250),
+(31, 6, 'maya31', 78965, 'Maya Sen', '1991-01-30', 31, 'FEMALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'maya91@gmail.com', '16:00:00', '19:00:00', 350),
+(32, 6, 'rupa27', 1234, 'Rupa Biswas', '1995-02-12', 27, 'FEMALE', 'Cardiology', NULL, NULL, 1, 4294967295, 'rupa27@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -187,8 +185,21 @@ CREATE TABLE `doctor` (
 CREATE TABLE `doc_appointment_schedule` (
   `id` int(5) UNSIGNED NOT NULL,
   `doctor_id` int(4) UNSIGNED NOT NULL,
-  `date_time` datetime NOT NULL
+  `date_time` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doc_appointment_schedule`
+--
+
+INSERT INTO `doc_appointment_schedule` (`id`, `doctor_id`, `date_time`) VALUES
+(9, 29, '09:00:00'),
+(10, 29, '09:30:00'),
+(11, 29, '10:00:00'),
+(12, 29, '10:30:00'),
+(14, 29, '11:00:00'),
+(13, 30, '10:30:00'),
+(15, 30, '11:30:00');
 
 -- --------------------------------------------------------
 
@@ -197,12 +208,11 @@ CREATE TABLE `doc_appointment_schedule` (
 --
 
 CREATE TABLE `management` (
-  `id` int(2) UNSIGNED NOT NULL,
+  `m_id` int(2) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED DEFAULT NULL,
   `username` varchar(10) NOT NULL,
   `password` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -211,8 +221,8 @@ CREATE TABLE `management` (
 -- Dumping data for table `management`
 --
 
-INSERT INTO `management` (`id`, `clinic_id`, `username`, `password`, `first_name`, `last_name`, `phn_no`, `email`) VALUES
-(25, 6, 'user1', 123, 'Dolon', 'Roy', 4294967295, 'rdolon321@gmail.com');
+INSERT INTO `management` (`m_id`, `clinic_id`, `username`, `password`, `full_name`, `phn_no`, `email`) VALUES
+(26, 6, 'mayank21', 25896, 'Mayank Kumar', 4294967295, 'mayank21@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -221,11 +231,10 @@ INSERT INTO `management` (`id`, `clinic_id`, `username`, `password`, `first_name
 --
 
 CREATE TABLE `patient` (
-  `id` int(5) UNSIGNED NOT NULL,
+  `p_id` int(5) UNSIGNED NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` int(10) UNSIGNED NOT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(20) NOT NULL,
+  `full_name` varchar(50) NOT NULL,
   `dob` date NOT NULL,
   `age` int(2) UNSIGNED NOT NULL,
   `gender` enum('MALE','FEMALE','OTHER') NOT NULL,
@@ -242,8 +251,9 @@ CREATE TABLE `patient` (
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`id`, `username`, `password`, `first_name`, `last_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
-(50, 'rdolon', 12345, 'Dolon', 'Roy', '2002-02-12', 0, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
+INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
+(51, 'rimi22', 34210, 'Rimi Mondal', '2000-05-20', 22, 'FEMALE', 'UNMARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, NULL),
+(52, 'rdolon', 8520, 'Dolon Roy', '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
 
@@ -264,13 +274,22 @@ CREATE TABLE `patient_document` (
 --
 
 CREATE TABLE `test` (
-  `id` int(4) UNSIGNED NOT NULL,
+  `t_id` int(4) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED DEFAULT NULL,
   `test_type` varchar(50) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
-  `fee` int(4) NOT NULL
+  `minimum_fee` int(4) UNSIGNED NOT NULL,
+  `maximum_fee` int(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `test`
+--
+
+INSERT INTO `test` (`t_id`, `clinic_id`, `test_type`, `start_time`, `end_time`, `minimum_fee`, `maximum_fee`) VALUES
+(25, 6, 'Blood Test', '06:00:00', '20:00:00', 500, 3000),
+(26, 6, 'ECG', '07:00:00', '16:00:00', 800, 1500);
 
 -- --------------------------------------------------------
 
@@ -316,8 +335,7 @@ ALTER TABLE `book_test`
   ADD PRIMARY KEY (`ticket_no`),
   ADD KEY `test_id` (`test_id`),
   ADD KEY `patient_id` (`patient_id`),
-  ADD KEY `clinic_id` (`clinic_id`),
-  ADD KEY `doctor_id` (`doctor_id`);
+  ADD KEY `clinic_id` (`clinic_id`);
 
 --
 -- Indexes for table `clinic`
@@ -342,7 +360,7 @@ ALTER TABLE `doceasy_feedback`
 -- Indexes for table `doctor`
 --
 ALTER TABLE `doctor`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`d_id`),
   ADD KEY `clinic_id` (`clinic_id`);
 
 --
@@ -356,14 +374,14 @@ ALTER TABLE `doc_appointment_schedule`
 -- Indexes for table `management`
 --
 ALTER TABLE `management`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`m_id`),
   ADD KEY `clinic_id` (`clinic_id`);
 
 --
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`p_id`);
 
 --
 -- Indexes for table `patient_document`
@@ -375,7 +393,7 @@ ALTER TABLE `patient_document`
 -- Indexes for table `test`
 --
 ALTER TABLE `test`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`t_id`),
   ADD KEY `clinic_id` (`clinic_id`);
 
 --
@@ -409,7 +427,7 @@ ALTER TABLE `book_appointment`
 -- AUTO_INCREMENT for table `book_test`
 --
 ALTER TABLE `book_test`
-  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `clinic`
@@ -427,37 +445,37 @@ ALTER TABLE `clinic_feedback`
 -- AUTO_INCREMENT for table `doceasy_feedback`
 --
 ALTER TABLE `doceasy_feedback`
-  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `d_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `doc_appointment_schedule`
 --
 ALTER TABLE `doc_appointment_schedule`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `m_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `p_id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `t_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `test_reports`
@@ -474,8 +492,8 @@ ALTER TABLE `test_reports`
 --
 ALTER TABLE `book_appointment`
   ADD CONSTRAINT `book_appointment_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_appointment_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_appointment_ibfk_3` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `book_appointment_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`p_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `book_appointment_ibfk_3` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `book_appointment_ibfk_4` FOREIGN KEY (`schedule_id`) REFERENCES `doc_appointment_schedule` (`id`) ON UPDATE CASCADE;
 
 --
@@ -483,9 +501,8 @@ ALTER TABLE `book_appointment`
 --
 ALTER TABLE `book_test`
   ADD CONSTRAINT `book_test_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_test_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_test_ibfk_3` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_test_ibfk_4` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `book_test_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`p_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `book_test_ibfk_3` FOREIGN KEY (`test_id`) REFERENCES `test` (`t_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `clinic_feedback`
@@ -503,7 +520,7 @@ ALTER TABLE `doctor`
 -- Constraints for table `doc_appointment_schedule`
 --
 ALTER TABLE `doc_appointment_schedule`
-  ADD CONSTRAINT `doc_appointment_schedule_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `doc_appointment_schedule_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `management`
@@ -515,7 +532,7 @@ ALTER TABLE `management`
 -- Constraints for table `patient_document`
 --
 ALTER TABLE `patient_document`
-  ADD CONSTRAINT `patient_document_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `patient_document_ibfk_1` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`p_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `test`
@@ -528,9 +545,9 @@ ALTER TABLE `test`
 --
 ALTER TABLE `test_reports`
   ADD CONSTRAINT `test_reports_ibfk_1` FOREIGN KEY (`ticket_no`) REFERENCES `book_test` (`ticket_no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `test` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_3` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_4` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `test_reports_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `test` (`t_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `test_reports_ibfk_3` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`p_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `test_reports_ibfk_4` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `test_reports_ibfk_5` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
 COMMIT;
 

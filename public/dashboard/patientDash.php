@@ -7,7 +7,7 @@ if ($_SESSION["loggedIn"]) {
     <html lang="en">
 
     <head>
-        <link rel="stylesheet" type="text/css" href="/assets/css/patientDashboard.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/patientDash.css" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Patient Dashboard</title>
@@ -21,6 +21,8 @@ if ($_SESSION["loggedIn"]) {
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if ($row) {
+            $patient_id = $row["p_id"];
+            $_SESSION["patient_id"] = $patient_id;
         ?>
             <header id="header">
                 <div class="logo">
@@ -31,7 +33,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
-                        <li><a class="nav-link" href="#"><?php echo $row["first_name"] . " " . $row["last_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
                         <li><a class="nav-link" href="../logout/patietLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -39,6 +41,51 @@ if ($_SESSION["loggedIn"]) {
 
 
             <main>
+
+                <section id="register">
+                    <h2>Booking at DocEasy</h2>
+                    <div class="container">
+                        <!-- Patient Login  -->
+                        <div class="card" id="patient">
+                            <div class="product-logo">
+                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo.svg" alt="DocEasy logo" />
+                            </div>
+                            <div class="desc">
+                                <h3>Features</h3>
+                                <ol>
+                                    <li>Easily personalise your details</li>
+                                    <li>Every Doctor you choose is well approved</li>
+                                    <li>Easy to use dashboard for accessibility</li>
+                                    <li>Track multiple appointments for various departments</li>
+                                </ol>
+                            </div>
+                            <a href="/public/booking/bookAppointment/chooseDept.php">
+                                <button class="btn">Book Appointment</button>
+                            </a>
+                        </div>
+
+
+                        <!-- Doctor Login  -->
+                        <div class="card" id="doctor">
+                            <div class="product-logo">
+                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo.svg" alt="DocEasy for doctors logo" />
+                            </div>
+                            <div class="desc">
+                                <h3>Features</h3>
+                                <ol>
+                                    <li>Know your Patients</li>
+                                    <li>Manage and keep track of patient's appointments</li>
+                                    <li>Choose your clinic address</li>
+                                    <li>Personalise area of expertise and qualifications</li>
+                                </ol>
+                            </div>
+                            <a href="/public/booking/bookTest/chooseTest.php">
+                                <button class="btn">Book Diagnosis</button>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+
                 <footer>
                     <div id="footer-logo">
                         <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
