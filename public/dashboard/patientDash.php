@@ -48,15 +48,14 @@ if ($_SESSION["loggedIn"]) {
                         <!-- Patient Login  -->
                         <div class="card" id="patient">
                             <div class="product-logo">
-                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo.svg" alt="DocEasy logo" />
+                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-book-appointment.svg" alt="DocEasy logo" />
                             </div>
                             <div class="desc">
                                 <h3>Features</h3>
                                 <ol>
-                                    <li>Easily personalise your details</li>
-                                    <li>Every Doctor you choose is well approved</li>
-                                    <li>Easy to use dashboard for accessibility</li>
-                                    <li>Track multiple appointments for various departments</li>
+                                    <li>Choose from a variety of Departments</li>
+                                    <li>Book at your preferred and nearest Clinic</li>
+                                    <li>We offer a wide section of Doctors.</li>
                                 </ol>
                             </div>
                             <a href="/public/booking/bookAppointment/chooseDept.php">
@@ -68,15 +67,14 @@ if ($_SESSION["loggedIn"]) {
                         <!-- Doctor Login  -->
                         <div class="card" id="doctor">
                             <div class="product-logo">
-                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo.svg" alt="DocEasy for doctors logo" />
+                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-book-tests.svg" alt="DocEasy for doctors logo" />
                             </div>
                             <div class="desc">
                                 <h3>Features</h3>
                                 <ol>
-                                    <li>Know your Patients</li>
-                                    <li>Manage and keep track of patient's appointments</li>
-                                    <li>Choose your clinic address</li>
-                                    <li>Personalise area of expertise and qualifications</li>
+                                    <li>Book your lab diagnosis now!</li>
+                                    <li>Verified from trusted lab physicians.</li>
+                                    <li>Get doctor recommendations.</li>
                                 </ol>
                             </div>
                             <a href="/public/booking/bookTest/chooseTest.php">
