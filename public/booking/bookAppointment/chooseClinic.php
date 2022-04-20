@@ -16,6 +16,8 @@ if ($_SESSION["logged_in"]) {
     <body>
         <main>
             <?php
+
+            $patient_id = $_SESSION["patient_id"];
             $dept = $_SESSION["dept"];
 
             $clinic_name = $clinicErr = '';

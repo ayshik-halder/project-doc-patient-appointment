@@ -63,8 +63,14 @@
             }
 
 
+            $today_date = strtotime(date('Y-m-d'));
+            $date_of_birth = strtotime($dob);
+
             if (!$dob) {
                 $dobErr = "DOB is required";
+                $flag = false;
+            } elseif ($date_of_birth >= $today_date) {
+                $dobErr = "Mention Proper Date of Birth";
                 $flag = false;
             } else {
                 test_input($dob);
@@ -192,7 +198,7 @@
             <h2>Patient Registration Form</h2>
             <div class="grid">
                 <form id="form" action="" method="POST">
-                    
+
                     <div class="column-100">
                         <div class="form-group">
                             <label id="name-label" for="full-name"><strong>Full Name</strong></label>

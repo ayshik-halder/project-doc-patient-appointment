@@ -1,7 +1,7 @@
 <?php
 require_once "../../config.php";
 session_start();
-if ($_SESSION["logged_In"]) {
+if ($_SESSION["logged_in"]) {
 ?>
 
     <!DOCTYPE html>
@@ -18,10 +18,11 @@ if ($_SESSION["logged_In"]) {
             <?php
 
             $patient_id = $_SESSION["patient_id"];
-            $test = $_SESSION["test"];
+            $dept = $_SESSION["dept"];
             $cname = $_SESSION["cname"];
+            $doctor = $_SESSION["doctor"];
 
-            $sql = "SELECT * FROM test WHERE test_type='$test'";
+            $sql = "SELECT * FROM doctor WHERE full_name='$doctor'";
 
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
@@ -64,7 +65,7 @@ if ($_SESSION["logged_In"]) {
 
                     if ($flag) {
                         $_SESSION["logged_In"] = true;
-                        header("Location:./bookTest.php");
+                        header("Location:./bookAppointment.php");
                     }
                 }
             ?>
@@ -72,12 +73,12 @@ if ($_SESSION["logged_In"]) {
                 <section id="registration">
                     <div class="container">
                         <div class="card">
-                            <h2>Book Diagnosis Test</h2>
+                            <h2>Book Doctor Appointment</h2>
                             <div class="grid">
                                 <form id="form" action=" " method="POST">
                                     <div class="form-group">
-                                        <label id="test-type-label" for="test-type"><strong>Test Type</strong></label>
-                                        <input type="text" name="test_type" class="form-control" id="test_type" value="<?php echo $test; ?>" />
+                                        <label id="specialization-label" for="specialization"><strong>Department</strong></label>
+                                        <input type="text" name="specialization" class="form-control" id="specialization" value="<?php echo $dept; ?>" />
                                     </div>
 
                                     <div class="form-group">
@@ -86,8 +87,13 @@ if ($_SESSION["logged_In"]) {
                                     </div>
 
                                     <div class="form-group">
+                                        <label id="doctor-label" for="doctor"><strong>Doctor</strong></label>
+                                        <input type="text" name="full_name" class="form-control" id="doctor" value="<?php echo $doctor; ?>" />
+                                    </div>
+
+                                    <div class="form-group">
                                         <label id="fee-label" for="fee"><strong>Fees</strong></label>
-                                        <input type="text" class="form-control" id="fee" value="<?php echo $row["minimum_fee"] . " - " . $row["maximum_fee"]; ?>" />
+                                        <input type="text" name="fee" class="form-control" id="fee" value="<?php echo $row["fee"]; ?>" />
                                     </div>
 
                                     <div class="form-group">
@@ -101,8 +107,9 @@ if ($_SESSION["logged_In"]) {
                                             <label id="submit-label" for="submit"></label>
                                             <input id="submit" type="submit" value="Next" class="btn" />
                                             <label id="back-label" for="back"></label>
-                                            <a href="./chooseClinic.php">
+                                            <a href="./chooseDoctor.php">
                                                 <input id="back" type="back" value="back" class="btn" />
+                                            </a>
                                             </a>
                                         </div>
                                     </div>

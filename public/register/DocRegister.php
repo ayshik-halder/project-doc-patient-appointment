@@ -62,8 +62,15 @@
                 test_input($full_name);
             }
 
+
+            $today_date = strtotime(date('Y-m-d'));
+            $date_of_birth = strtotime($dob);
+
             if (!$dob) {
                 $dobErr = "DOB is required";
+                $flag = false;
+            } elseif ($date_of_birth >= $today_date) {
+                $dobErr = "Mention Proper Date of Birth";
                 $flag = false;
             } else {
                 test_input($dob);

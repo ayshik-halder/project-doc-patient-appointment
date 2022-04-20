@@ -16,6 +16,8 @@ if ($_SESSION["logged_in"]) {
     <body>
         <main>
             <?php
+
+            $patient_id = $_SESSION["patient_id"];
             $dept = $_SESSION["dept"];
             $cname = $_SESSION["cname"];
 
@@ -34,7 +36,7 @@ if ($_SESSION["logged_in"]) {
 
                 if ($flag) {
                     $_SESSION["logged_in"] = true;
-                    header("Location:./chooseTime.php");
+                    header("Location:./chooseDate.php");
                 }
             }
             ?>
@@ -61,10 +63,10 @@ if ($_SESSION["logged_in"]) {
                                         <option selected>Choose Doctor</option>
 
                                         <?php
-                                        $query_doctor = "SELECT DISTINCT username FROM doctor,clinic,doc_appointment_schedule WHERE doctor.clinic_id = clinic.id AND doctor.id = doc_appointment_schedule.doctor_id AND specialization = '$dept' AND clinic_name= '$cname' AND start_time IS NOT NULL AND date_time IS NOT NULL";
+                                        $query_doctor = "SELECT DISTINCT full_name FROM doctor,clinic WHERE doctor.clinic_id = clinic.id AND specialization = '$dept' AND clinic_name= '$cname' AND start_time IS NOT NULL";
                                         $result_doctor = $conn->query($query_doctor);
                                         while ($row = $result_doctor->fetch_array()) {
-                                            $doctor = $row['username'];
+                                            $doctor = $row['full_name'];
                                         ?>
                                             <option><?php echo $doctor ?></option>
                                         <?php } ?>

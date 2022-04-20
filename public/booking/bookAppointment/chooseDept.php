@@ -21,6 +21,8 @@ session_start();
 
         <?php
 
+        $patient_id = $_SESSION["patient_id"];
+
         $dept = $deptErr = '';
         $flag = true;
 
