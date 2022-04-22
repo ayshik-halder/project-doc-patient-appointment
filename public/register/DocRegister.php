@@ -32,7 +32,7 @@
 
         $full_name = $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
-        $nameErr = $lastNameErr = $dobErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+        $nameErr = $dobErr = $ageErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
         $flag = true;
 
@@ -74,6 +74,17 @@
                 $flag = false;
             } else {
                 test_input($dob);
+            }
+
+
+            if (!$age) {
+                $ageErr = "Mention Your Age";
+                $flag = false;
+            } elseif (strlen($age) > 2) {
+                $ageErr = "Age cannot contain more than 2 digit";
+                $flag = false;
+            } else {
+                test_input($age);
             }
 
             if (!$gender) {
@@ -222,6 +233,7 @@
                         <div class="form-group">
                             <label id="age-label" for="age"><strong>Age</strong></label>
                             <input type="number" name="age" class="form-control" id="age" placeholder="Age" value="<?php echo $age; ?>" />
+                            <small class="error-label"><?php echo $ageErr ?></small>
                         </div>
                     </div>
 

@@ -16,7 +16,7 @@ if ($_SESSION["loggedIn"]) {
     <body>
         <?php
         $uname =  $_SESSION["uname"];
-        $sql = "SELECT * FROM doctor WHERE username='$uname'";
+        $sql = "SELECT * FROM doctor,clinic WHERE doctor.clinic_id = clinic.id AND username='$uname'";
 
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
@@ -32,7 +32,9 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["specialization"];  ?></a></li>
+                        <li><a class="nav-link" href="./ProfilePage/updateDoctorProfile.php">Update Profile</a></li>
                         <li><a class="nav-link" href="../logout/docLogout.php">Logout</a></li>
                     </ul>
                 </nav>

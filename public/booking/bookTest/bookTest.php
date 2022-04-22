@@ -43,12 +43,19 @@ if ($_SESSION["logged_In"]) {
 
                     if ($flag) {
                         $query = "INSERT INTO book_test(patient_id, test_id, clinic_id, date)
-                                VALUE('$patient_id', '$test_id', '$clinic_id', '$date')";
+                                VALUES('$patient_id', '$test_id', '$clinic_id', '$date')";
 
                         if ($conn->query($query)) {
-                            session_unset();
-                            session_destroy();
-                            header("Location:/public/dashboard/patientDash.php");
+
+                            $query_status = "UPDATE book_test
+                                            SET approval_status = 'APPROVED'
+                                            WHERE patient_id = '$patient_id' AND test_id = '$test_id' AND date = '$date';";
+
+                            if ($conn->query($query_status)) {
+                                header("Location:/public/dashboard/patientDash.php");
+                            } else {
+                                echo "failed" . $conn->error;
+                            }
                         } else {
                             echo "failed" . $conn->error;
                         }
@@ -87,7 +94,7 @@ if ($_SESSION["logged_In"]) {
                                         <label id="payment-label" for="payment-type"><strong>Payment Mode</strong></label>
                                         <select name="payment" id="payment" class="form-control">
                                             <option selected>Choose Payment Type</option>
-                                            <option value="<?php echo $payment ?>">Cash Payment</option>
+                                            <option>Cash Payment</option>
                                         </select>
                                         <small class="error-label"><?php echo $paymentErr ?></small>
                                     </div>

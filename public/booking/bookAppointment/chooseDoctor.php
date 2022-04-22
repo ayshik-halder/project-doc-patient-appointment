@@ -82,7 +82,6 @@ if ($_SESSION["logged_in"]) {
                                         <a href="./chooseClinic.php">
                                             <input id="back" type="back" value="back" class="btn" />
                                         </a>
-                                        </a>
                                     </div>
                                 </div>
 

@@ -34,6 +34,7 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="./ProfilePage/updatePatientProfile.php">Update Profile</a></li>
                         <li><a class="nav-link" href="../logout/patietLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -48,7 +49,7 @@ if ($_SESSION["loggedIn"]) {
                         <!-- Patient Login  -->
                         <div class="card" id="patient">
                             <div class="product-logo">
-                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-book-appointment.svg" alt="DocEasy logo" />
+                                <img class="logo-img" src="/assets/images/doceasy/doceasy-book-appointment.svg" alt="DocEasy logo" />
                             </div>
                             <div class="desc">
                                 <h3>Features</h3>
@@ -67,7 +68,7 @@ if ($_SESSION["loggedIn"]) {
                         <!-- Doctor Login  -->
                         <div class="card" id="doctor">
                             <div class="product-logo">
-                                <img class="logo-img" src="../../assets/images/doceasy/doceasy-book-tests.svg" alt="DocEasy for doctors logo" />
+                                <img class="logo-img" src="/assets/images/doceasy/doceasy-book-tests.svg" alt="DocEasy for doctors logo" />
                             </div>
                             <div class="desc">
                                 <h3>Features</h3>

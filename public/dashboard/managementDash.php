@@ -7,7 +7,7 @@ if ($_SESSION["loggedIn"]) {
     <html lang="en">
 
     <head>
-        <link rel="stylesheet" type="text/css" href="/assets/css/patientDashboard.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/managementDashboard.css" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Management Dashboard</title>
@@ -33,13 +33,15 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="./ProfilePage/updateManagementProfile.php">Update Profile</a></li>
                         <li><a class="nav-link" href="../logout/managementLogout.php">Logout</a></li>
                     </ul>
                 </nav>
             </header>
 
-
             <main>
+
+
                 <footer>
                     <div id="footer-logo">
                         <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />

@@ -22,6 +22,7 @@ if ($_SESSION["logged_in"]) {
             $cname = $_SESSION["cname"];
             $doctor = $_SESSION["doctor"];
             $date = $_SESSION["date"];
+            $payment = $_SESSION["payment"];
 
 
             $sql = "SELECT * FROM doctor,clinic WHERE doctor.clinic_id = clinic.id AND full_name = '$doctor' AND clinic_name = '$cname'";
@@ -33,33 +34,31 @@ if ($_SESSION["logged_in"]) {
                 $doctor_id = $row["d_id"];
                 $clinic_id = $row["clinic_id"];
 
-                $payment = $paymentErr = '';
-                $flag = true;
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $problem = $_POST['problem'];
 
-                    if ($payment == "Choose Payment Type") {
-                        $paymentErr = "Mention Payment Type";
-                        $flag = false;
-                    }
+                    $query = "INSERT INTO book_appointment(patient_id, doctor_id, clinic_id, date, problem) VALUES('$patient_id', '$doctor_id', '$clinic_id', '$date', '$problem')";
 
-                    if ($flag) {
-                        $query = "INSERT INTO book_appointment(patient_id, doctor_id, clinic_id, date_time)
-                                VALUE('$patient_id', '$doctor_id', '$clinic_id', '$date')";
+                    if ($conn->query($query)) {
+                        
+                        $query_status = "UPDATE book_appointment
+                                        SET approval_status = 'APPROVED'
+                                        WHERE patient_id = '$patient_id' AND doctor_id = '$doctor_id' AND date = '$date';";
 
-                        if ($conn->query($query)) {
-                            session_unset();
-                            session_destroy();
+                        if ($conn->query($query_status)) {
                             header("Location:/public/dashboard/patientDash.php");
                         } else {
                             echo "failed" . $conn->error;
                         }
+                    } else {
+                        echo "failed" . $conn->error;
                     }
                 }
             ?>
 
 
-<section id="registration">
+                <section id="registration">
                     <div class="container">
                         <div class="card">
                             <h2>Book Doctor Appointment</h2>
@@ -92,12 +91,20 @@ if ($_SESSION["logged_in"]) {
 
                                     <div class="form-group">
                                         <label id="payment-label" for="payment-type"><strong>Payment Mode</strong></label>
-                                        <select name="payment" id="payment" class="form-control">
-                                            <option selected>Choose Payment Type</option>
-                                            <option value="<?php echo $payment ?>">Cash Payment</option>
-                                            <option value="<?php echo $payment ?>">UPI Payment</option>
-                                        </select>
-                                        <small class="error-label"><?php echo $paymentErr ?></small>
+                                        <input type="text" name="payment" class="form-control" id="payment" value="<?php echo $payment; ?>" />
+                                    </div>
+
+                                    <?php
+                                    if ($payment == "UPI Payment") { ?>
+                                        <div class="form-group">
+                                            <label id="upi-label" for="upi"><strong>UPI ID</strong></label>
+                                            <input type="text" name="clinic_upi_id" class="form-control" id="upi" value="<?php echo $row["clinic_upi_id"]; ?>" />
+                                        </div>
+                                    <?php } ?>
+
+                                    <div class="form-group">
+                                        <label id="problem-label" for="problem"><strong>Problem</strong></label>
+                                        <input type="text" name="problem" class="form-control" placeholder="Problem (OPTIONAL)" id="problem" value="<?php $problem; ?>" />
                                     </div>
 
                                     <div class="form-group">
@@ -105,9 +112,8 @@ if ($_SESSION["logged_in"]) {
                                             <label id="submit-label" for="submit"></label>
                                             <input id="submit" type="submit" value="Next" class="btn" />
                                             <label id="back-label" for="back"></label>
-                                            <a href="./chooseDoctor.php">
+                                            <a href="./choosePayment.php">
                                                 <input id="back" type="back" value="back" class="btn" />
-                                            </a>
                                             </a>
                                         </div>
                                     </div>

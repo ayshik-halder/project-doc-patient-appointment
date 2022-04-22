@@ -21,54 +21,38 @@ if ($_SESSION["logged_in"]) {
             $dept = $_SESSION["dept"];
             $cname = $_SESSION["cname"];
             $doctor = $_SESSION["doctor"];
+            $date = $_SESSION["date"];
 
-            $sql = "SELECT * FROM doctor WHERE full_name='$doctor'";
+
+            $sql = "SELECT * FROM doctor,clinic WHERE doctor.clinic_id = clinic.id AND full_name = '$doctor' AND clinic_name = '$cname'";
 
             $result = $conn->query($sql);
             $row = $result->fetch_assoc();
             if ($row) {
 
-                $date = $dateErr = '';
+                $doctor_id = $row["d_id"];
+                $clinic_id = $row["clinic_id"];
+
+                $payment = $paymentErr = '';
                 $flag = true;
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    $date = $_POST['date'];
+                    $payment = $_POST['payment'];
 
-
-                    $today_date = strtotime(date('Y-m-d'));
-                    $DATE = strtotime($date);
-                    $last_date = strtotime(date("Y-m-t", $today_date));
-
-                    if (!$date) {
-                        $dateErr = "Mention Date";
-                        $flag = false;
-                    } elseif ($today_date == $last_date) {
-                        $tomorrow = strtotime(date("Y-m-d", strtotime(date('Y-m-d') . '+1days')));
-                        $lastDate = strtotime(date("Y-m-t", $tomorrow));
-
-                        if ($DATE <= $today_date) {
-                            $dateErr = "Choose Upcoming date of next month";
-                            $flag = false;
-                        } elseif ($DATE > $lastDate) {
-                            $dateErr = "Choose Upcoming date of next month";
-                            $flag = false;
-                        }
-                    } elseif ($DATE <= $today_date) {
-                        $dateErr = "Choose Upcoming date of current month";
-                        $flag = false;
-                    } elseif ($DATE > $last_date) {
-                        $dateErr = "Choose Upcoming date of current month";
+                    if ($payment == "Choose Payment Type") {
+                        $paymentErr = "Mention Payment Type";
                         $flag = false;
                     }
 
-                    $_SESSION["date"] = $date;
+                    $_SESSION["payment"] = $payment;
 
                     if ($flag) {
                         $_SESSION["logged_In"] = true;
-                        header("Location:./choosePayment.php");
+                        header("Location:./bookAppointment.php");
                     }
                 }
             ?>
+
 
                 <section id="registration">
                     <div class="container">
@@ -97,9 +81,18 @@ if ($_SESSION["logged_in"]) {
                                     </div>
 
                                     <div class="form-group">
-                                        <label id="date-label" for="date"><strong>Choose Date</strong></label>
-                                        <input type="date" name="date" class="form-control" id="date" value="<?php $date; ?>" />
-                                        <small class="error-label"><?php echo $dateErr ?></small>
+                                        <label id="date-label" for="date"><strong>Date</strong></label>
+                                        <input type="text" name="date_time" class="form-control" id="date" value="<?php echo $date; ?>" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label id="payment-label" for="payment-type"><strong>Payment Mode</strong></label>
+                                        <select name="payment" id="payment" class="form-control">
+                                            <option selected>Choose Payment Type</option>
+                                            <option>Cash Payment</option>
+                                            <option>UPI Payment</option>
+                                        </select>
+                                        <small class="error-label"><?php echo $paymentErr ?></small>
                                     </div>
 
                                     <div class="form-group">
@@ -107,7 +100,7 @@ if ($_SESSION["logged_in"]) {
                                             <label id="submit-label" for="submit"></label>
                                             <input id="submit" type="submit" value="Next" class="btn" />
                                             <label id="back-label" for="back"></label>
-                                            <a href="./chooseDoctor.php">
+                                            <a href="./chooseDate.php">
                                                 <input id="back" type="back" value="back" class="btn" />
                                             </a>
                                         </div>

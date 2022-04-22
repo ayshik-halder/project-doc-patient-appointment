@@ -60,7 +60,7 @@ if ($_SESSION["loggedIn"]) {
 
                     $full_name = $_POST['full_name'];
                     $phn_no = $_POST['phn_no'];
-                    $email = $_POST['email'];
+                    $email = $_POST['Email'];
                     $clinic_name = $_POST['clinic_name'];
                     $username = $_POST['username'];
                     $password = $_POST['password'];
@@ -135,7 +135,7 @@ if ($_SESSION["loggedIn"]) {
 
                     if ($flag) {
 
-                        $query = "INSERT INTO management(full_name, phn_no, email, username, password)
+                        $query = "INSERT INTO management(full_name, phn_no, Email, username, password)
                 VALUES('$full_name', '$phn_no', '$email', '$username', '$password' )";
 
                         if ($conn->query($query)) {
@@ -185,7 +185,7 @@ if ($_SESSION["loggedIn"]) {
                             <div class="column-50">
                                 <div class="form-group">
                                     <label id="email-label" for="email"><strong>Email</strong></label>
-                                    <input type="email" name="email" class="form-control" id="email" placeholder="Email address" value="<?php $email; ?>" />
+                                    <input type="email" name="Email" class="form-control" id="email" placeholder="Email address" value="<?php $email; ?>" />
                                     <small class="error-label"><?php echo $emailErr ?></small>
                                 </div>
                             </div>

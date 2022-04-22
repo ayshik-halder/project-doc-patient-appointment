@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2022 at 10:37 PM
+-- Generation Time: Apr 22, 2022 at 05:45 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -54,13 +54,22 @@ CREATE TABLE `book_appointment` (
   `patient_id` int(5) UNSIGNED NOT NULL,
   `clinic_id` int(4) UNSIGNED NOT NULL,
   `doctor_id` int(4) UNSIGNED NOT NULL,
-  `schedule_id` int(5) UNSIGNED NOT NULL,
+  `schedule_id` int(5) UNSIGNED DEFAULT NULL,
   `date_time` varchar(50) NOT NULL,
   `approval_status` enum('PENDING','APPROVED','DECLINE','EXPIRE') NOT NULL DEFAULT 'PENDING',
   `problem` varchar(100) DEFAULT NULL,
   `doctor_massage` varchar(100) DEFAULT NULL,
   `doctor_appointment_slip` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `book_appointment`
+--
+
+INSERT INTO `book_appointment` (`id`, `patient_id`, `clinic_id`, `doctor_id`, `schedule_id`, `date_time`, `approval_status`, `problem`, `doctor_massage`, `doctor_appointment_slip`) VALUES
+(1, 51, 7, 29, NULL, '2022-04-30', 'PENDING', NULL, NULL, NULL),
+(2, 51, 7, 29, NULL, '2022-04-30', 'PENDING', NULL, NULL, NULL),
+(3, 51, 6, 31, NULL, '2022-04-23', 'PENDING', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -77,6 +86,13 @@ CREATE TABLE `book_test` (
   `approval_status` enum('PENDING','APPROVED','DECLINE','EXPIRE') NOT NULL DEFAULT 'PENDING',
   `test_appointment_slip` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `book_test`
+--
+
+INSERT INTO `book_test` (`ticket_no`, `test_id`, `patient_id`, `clinic_id`, `date`, `approval_status`, `test_appointment_slip`) VALUES
+(7, 25, 51, 6, '2022-04-23', 'PENDING', NULL);
 
 -- --------------------------------------------------------
 
@@ -173,7 +189,7 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`d_id`, `clinic_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `start_time`, `end_time`, `fee`) VALUES
 (29, 7, 'anuvab5', 123654, 'Anuvab Roy', '1990-03-23', 32, 'MALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'anuvab1990@gmail.com', '09:00:01', '13:30:00', 300),
 (30, 6, 'chitra3', 2580, 'Chitra Mondal', '1993-10-02', 29, 'FEMALE', 'Gynaecology', NULL, NULL, 3, 4294967295, 'chitra93@gmail.com', '10:30:00', '12:30:00', 250),
-(31, 6, 'maya31', 78965, 'Maya Sen', '1991-01-30', 31, 'FEMALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'maya91@gmail.com', '16:00:00', '19:00:00', 350),
+(31, 6, 'maya31', 78965, 'Maya Sen', '1991-01-30', 31, 'FEMALE', 'Cardiology', 'MBBS', '', 5, 4294967295, 'maya91@gmail.com', '11:00:00', '00:00:00', 300),
 (32, 6, 'rupa27', 1234, 'Rupa Biswas', '1995-02-12', 27, 'FEMALE', 'Cardiology', NULL, NULL, 1, 4294967295, 'rupa27@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -188,19 +204,6 @@ CREATE TABLE `doc_appointment_schedule` (
   `date_time` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `doc_appointment_schedule`
---
-
-INSERT INTO `doc_appointment_schedule` (`id`, `doctor_id`, `date_time`) VALUES
-(9, 29, '09:00:00'),
-(10, 29, '09:30:00'),
-(11, 29, '10:00:00'),
-(12, 29, '10:30:00'),
-(14, 29, '11:00:00'),
-(13, 30, '10:30:00'),
-(15, 30, '11:30:00');
-
 -- --------------------------------------------------------
 
 --
@@ -214,15 +217,15 @@ CREATE TABLE `management` (
   `password` int(10) UNSIGNED NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `phn_no` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) NOT NULL
+  `Email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `management`
 --
 
-INSERT INTO `management` (`m_id`, `clinic_id`, `username`, `password`, `full_name`, `phn_no`, `email`) VALUES
-(26, 6, 'mayank21', 25896, 'Mayank Kumar', 4294967295, 'mayank21@gmail.com');
+INSERT INTO `management` (`m_id`, `clinic_id`, `username`, `password`, `full_name`, `phn_no`, `Email`) VALUES
+(26, 6, 'mayank21', 25896, 'Mayank kumar', 4294967295, 'mayank21@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -252,8 +255,8 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
-(51, 'rimi22', 34210, 'Rimi Mondal', '2000-05-20', 22, 'FEMALE', 'UNMARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, NULL),
-(52, 'rdolon', 8520, 'Dolon Roy', '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
+(51, 'rimi22', 34210, 'Rimi Mondol', '2000-05-20', 22, 'FEMALE', 'UNMARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, ''),
+(52, 'rdolon', 0, 'Dolon Roy', '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
 
@@ -262,9 +265,10 @@ INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `dob`, `age`
 --
 
 CREATE TABLE `patient_document` (
+  `id` int(5) NOT NULL,
   `patient_id` int(5) UNSIGNED NOT NULL,
-  `report` mediumblob NOT NULL,
-  `report_type` varchar(50) NOT NULL
+  `report_type` varchar(50) NOT NULL,
+  `report` mediumblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -387,6 +391,7 @@ ALTER TABLE `patient`
 -- Indexes for table `patient_document`
 --
 ALTER TABLE `patient_document`
+  ADD PRIMARY KEY (`id`,`patient_id`),
   ADD KEY `patient_id` (`patient_id`);
 
 --
@@ -421,13 +426,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `book_test`
 --
 ALTER TABLE `book_test`
-  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `clinic`
@@ -470,6 +475,12 @@ ALTER TABLE `management`
 --
 ALTER TABLE `patient`
   MODIFY `p_id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `patient_document`
+--
+ALTER TABLE `patient_document`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `test`
