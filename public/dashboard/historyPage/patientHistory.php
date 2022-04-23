@@ -48,7 +48,7 @@ if ($_SESSION["loggedIn"]) {
                             <td> <?php echo $row["problem"]; ?> </td>
                             <td> <?php echo $row["clinic_name"]; ?> </td>
                             <td> <?php echo $row["approval_status"]; ?> </td>
-                            <td> <button> <a href="./PatientHistoryDelete.php?id=<?php echo $row['booking_id'] ?>"> Delete </a> </button> </td>
+                            <td> <button> <a href="./PatientHistoryDelete.php?id=<?php echo $row['booking_id'] ?>"> Cancel </a> </button> </td>
                         </tr>
                     <?php } ?>
                 </table>

@@ -34,25 +34,35 @@ if ($_SESSION["logged_in"]) {
                 $doctor_id = $row["d_id"];
                 $clinic_id = $row["clinic_id"];
 
+                $transactionErr = $transaction = '';
+                $flag = true;
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $transaction = $_POST['transaction_id'];
                     $problem = $_POST['problem'];
 
-                    $query = "INSERT INTO book_appointment(patient_id, doctor_id, clinic_id, date, problem) VALUES('$patient_id', '$doctor_id', '$clinic_id', '$date', '$problem')";
+                    $query = "INSERT INTO book_appointment(patient_id, doctor_id, clinic_id, date, problem, transaction_id) VALUES('$patient_id', '$doctor_id', '$clinic_id', '$date', '$problem', '$transaction')";
 
-                    if ($conn->query($query)) {
-                        
-                        $query_status = "UPDATE book_appointment
+                    if (!$transaction) {
+                        $transactionErr = "Mention your Ttansaction Id";
+                        $flag = false;
+                    }
+
+                    if ($flag) {
+                        if ($conn->query($query)) {
+
+                            $query_status = "UPDATE book_appointment
                                         SET approval_status = 'APPROVED'
                                         WHERE patient_id = '$patient_id' AND doctor_id = '$doctor_id' AND date = '$date';";
 
-                        if ($conn->query($query_status)) {
-                            header("Location:/public/dashboard/patientDash.php");
+                            if ($conn->query($query_status)) {
+                                header("Location:/public/dashboard/patientDash.php");
+                            } else {
+                                echo "failed" . $conn->error;
+                            }
                         } else {
                             echo "failed" . $conn->error;
                         }
-                    } else {
-                        echo "failed" . $conn->error;
                     }
                 }
             ?>
@@ -100,6 +110,11 @@ if ($_SESSION["logged_in"]) {
                                             <label id="upi-label" for="upi"><strong>UPI ID</strong></label>
                                             <input type="text" name="clinic_upi_id" class="form-control" id="upi" value="<?php echo $row["clinic_upi_id"]; ?>" />
                                         </div>
+
+                                        <div class="form-group">
+                                            <label id="transaction-label" for="transaction"><strong>Transaction ID</strong></label>
+                                            <input type="text" name="transaction_id" class="form-control" id="transaction" placeholder="Mention your transaction id" value="<?php echo $transaction; ?>" />
+                                        </div>
                                     <?php } ?>
 
                                     <div class="form-group">
@@ -110,7 +125,7 @@ if ($_SESSION["logged_in"]) {
                                     <div class="form-group">
                                         <div id="button-group">
                                             <label id="submit-label" for="submit"></label>
-                                            <input id="submit" type="submit" value="Next" class="btn" />
+                                            <input id="submit" type="submit" value="Submit" class="btn" />
                                             <label id="back-label" for="back"></label>
                                             <a href="./choosePayment.php">
                                                 <input id="back" type="back" value="back" class="btn" />

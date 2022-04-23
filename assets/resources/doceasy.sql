@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 22, 2022 at 05:45 PM
+-- Generation Time: Apr 23, 2022 at 08:46 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -55,21 +55,21 @@ CREATE TABLE `book_appointment` (
   `clinic_id` int(4) UNSIGNED NOT NULL,
   `doctor_id` int(4) UNSIGNED NOT NULL,
   `schedule_id` int(5) UNSIGNED DEFAULT NULL,
-  `date_time` varchar(50) NOT NULL,
+  `date` varchar(50) NOT NULL,
   `approval_status` enum('PENDING','APPROVED','DECLINE','EXPIRE') NOT NULL DEFAULT 'PENDING',
   `problem` varchar(100) DEFAULT NULL,
-  `doctor_massage` varchar(100) DEFAULT NULL,
-  `doctor_appointment_slip` mediumblob DEFAULT NULL
+  `doctor_message` varchar(100) DEFAULT NULL,
+  `doctor_appointment_slip` mediumblob DEFAULT NULL,
+  `transaction_id` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `book_appointment`
 --
 
-INSERT INTO `book_appointment` (`id`, `patient_id`, `clinic_id`, `doctor_id`, `schedule_id`, `date_time`, `approval_status`, `problem`, `doctor_massage`, `doctor_appointment_slip`) VALUES
-(1, 51, 7, 29, NULL, '2022-04-30', 'PENDING', NULL, NULL, NULL),
-(2, 51, 7, 29, NULL, '2022-04-30', 'PENDING', NULL, NULL, NULL),
-(3, 51, 6, 31, NULL, '2022-04-23', 'PENDING', NULL, NULL, NULL);
+INSERT INTO `book_appointment` (`id`, `patient_id`, `clinic_id`, `doctor_id`, `schedule_id`, `date`, `approval_status`, `problem`, `doctor_message`, `doctor_appointment_slip`, `transaction_id`) VALUES
+(4, 51, 6, 30, NULL, '2022-04-23', 'APPROVED', 'PCOD', NULL, NULL, NULL),
+(15, 51, 7, 29, NULL, '2022-04-27', 'APPROVED', '', NULL, NULL, 'cfgcgcf');
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,9 @@ CREATE TABLE `book_test` (
 --
 
 INSERT INTO `book_test` (`ticket_no`, `test_id`, `patient_id`, `clinic_id`, `date`, `approval_status`, `test_appointment_slip`) VALUES
-(7, 25, 51, 6, '2022-04-23', 'PENDING', NULL);
+(7, 25, 51, 6, '2022-04-23', 'PENDING', NULL),
+(8, 25, 51, 6, '2022-04-23', 'PENDING', NULL),
+(9, 25, 51, 6, '2022-04-24', 'PENDING', NULL);
 
 -- --------------------------------------------------------
 
@@ -189,7 +191,7 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`d_id`, `clinic_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `start_time`, `end_time`, `fee`) VALUES
 (29, 7, 'anuvab5', 123654, 'Anuvab Roy', '1990-03-23', 32, 'MALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'anuvab1990@gmail.com', '09:00:01', '13:30:00', 300),
 (30, 6, 'chitra3', 2580, 'Chitra Mondal', '1993-10-02', 29, 'FEMALE', 'Gynaecology', NULL, NULL, 3, 4294967295, 'chitra93@gmail.com', '10:30:00', '12:30:00', 250),
-(31, 6, 'maya31', 78965, 'Maya Sen', '1991-01-30', 31, 'FEMALE', 'Cardiology', 'MBBS', '', 5, 4294967295, 'maya91@gmail.com', '11:00:00', '00:00:00', 300),
+(31, 6, 'maya31', 78965, 'Maya Sen', '1990-02-03', 32, 'FEMALE', 'Cardiology', 'MBBS', 0x4c5347455f535445502b5f576970726f2e706466, 5, 4294967295, 'maya91@gmail.com', '11:00:00', '00:00:00', 300),
 (32, 6, 'rupa27', 1234, 'Rupa Biswas', '1995-02-12', 27, 'FEMALE', 'Cardiology', NULL, NULL, 1, 4294967295, 'rupa27@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -225,7 +227,7 @@ CREATE TABLE `management` (
 --
 
 INSERT INTO `management` (`m_id`, `clinic_id`, `username`, `password`, `full_name`, `phn_no`, `Email`) VALUES
-(26, 6, 'mayank21', 25896, 'Mayank kumar', 4294967295, 'mayank21@gmail.com');
+(26, 6, 'mayank21', 34210, 'Mayank kumar', 4294967295, 'mayank21@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -256,7 +258,7 @@ CREATE TABLE `patient` (
 
 INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
 (51, 'rimi22', 34210, 'Rimi Mondol', '2000-05-20', 22, 'FEMALE', 'UNMARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, ''),
-(52, 'rdolon', 0, 'Dolon Roy', '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
+(52, 'rdolon', 25896, 'Dolon Roy', '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
 
@@ -426,13 +428,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `book_test`
 --
 ALTER TABLE `book_test`
-  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `clinic`
