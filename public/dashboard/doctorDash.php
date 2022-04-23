@@ -21,6 +21,9 @@ if ($_SESSION["loggedIn"]) {
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if ($row) {
+            if($row["start_time"] == '' || $row["end_time"] == '' || $row["fee"] == '' || $row["degree"] == '' || $row["degree_proof"] == '') { 
+                echo '<script> alert("Complete Your Profile") </script>';
+            }
         ?>
             <header id="header">
                 <div class="logo">
