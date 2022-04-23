@@ -40,7 +40,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
                 $patient_id = $row["p_id"];
-                $nameErr = $dobErr = $ageErr = $phnNoErr = $emailErr = $pinCodeErr = $usernameErr = '';
+                $nameErr = $dobErr = $ageErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = '';
                 $flag = true;
 
                 if (isset($_POST["update"])) {
@@ -58,7 +58,10 @@ if ($_SESSION["loggedIn"]) {
                     $report = $_POST['report'];
 
 
-                    if (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
+                    if (!$full_name) {
+                        $nameErr = "First name is required";
+                        $flag = false;
+                    } elseif (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
                         $nameErr = "only letters and white spaces allowed";
                         $flag = false;
                     }
@@ -66,27 +69,52 @@ if ($_SESSION["loggedIn"]) {
                     $today_date = strtotime(date('Y-m-d'));
                     $date_of_birth = strtotime($dob);
 
-                    if ($date_of_birth >= $today_date) {
+                    if (!$dob) {
+                        $dobErr = "DOB is required";
+                        $flag = false;
+                    } elseif ($date_of_birth >= $today_date) {
                         $dobErr = "Mention Proper Date of Birth";
                         $flag = false;
                     }
 
-                    if (strlen($age) > 2) {
+                    if (!$age) {
+                        $ageErr = "Mention Your Age";
+                        $flag = false;
+                    } elseif (strlen($age) > 2) {
                         $ageErr = "Age cannot contain more than 2 digit";
                         $flag = false;
                     }
 
-                    if (strlen($phn_no) != 10) {
+                    if (!$phn_no) {
+                        $phnNoErr = "Phone Number is required";
+                        $flag = false;
+                    } elseif (strlen($phn_no) != 10) {
                         $phnNoErr = "Phone Number must be contain 10 digit";
                         $flag = false;
                     }
 
-                    if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
+                    if (!$email) {
+                        $emailErr = "Email is required";
+                        $flag = false;
+                    } elseif (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
                         $emailErr = "Email format is not valid";
                         $flag = false;
                     }
 
-                    if (strlen($pin_code) != 6) {
+                    if (!$address) {
+                        $addressErr = "Address is required";
+                        $flag = false;
+                    } 
+
+                    if (!$city) {
+                        $cityErr = "City is required";
+                        $flag = false;
+                    } 
+
+                    if (!$pin_code) {
+                        $pinCodeErr = "Pin Code is required";
+                        $flag = false;
+                    } elseif (strlen($pin_code) != 6) {
                         $pinCodeErr = "Pin Code must be contain 6 digit";
                         $flag = false;
                     }
@@ -165,6 +193,7 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="address-label" for="address"><strong>Address</strong></label>
                                     <input type="text" name="address" class="form-control" id="address" placeholder="Address" value="<?php echo $row["address"] ?>" />
+                                    <small class="error-label"><?php echo $addressErr ?></small>
                                 </div>
                             </div>
 
@@ -172,6 +201,7 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="city-label" for="city"><strong>City</strong></label>
                                     <input type="text" name="city" class="form-control" id="city" placeholder="City" value="<?php echo $row["city"] ?>" />
+                                    <small class="error-label"><?php echo $cityErr ?></small>
                                 </div>
                             </div>
 

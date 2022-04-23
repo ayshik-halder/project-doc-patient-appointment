@@ -33,6 +33,7 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="./ProfilePage/updateClinicProfile.php">Update Clinic Details</a></li>
                         <li><a class="nav-link" href="./ProfilePage/updateManagementProfile.php">Update Profile</a></li>
                         <li><a class="nav-link" href="../logout/managementLogout.php">Logout</a></li>
                     </ul>

@@ -104,6 +104,9 @@
             if (!$experience) {
                 $experienceErr = "Experience Year is required";
                 $flag = false;
+            } elseif (strlen($experience) > (strlen($age) / 3)) {
+                $experienceErr = "Mention your proper experience year";
+                $flag = false;
             } else {
                 test_input($experience);
             }
@@ -293,7 +296,7 @@
                     <div class="column-100">
                         <div class="form-group">
                             <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
-                            <select name="clinic_name" id="clinic-name" , class="form-control">
+                            <select name="clinic_name" id="clinic-name" class="form-control">
                                 <option selected>Choose Clinic</option>
 
                                 <?php

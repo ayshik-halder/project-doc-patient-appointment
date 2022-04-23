@@ -40,7 +40,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
                 $management_id = $row["m_id"];
-                $nameErr = $phnNoErr = '';
+                $nameErr = $phnNoErr = $emailErr = '';
                 $flag = true;
 
                 if (isset($_POST["update"])) {
@@ -49,13 +49,24 @@ if ($_SESSION["loggedIn"]) {
                     $phn_no = $_POST['phn_no'];
                     $email = $_POST['Email'];
 
-                    if (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
+                    if (!$full_name) {
+                        $nameErr = "First name is required";
+                        $flag = false;
+                    } elseif (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
                         $nameErr = "only letters and white spaces allowed";
                         $flag = false;
                     }
 
-                    if (strlen($phn_no) != 10) {
+                    if (!$phn_no) {
+                        $phnNoErr = "Phone Number is required";
+                        $flag = false;
+                    } elseif (strlen($phn_no) != 10) {
                         $phnNoErr = "Phone Number must be contain 10 digit";
+                        $flag = false;
+                    }
+
+                    if (!$email) {
+                        $emailErr = "Email is required";
                         $flag = false;
                     }
 
@@ -97,6 +108,7 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="email-label" for="email"><strong>Email</strong></label>
                                     <input type="email" name="Email" class="form-control" id="email" placeholder="Email address" value="<?php echo $row["Email"] ?>" />
+                                    <small class="error-label"><?php echo $emailErr ?></small>
                                 </div>
                             </div>
 

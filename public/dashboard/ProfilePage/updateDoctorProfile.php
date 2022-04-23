@@ -39,7 +39,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
                 $doctor_id = $row["d_id"];
-                $nameErr = $dobErr = $ageErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $feeErr =  '';
+                $nameErr = $dobErr = $ageErr = $experienceErr = $phnNoErr = $emailErr = $feeErr = $timeErr =  '';
                 $flag = true;
 
                 if (isset($_POST["update"])) {
@@ -57,7 +57,10 @@ if ($_SESSION["loggedIn"]) {
                     $fee = $_POST['fee'];
 
 
-                    if (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
+                    if (!$full_name) {
+                        $nameErr = "First name is required";
+                        $flag = false;
+                    } elseif (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
                         $nameErr = "only letters and white spaces allowed";
                         $flag = false;
                     }
@@ -66,28 +69,53 @@ if ($_SESSION["loggedIn"]) {
                     $today_date = strtotime(date('Y-m-d'));
                     $date_of_birth = strtotime($dob);
 
-                    if ($date_of_birth >= $today_date) {
+                    if (!$dob) {
+                        $dobErr = "DOB is required";
+                        $flag = false;
+                    } elseif ($date_of_birth >= $today_date) {
                         $dobErr = "Mention Proper Date of Birth";
                         $flag = false;
                     }
 
-                    if (strlen($age) > 2) {
+                    if (!$age) {
+                        $ageErr = "Mention Your Age";
+                        $flag = false;
+                    } elseif (strlen($age) > 2) {
                         $ageErr = "Age cannot contain more than 2 digit";
                         $flag = false;
                     }
 
-                    if (strlen($phn_no) != 10) {
+                    if (!$experience) {
+                        $experienceErr = "Mention Your Experience";
+                        $flag = false;
+                    } elseif (strlen($experience) > (strlen($age)/3)) {
+                        $experienceErr = "Mention your proper experience year";
+                        $flag = false;
+                    }
+
+                    if (!$phn_no) {
+                        $phnNoErr = "Phone Number is required";
+                        $flag = false;
+                    } elseif (strlen($phn_no) != 10) {
                         $phnNoErr = "Phone Number must be contain 10 digit";
                         $flag = false;
                     }
 
-                    if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
+                    if (!$email) {
+                        $emailErr = "Email is required";
+                        $flag = false;
+                    } elseif (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
                         $emailErr = "Email format is not valid";
                         $flag = false;
                     }
 
                     if (strlen($fee) > 4) {
                         $feeErr = "Fee cannot contain more than 4 digit";
+                        $flag = false;
+                    }
+
+                    if($start_time >= $end_time) {
+                        $timeErr = "Mention Proper Timing";
                         $flag = false;
                     }
 
@@ -181,6 +209,7 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="start-time-label" for="start-time"><strong>Start Time</strong></label>
                                     <input type="time" name="start_time" class="form-control" id="start-time" value="<?php echo $row["start_time"] ?>" />
+                                    <small class="error-label"><?php echo $timeErr ?></small>
                                 </div>
                             </div>
 
@@ -188,6 +217,7 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="end-time-label" for="end-time"><strong>End Time</strong></label>
                                     <input type="time" name="end_time" class="form-control" id="end-time" value="<?php echo $row["end_time"] ?>" />
+                                    <small class="error-label"><?php echo $timeErr ?></small>
                                 </div>
                             </div>
 

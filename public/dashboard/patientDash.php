@@ -35,7 +35,8 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
                         <li><a class="nav-link" href="./ProfilePage/updatePatientProfile.php">Update Profile</a></li>
-                        <li><a class="nav-link" href="./historyPage/patientHistory.php">Booking Details</a></li>
+                        <li><a class="nav-link" href="./historyPage/patientHistory.php">My Appointments</a></li>
+                        <li><a class="nav-link" href="#">My Tests</a></li>
                         <li><a class="nav-link" href="../logout/patietLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -92,7 +93,7 @@ if ($_SESSION["loggedIn"]) {
                     </div>
                     <div id="footer-info">
                         <ul>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="/public/feedback/clinic_feedback.php">Clinic Feedback</a></li>
                             <li><a href="#">Customer Support</a></li>
                             <li><a href="/index.php#contact">Contact</a></li>
                         </ul>
