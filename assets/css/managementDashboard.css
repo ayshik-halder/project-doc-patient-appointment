@@ -34,6 +34,37 @@ img {
 }
 
 /* Global Classes */
+
+.column-60 {
+  float: left;
+  width: 60%;
+  padding: 0 4%;
+}
+
+.column-40 {
+  float: left;
+  padding: 0 4%;
+  width: 40%;
+}
+
+.grid::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 1000px) {
+  .column-60,
+  .column-40 {
+    width: 100%;
+    float: none;
+    padding: 0;
+  }
+  #image-div img {
+    margin: auto;
+  }
+}
+
 .btn {
   text-transform: uppercase;
   font-weight: 600;
@@ -63,6 +94,50 @@ img {
     margin: 0 auto;
   }
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: calc(100% / 3);
+  margin: 1.5rem;
+  padding: 3rem 2rem 3rem 2rem;
+  border: 1px solid rgba(55, 56, 58, 0.1);
+  border-radius: 5px;
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .card {
+    width: 100%;
+    margin: 1.5rem auto;
+  }
+}
+
+.card:hover {
+  box-shadow: 0 0 2rem -0.7rem rgba(55, 56, 58, 0.2);
+  border: 1px solid #ced4ee;
+}
+
+.icon {
+  width: 50px;
+}
+
+.desc > h3 {
+  margin: 2rem 0 2rem 0;
+}
+
+/* Header */
 
 /* Header */
 
@@ -117,6 +192,12 @@ nav > ul {
 
 nav li {
   padding: 0px 10px 0px 10px;
+}
+
+/* why section */
+#why {
+  padding: 15rem 5rem 5rem 5rem;
+  text-align: center;
 }
 
 /* form section */
@@ -219,6 +300,18 @@ label {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+}
+
+
+/* Team Member Section  */
+
+#team {
+  padding: 15rem 5rem 5rem 5rem;
+  text-align: center;
+}
+
+#team .card {
+  width: fit-content;
 }
 
 /* Footer */

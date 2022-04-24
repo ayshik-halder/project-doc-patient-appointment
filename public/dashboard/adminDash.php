@@ -40,6 +40,69 @@ if ($_SESSION["loggedIn"]) {
 
 
             <main>
+            <section id="why">
+                    <h2>Welcome <?php echo explode(' ', trim($row["full_name"]))[0]; ?></h2>
+                    <div class="container">
+                        <div class="card">
+                            <div class="icon">
+                                <a href="./ProfilePage/updateDoctorProfile.php">
+                                    <img src="/assets/images/myData.png" alt="Profile icon" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>Access Master Data</h3>
+                                <p>
+                                    Click to view or update clinic details. 
+                                    Keep clinic information updated with time.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="/assets/images/clinic.png" alt="Schedule icon" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>Clinic Register</h3>
+                                <p>
+                                    Register new Clinic at Doceasy
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="/assets/images/management.png" alt="Diagnosis" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>Management Register</h3>
+                                <p>
+                                    Assign members to a clinic's management team.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="/assets/images/myFeedback.png" alt="contact icon" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>View Feedbacks</h3>
+                                <p>
+                                    View all the feedbacks and answer to customer's queries.
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <footer>
                     <div id="footer-logo">
                         <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />

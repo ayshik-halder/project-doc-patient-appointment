@@ -72,6 +72,26 @@
                         <button class="btn">Login</button>
                     </a>
                 </div>
+                <div class="card" id="management">
+                    <div class="product-logo">
+                        <img class="logo-img" src="../../assets/images/doceasy/doceasy-patient-logo.svg"
+                            alt="DocEasy logo" />
+                    </div>
+                    <div class="desc">
+                        <h3>Features</h3>
+                        <ol>
+                            <li>Easily personalise your details</li>
+                            <li>Every Doctor you choose is well approved</li>
+                            <li>Easy to use dashboard for accessibility</li>
+                            <li>Track multiple appointments for various departments</li>
+                            <li>Weekly & monthly reports to share with your doctor</li>
+                        </ol>
+                    </div>
+                    <a href="ManagementLogin.php">
+                        <button class="btn">Login</button>
+                    </a>
+                </div>
+                
             </div>
         </section>
 
