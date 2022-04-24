@@ -21,7 +21,7 @@ if ($_SESSION["loggedIn"]) {
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if ($row) {
-            if($row["start_time"] == '' || $row["end_time"] == '' || $row["fee"] == '' || $row["degree"] == '' || $row["degree_proof"] == '') { 
+            if ($row["start_time"] == '' || $row["end_time"] == '' || $row["fee"] == '' || $row["degree"] == '' || $row["degree_proof"] == '') {
                 echo '<script> alert("Complete Your Profile") </script>';
             }
         ?>
@@ -37,7 +37,6 @@ if ($_SESSION["loggedIn"]) {
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["specialization"];  ?></a></li>
-                        <li><a class="nav-link" href="./ProfilePage/updateDoctorProfile.php">Update Profile</a></li>
                         <li><a class="nav-link" href="../logout/docLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -45,6 +44,56 @@ if ($_SESSION["loggedIn"]) {
 
 
             <main>
+                <section id="why">
+                    <h2>Welcome <?php echo explode(' ', trim($row["full_name"]))[0]; ?></h2>
+                    <div class="container">
+                        <div class="card">
+                            <div class="icon">
+                                <a href="./ProfilePage/updateDoctorProfile.php">
+                                    <img src="/assets/images/myProfile.png" alt="Profile icon" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>My Profile</h3>
+                                <p>
+                                    Fill your details so that patients can book appointments.
+                                    View and update your personal profile here.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="icon">
+                                <a href="./historyPage/doctorHistory.php">
+                                    <img src="/assets/images/mySchedule.png" alt="Schedule icon" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>My Appointments</h3>
+                                <p>
+                                    Manage and view your appointment history here. Appointments once
+                                    confirmed can only be deleted as per your discretion.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="icon">
+                                <a href="#">
+                                    <img src="/assets/images/myFeedback.png" alt="contact icon" />
+                                </a>
+                            </div>
+                            <div class="desc">
+                                <h3>Contact Clinic</h3>
+                                <p>
+                                    Talk to your assigned management. Address any queries or clarification
+                                    that needs to be resolved.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <footer>
                     <div id="footer-logo">
                         <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
@@ -58,7 +107,9 @@ if ($_SESSION["loggedIn"]) {
                         <div id="copyright">Copyright &#169; DocEasy 2022</div>
                     </div>
                 </footer>
+
             </main>
+
     </body>
 
 
