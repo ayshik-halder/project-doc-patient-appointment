@@ -79,7 +79,7 @@ if ($_SESSION["loggedIn"]) {
 
                         <div class="card">
                             <div class="icon">
-                                <a href="#">
+                                <a href="/public/feedback/clinic_feedback.php">
                                     <img src="/assets/images/myFeedback.png" alt="contact icon" />
                                 </a>
                             </div>
