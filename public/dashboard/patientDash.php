@@ -35,8 +35,8 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
                         <li><a class="nav-link" href="./ProfilePage/updatePatientProfile.php">Update Profile</a></li>
-                        <li><a class="nav-link" href="./historyPage/patientHistory.php">My Appointments</a></li>
-                        <li><a class="nav-link" href="#">My Tests</a></li>
+                        <li><a class="nav-link" href="/public/historyPage/patientAppointmentHistory.php">My Appointments</a></li>
+                        <li><a class="nav-link" href="/public/historyPage/patientTestHistory.php">My Tests</a></li>
                         <li><a class="nav-link" href="../logout/patietLogout.php">Logout</a></li>
                     </ul>
                 </nav>

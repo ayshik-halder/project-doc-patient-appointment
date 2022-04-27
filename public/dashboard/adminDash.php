@@ -45,7 +45,7 @@ if ($_SESSION["loggedIn"]) {
                     <div class="container">
                         <div class="card">
                             <div class="icon">
-                                <a href="./ProfilePage/updateDoctorProfile.php">
+                                <a href="http://localhost/phpmyadmin/index.php?route=/database/structure&server=1&db=doceasy" target="blank">
                                     <img src="/assets/images/myData.png" alt="Profile icon" />
                                 </a>
                             </div>
@@ -60,7 +60,7 @@ if ($_SESSION["loggedIn"]) {
 
                         <div class="card">
                             <div class="icon">
-                                <a href="#">
+                                <a href="/public/register/clinicRegister.php">
                                     <img src="/assets/images/clinic.png" alt="Schedule icon" />
                                 </a>
                             </div>
@@ -74,7 +74,7 @@ if ($_SESSION["loggedIn"]) {
                         
                         <div class="card">
                             <div class="icon">
-                                <a href="#">
+                                <a href="/public/register/managementRegister.php">
                                     <img src="/assets/images/management.png" alt="Diagnosis" />
                                 </a>
                             </div>

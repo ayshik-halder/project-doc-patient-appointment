@@ -7,7 +7,7 @@ if ($_SESSION["loggedIn"]) {
     <html lang="en">
 
     <head>
-        <link rel="stylesheet" type="text/css" href="/assets/css/DocDash.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/DoctorDash.css" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Doctor Dashboard</title>
@@ -21,9 +21,13 @@ if ($_SESSION["loggedIn"]) {
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if ($row) {
+            $doctor_id = $row["d_id"];
+            $_SESSION["doctor_id"] = $doctor_id;
+
             if ($row["start_time"] == '' || $row["end_time"] == '' || $row["fee"] == '' || $row["degree"] == '' || $row["degree_proof"] == '') {
                 echo '<script> alert("Complete Your Profile") </script>';
             }
+
         ?>
             <header id="header">
                 <div class="logo">
@@ -49,7 +53,7 @@ if ($_SESSION["loggedIn"]) {
                     <div class="container">
                         <div class="card">
                             <div class="icon">
-                                <a href="./ProfilePage/updateDoctorProfile.php">
+                                <a href="/public/dashboard/ProfilePage/updateDoctorProfile.php">
                                     <img src="/assets/images/myProfile.png" alt="Profile icon" />
                                 </a>
                             </div>
@@ -64,7 +68,7 @@ if ($_SESSION["loggedIn"]) {
 
                         <div class="card">
                             <div class="icon">
-                                <a href="./historyPage/doctorHistory.php">
+                                <a href="/public/historyPage/doctorAppointmentHistory.php">
                                     <img src="/assets/images/mySchedule.png" alt="Schedule icon" />
                                 </a>
                             </div>

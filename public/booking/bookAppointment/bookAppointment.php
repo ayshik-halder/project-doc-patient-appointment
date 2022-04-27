@@ -43,9 +43,11 @@ if ($_SESSION["logged_in"]) {
 
                     $query = "INSERT INTO book_appointment(patient_id, doctor_id, clinic_id, date, problem, transaction_id) VALUES('$patient_id', '$doctor_id', '$clinic_id', '$date', '$problem', '$transaction')";
 
-                    if (!$transaction) {
-                        $transactionErr = "Mention your Ttansaction Id";
-                        $flag = false;
+                    if ($payment == "UPI Payment") {
+                        if (!$transaction) {
+                            $transactionErr = "Mention your Ttansaction Id";
+                            $flag = false;
+                        }
                     }
 
                     if ($flag) {
@@ -107,13 +109,14 @@ if ($_SESSION["logged_in"]) {
                                     <?php
                                     if ($payment == "UPI Payment") { ?>
                                         <div class="form-group">
-                                            <label id="upi-label" for="upi"><strong>UPI ID</strong></label>
+                                            <label id="upi-label" for="upi"><strong>Clinic UPI ID</strong></label>
                                             <input type="text" name="clinic_upi_id" class="form-control" id="upi" value="<?php echo $row["clinic_upi_id"]; ?>" />
                                         </div>
 
                                         <div class="form-group">
                                             <label id="transaction-label" for="transaction"><strong>Transaction ID</strong></label>
                                             <input type="text" name="transaction_id" class="form-control" id="transaction" placeholder="Mention your transaction id" value="<?php echo $transaction; ?>" />
+                                            <small class="error-label"><?php echo $transactionErr ?></small>
                                         </div>
                                     <?php } ?>
 

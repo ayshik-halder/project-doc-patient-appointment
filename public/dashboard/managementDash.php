@@ -33,7 +33,11 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="/public/historyPage/clinicAvailableDoctor.php">Available Doctor</a></li>
+                        <li><a class="nav-link" href="/public/historyPage/ClinicAvailableTest.php">Available Test facility</a></li>
+                        <li><a class="nav-link" href="/public/historyPage/managementTestHistory.php">Test History</a></li>
                         <li><a class="nav-link" href="../logout/managementLogout.php">Logout</a></li>
+                        
                     </ul>
                 </nav>
             </header>
@@ -44,7 +48,7 @@ if ($_SESSION["loggedIn"]) {
                     <div class="container">
                         <div class="card">
                             <div class="icon">
-                                <a href="./ProfilePage/updateDoctorProfile.php">
+                                <a href="/public/dashboard/ProfilePage/updateClinicProfile.php">
                                     <img src="/assets/images/myProfile.png" alt="Profile icon" />
                                 </a>
                             </div>
@@ -59,7 +63,7 @@ if ($_SESSION["loggedIn"]) {
 
                         <div class="card">
                             <div class="icon">
-                                <a href="#">
+                                <a href="/public/historyPage/managementAppointmentHistory.php">
                                     <img src="/assets/images/mySchedule.png" alt="History" />
                                 </a>
                             </div>
@@ -74,7 +78,7 @@ if ($_SESSION["loggedIn"]) {
                         
                         <div class="card">
                             <div class="icon">
-                                <a href="#">
+                                <a href="/public/register/testRegister.php">
                                     <img src="/assets/images/myTests.png" alt="Diagnosis" />
                                 </a>
                             </div>
@@ -123,7 +127,7 @@ if ($_SESSION["loggedIn"]) {
 <?php
         }
     } else {
-        header("Location: ../login/patientLogin.php");
+        header("Location: ../login/ManagementLogin.php");
     }
 ?>
 

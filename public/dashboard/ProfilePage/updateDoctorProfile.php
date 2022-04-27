@@ -88,7 +88,7 @@ if ($_SESSION["loggedIn"]) {
                     if (!$experience) {
                         $experienceErr = "Mention Your Experience";
                         $flag = false;
-                    } elseif (strlen($experience) > (strlen($age)/3)) {
+                    } elseif ($experience > ($age / 3)) {
                         $experienceErr = "Mention your proper experience year";
                         $flag = false;
                     }

@@ -25,7 +25,7 @@ if ($_SESSION["loggedIn"]) {
             <header id="header">
                 <div class="logo">
                     <a href="../managementDash.php">
-                        <img class="logo-img" id="header-img" src="/assets/images/doceasy/doceasy-doctor-logo.svg" alt="DocEasy logo" />
+                        <img class="logo-img" id="header-img" src="/assets/images/doceasy/doceasy-logo.svg" alt="DocEasy logo" />
                     </a>
                 </div>
 

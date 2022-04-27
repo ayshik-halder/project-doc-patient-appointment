@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2022 at 08:46 AM
+-- Generation Time: Apr 27, 2022 at 07:15 PM
 -- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -59,6 +59,7 @@ CREATE TABLE `book_appointment` (
   `approval_status` enum('PENDING','APPROVED','DECLINE','EXPIRE') NOT NULL DEFAULT 'PENDING',
   `problem` varchar(100) DEFAULT NULL,
   `doctor_message` varchar(100) DEFAULT NULL,
+  `patient_message` varchar(100) DEFAULT NULL,
   `doctor_appointment_slip` mediumblob DEFAULT NULL,
   `transaction_id` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -67,9 +68,18 @@ CREATE TABLE `book_appointment` (
 -- Dumping data for table `book_appointment`
 --
 
-INSERT INTO `book_appointment` (`id`, `patient_id`, `clinic_id`, `doctor_id`, `schedule_id`, `date`, `approval_status`, `problem`, `doctor_message`, `doctor_appointment_slip`, `transaction_id`) VALUES
-(4, 51, 6, 30, NULL, '2022-04-23', 'APPROVED', 'PCOD', NULL, NULL, NULL),
-(15, 51, 7, 29, NULL, '2022-04-27', 'APPROVED', '', NULL, NULL, 'cfgcgcf');
+INSERT INTO `book_appointment` (`id`, `patient_id`, `clinic_id`, `doctor_id`, `schedule_id`, `date`, `approval_status`, `problem`, `doctor_message`, `patient_message`, `doctor_appointment_slip`, `transaction_id`) VALUES
+(4, 51, 6, 30, NULL, '2022-04-23', 'APPROVED', 'PCOD', NULL, NULL, NULL, NULL),
+(18, 51, 7, 29, NULL, '2022-04-27', 'APPROVED', '', NULL, NULL, NULL, ''),
+(19, 51, 7, 29, NULL, '2022-04-27', 'APPROVED', '', NULL, NULL, NULL, ''),
+(20, 51, 7, 29, NULL, '2022-04-29', 'APPROVED', '', NULL, NULL, NULL, ''),
+(21, 51, 6, 30, NULL, '2022-04-28', 'APPROVED', '', NULL, NULL, NULL, ''),
+(22, 52, 6, 31, NULL, '2022-04-28', 'APPROVED', '', NULL, NULL, NULL, ''),
+(23, 52, 6, 30, NULL, '2022-04-28', 'APPROVED', '', NULL, NULL, NULL, ''),
+(24, 51, 6, 30, NULL, '2022-04-29', 'DECLINE', '', NULL, NULL, NULL, ''),
+(25, 51, 6, 30, NULL, '2022-04-28', 'APPROVED', '', NULL, NULL, NULL, 'huiyiu'),
+(26, 51, 7, 29, NULL, '2022-04-29', 'APPROVED', '', NULL, NULL, NULL, ''),
+(27, 51, 6, 30, NULL, '2022-04-29', 'DECLINE', '', NULL, NULL, NULL, 'gdgdgd');
 
 -- --------------------------------------------------------
 
@@ -92,9 +102,12 @@ CREATE TABLE `book_test` (
 --
 
 INSERT INTO `book_test` (`ticket_no`, `test_id`, `patient_id`, `clinic_id`, `date`, `approval_status`, `test_appointment_slip`) VALUES
-(7, 25, 51, 6, '2022-04-23', 'PENDING', NULL),
 (8, 25, 51, 6, '2022-04-23', 'PENDING', NULL),
-(9, 25, 51, 6, '2022-04-24', 'PENDING', NULL);
+(10, 25, 51, 6, '2022-04-28', 'APPROVED', NULL),
+(11, 25, 52, 6, '2022-04-27', 'APPROVED', NULL),
+(12, 26, 52, 6, '2022-04-28', 'APPROVED', NULL),
+(13, 25, 52, 6, '2022-04-28', 'APPROVED', NULL),
+(14, 25, 51, 6, '2022-04-29', 'APPROVED', NULL);
 
 -- --------------------------------------------------------
 
@@ -130,12 +143,22 @@ INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `conta
 CREATE TABLE `clinic_feedback` (
   `id` int(5) NOT NULL,
   `clinic_id` int(4) UNSIGNED DEFAULT NULL,
+  `date_time` varchar(50) NOT NULL,
+  `user_type` enum('DOCTOR','PATIENT') NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `message_type` enum('FEEDBACK','COMPLAIN','QUERY','') NOT NULL,
   `message` varchar(500) NOT NULL,
   `attach_file` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `clinic_feedback`
+--
+
+INSERT INTO `clinic_feedback` (`id`, `clinic_id`, `date_time`, `user_type`, `name`, `email`, `message_type`, `message`, `attach_file`) VALUES
+(1, 6, '27-04-2022 22:01:17', 'PATIENT', 'Dolon Roy', 'rdolon321@gmail.com', 'FEEDBACK', 'HIII', ''),
+(2, 7, '27-04-2022 22:04:43', 'PATIENT', 'Dolon', 'rdolon31@gmail.com', 'FEEDBACK', 'hello', '');
 
 -- --------------------------------------------------------
 
@@ -191,8 +214,7 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`d_id`, `clinic_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `start_time`, `end_time`, `fee`) VALUES
 (29, 7, 'anuvab5', 123654, 'Anuvab Roy', '1990-03-23', 32, 'MALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'anuvab1990@gmail.com', '09:00:01', '13:30:00', 300),
 (30, 6, 'chitra3', 2580, 'Chitra Mondal', '1993-10-02', 29, 'FEMALE', 'Gynaecology', NULL, NULL, 3, 4294967295, 'chitra93@gmail.com', '10:30:00', '12:30:00', 250),
-(31, 6, 'maya31', 78965, 'Maya Sen', '1990-02-03', 32, 'FEMALE', 'Cardiology', 'MBBS', 0x4c5347455f535445502b5f576970726f2e706466, 5, 4294967295, 'maya91@gmail.com', '11:00:00', '00:00:00', 300),
-(32, 6, 'rupa27', 1234, 'Rupa Biswas', '1995-02-12', 27, 'FEMALE', 'Cardiology', NULL, NULL, 1, 4294967295, 'rupa27@gmail.com', NULL, NULL, NULL);
+(31, 6, 'maya31', 78965, 'Maya Sen', '1990-02-03', 32, 'FEMALE', 'Cardiology', 'MBBS', 0x536368656d612e706466, 5, 4294967295, 'maya91@gmail.com', '11:00:00', '16:00:00', 300);
 
 -- --------------------------------------------------------
 
@@ -257,7 +279,7 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
-(51, 'rimi22', 34210, 'Rimi Mondol', '2000-05-20', 22, 'FEMALE', 'UNMARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, ''),
+(51, 'rimi22', 34210, 'Rimi Mondol', '2000-05-20', 22, 'FEMALE', 'UNMARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, NULL),
 (52, 'rdolon', 25896, 'Dolon Roy', '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
@@ -300,19 +322,22 @@ INSERT INTO `test` (`t_id`, `clinic_id`, `test_type`, `start_time`, `end_time`, 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `test_reports`
+-- Table structure for table `test_report`
 --
 
-CREATE TABLE `test_reports` (
+CREATE TABLE `test_report` (
   `report_no` int(5) NOT NULL,
   `ticket_no` int(5) UNSIGNED NOT NULL,
-  `test_id` int(4) UNSIGNED NOT NULL,
-  `clinic_id` int(4) UNSIGNED NOT NULL,
-  `patient_id` int(5) UNSIGNED NOT NULL,
-  `doctor_id` int(4) UNSIGNED DEFAULT NULL,
-  `report` mediumblob NOT NULL,
-  `report_type` varchar(50) NOT NULL
+  `report` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `test_report`
+--
+
+INSERT INTO `test_report` (`report_no`, `ticket_no`, `report`) VALUES
+(1, 10, ''),
+(2, 10, NULL);
 
 --
 -- Indexes for dumped tables
@@ -404,15 +429,11 @@ ALTER TABLE `test`
   ADD KEY `clinic_id` (`clinic_id`);
 
 --
--- Indexes for table `test_reports`
+-- Indexes for table `test_report`
 --
-ALTER TABLE `test_reports`
+ALTER TABLE `test_report`
   ADD PRIMARY KEY (`report_no`),
-  ADD KEY `ticket_no` (`ticket_no`),
-  ADD KEY `test_id` (`test_id`),
-  ADD KEY `clinic_id` (`clinic_id`),
-  ADD KEY `patient_id` (`patient_id`),
-  ADD KEY `doctor_id` (`doctor_id`);
+  ADD KEY `ticket_no` (`ticket_no`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -428,13 +449,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `book_test`
 --
 ALTER TABLE `book_test`
-  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `clinic`
@@ -446,7 +467,7 @@ ALTER TABLE `clinic`
 -- AUTO_INCREMENT for table `clinic_feedback`
 --
 ALTER TABLE `clinic_feedback`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `doceasy_feedback`
@@ -491,10 +512,10 @@ ALTER TABLE `test`
   MODIFY `t_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT for table `test_reports`
+-- AUTO_INCREMENT for table `test_report`
 --
-ALTER TABLE `test_reports`
-  MODIFY `report_no` int(5) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `test_report`
+  MODIFY `report_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -554,14 +575,10 @@ ALTER TABLE `test`
   ADD CONSTRAINT `test_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `test_reports`
+-- Constraints for table `test_report`
 --
-ALTER TABLE `test_reports`
-  ADD CONSTRAINT `test_reports_ibfk_1` FOREIGN KEY (`ticket_no`) REFERENCES `book_test` (`ticket_no`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_2` FOREIGN KEY (`test_id`) REFERENCES `test` (`t_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_3` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`p_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_4` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `test_reports_ibfk_5` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
+ALTER TABLE `test_report`
+  ADD CONSTRAINT `test_report_ibfk_1` FOREIGN KEY (`ticket_no`) REFERENCES `book_test` (`ticket_no`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

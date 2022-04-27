@@ -21,7 +21,7 @@
         <nav id="nav-bar">
           <ul>
             <p>Not yet a user?</p>
-            <li><a class="nav-link" href="../../index.php#register"><u>Register</u></a></li>
+            <li><a class="nav-link" href="/index.php#register"><u>Register</u></a></li>
           </ul>
         </nav>
       </header>
@@ -33,7 +33,7 @@
                 <!-- Patient Login  -->
                 <div class="card" id="patient">
                     <div class="product-logo">
-                        <img class="logo-img" src="../../assets/images/doceasy/doceasy-patient-logo.svg"
+                        <img class="logo-img" src="/assets/images/doceasy/doceasy-patient-logo.svg"
                             alt="DocEasy logo" />
                     </div>
                     <div class="desc">
@@ -55,7 +55,7 @@
                 <!-- Doctor Login  -->
                 <div class="card" id="doctor">
                     <div class="product-logo">
-                        <img class="logo-img" src="../../assets/images/doceasy/doceasy-doctor-logo.svg"
+                        <img class="logo-img" src="/assets/images/doceasy/doceasy-doctor-logo.svg"
                             alt="DocEasy for doctors logo" />
                     </div>
                     <div class="desc">
@@ -74,7 +74,7 @@
                 </div>
                 <div class="card" id="management">
                     <div class="product-logo">
-                        <img class="logo-img" src="../../assets/images/doceasy/doceasy-patient-logo.svg"
+                        <img class="logo-img" src="/assets/images/doceasy/doceasy-logo.svg"
                             alt="DocEasy logo" />
                     </div>
                     <div class="desc">
@@ -97,7 +97,7 @@
 
         <footer>
             <div id="footer-logo">
-              <img class="logo-img" src="../../assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
+              <img class="logo-img" src="/assets/images/doceasy/doceasy-logo-white.svg" alt="Doceasy logo" />
             </div>
             <div id="footer-info">
               <ul>

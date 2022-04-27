@@ -47,6 +47,7 @@ include("../config.php");
                      WHERE clinic_id IS NULL;";
 
                     if ($conn->query($query_id)) {
+                        echo '<script> alert("Data submitted sucessfully") </script>';
                     } else {
                         echo "failed" . $conn->error;
                     }
