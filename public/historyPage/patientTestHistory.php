@@ -64,16 +64,23 @@ if ($_SESSION["loggedIn"]) {
                                 while ($row = $result->fetch_assoc()) {
                                 ?>
                                     <tr>
-                                    <td> <?php echo $row["date"]; ?> </td>
-                                    <td> <?php echo $row["start_time"]."-".$row["end_time"]; ?> </td>
-                                    <td> <?php echo $row["clinic_name"]; ?> </td>
-                                    <td> <?php echo $row["test_type"]; ?> </td>
-                                    <td> <?php echo $row["minimum_fee"]."-".$row["maximum_fee"]; ?> </td>
-                                    <td> <?php echo $row["approval_status"]; ?> </td>
-                                    <td></td>
-                                    <td> <button> <a href="./PatientTestDelete.php?id=<?php echo $row["ticket_no"] ?>"> Cancel </a> </button> </td>
+                                        <td> <?php echo $row["date"]; ?> </td>
+                                        <td> <?php echo $row["start_time"] . "-" . $row["end_time"]; ?> </td>
+                                        <td> <?php echo $row["clinic_name"]; ?> </td>
+                                        <td> <?php echo $row["test_type"]; ?> </td>
+                                        <td> <?php echo $row["minimum_fee"] . "-" . $row["maximum_fee"]; ?> </td>
+                                        <td> <?php echo $row["approval_status"]; ?> </td>
+                                        <td></td>
+                                        <td> <button> <a href="./PatientTestDelete.php?id=<?php echo $row["ticket_no"] ?>" onclick='return checkDelete()'> Cancel </a> </button> </td>
                                     </tr>
                                 <?php } ?>
+
+                                <script>
+                                    function checkDelete() {
+                                        return confirm('Are you sure you want to cancel the Appointment');
+                                    }
+                                </script>
+
                             </table>
                         </div>
                     </div>

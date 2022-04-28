@@ -66,16 +66,23 @@ if ($_SESSION["loggedIn"]) {
                                 ?>
                                     <tr>
                                         <td> <?php echo $row["date"]; ?> </td>
-                                        <td> <?php echo $row["start_time"]."-".$row["end_time"]; ?> </td>
+                                        <td> <?php echo $row["start_time"] . "-" . $row["end_time"]; ?> </td>
                                         <td> <?php echo $row["clinic_name"]; ?> </td>
                                         <td> <?php echo $row["doctor_name"]; ?> </td>
                                         <td> <?php echo $row["problem"]; ?> </td>
                                         <td> <?php echo $row["approval_status"]; ?> </td>
                                         <td> <?php echo $row["doctor_message"]; ?> </td>
                                         <td> <?php echo $row["patient_message"]; ?> </td>
-                                        <td> <button> <a href="./PatientAppointmentDelete.php?id=<?php echo $row['booking_id'] ?>"> Cancel </a> </button> </td>
+                                        <td> <button> <a href="./PatientAppointmentDelete.php?id=<?php echo $row['booking_id'] ?>" onclick='return checkDelete()'> Cancel </a> </button> </td>
                                     </tr>
                                 <?php } ?>
+
+                                <script>
+                                    function checkDelete() {
+                                        return confirm('Are you sure you want to cancel the Appointment');
+                                    }
+                                </script>
+
                             </table>
                         </div>
                     </div>

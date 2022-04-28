@@ -72,9 +72,16 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["approval_status"]; ?> </td>
                                         <td> <?php echo $row["doctor_message"]; ?> </td>
                                         <td> <?php echo $row["patient_message"]; ?> </td>
-                                        <td> <button> <a href="./doctorHistoryDelete.php?id=<?php echo $row['booking_id'] ?>"> Cancel </a> </button> </td>
+                                        <td> <button> <a href="./doctorHistoryDelete.php?id=<?php echo $row['booking_id'] ?>" onclick='return checkDelete()'> Cancel </a> </button> </td>
                                     </tr>
                                 <?php } ?>
+
+                                <script>
+                                    function checkDelete() {
+                                        return confirm('Are you sure you want to cancel the Appointment');
+                                    }
+                                </script>
+
                             </table>
                         </div>
                     </div>
