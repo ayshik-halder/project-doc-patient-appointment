@@ -21,6 +21,11 @@ if ($_SESSION["loggedIn"]) {
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if ($row) {
+            $clinic_name = $row["clinic_name"];
+            $full_name = $row["full_name"];
+            $_SESSION["clinic_name"] =$clinic_name;
+            $_SESSION["full_name"] = $full_name;
+
         ?>
             <header id="header">
                 <div class="logo">
@@ -31,12 +36,12 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
-                        <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
-                        <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $clinic_name  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $full_name  ?></a></li>
                         <li><a class="nav-link" href="/public/historyPage/clinicAvailableDoctor.php">Available Doctor</a></li>
                         <li><a class="nav-link" href="/public/historyPage/ClinicAvailableTest.php">Available Test facility</a></li>
                         <li><a class="nav-link" href="/public/historyPage/managementTestHistory.php">Test History</a></li>
-                        <li><a class="nav-link" href="../logout/managementLogout.php">Logout</a></li>
+                        <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
                         
                     </ul>
                 </nav>
@@ -93,7 +98,7 @@ if ($_SESSION["loggedIn"]) {
 
                         <div class="card">
                             <div class="icon">
-                                <a href="#">
+                                <a href="/public/feedback/managementFeedback.php">
                                     <img src="/assets/images/myFeedback.png" alt="contact icon" />
                                 </a>
                             </div>

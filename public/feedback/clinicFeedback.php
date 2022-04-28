@@ -17,6 +17,7 @@ include("../config.php");
     <main>
         <?php
 
+        $clinicErr = $userTypeErr = $nameErr = $emailErr = $messageTypeErr = $messageErr = '';
         $flag = true;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -31,6 +32,39 @@ include("../config.php");
 
             date_default_timezone_set('Asia/Kolkata');
             $date = date('d-m-Y H:i:s');
+
+            if ($clinic_name == "Choose Clinic") {
+                $clinicErr = "Specify your Clinic";
+                $flag = false;
+            }
+
+            if ($user_type == "Choose User Type") {
+                $userTypeErr = "Specify user Type";
+                $flag = false;
+            }
+
+            if (!$name) {
+                $nameErr = "Name is required";
+                $flag = false;
+            } elseif (!preg_match("/^[a-zA-Z ]*$/", $name)) {
+                $nameErr = "only letters and white spaces allowed";
+                $flag = false;
+            }
+
+            if (!$email) {
+                $emailErr = "Email is required";
+                $flag = false;
+            }
+
+            if ($message_type == "Choose your message Type") {
+                $messageTypeErr = "Specify user Type";
+                $flag = false;
+            }
+
+            if (!$message) {
+                $messageErr = "Email is required";
+                $flag = false;
+            }
 
             // submit form if validated successfully
             if ($flag) {
@@ -78,6 +112,7 @@ include("../config.php");
                                     <option><?php echo $clinic_name ?></option>
                                 <?php } ?>
                             </select>
+                            <small class="error-label"><?php echo $clinicErr ?></small>
                         </div>
 
                         <div class="form-group">
@@ -92,16 +127,19 @@ include("../config.php");
                                     <option> <?php echo $items ?></option>
                                 <?php } ?>
                             </select>
+                            <small class="error-label"><?php echo $userTypeErr ?></small>
                         </div>
 
                         <div class="form-group">
                             <label id="name-label" for="name">Name</label>
                             <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="<?php $name ?>" />
+                            <small class="error-label"><?php echo $nameErr ?></small>
                         </div>
 
                         <div class="form-group">
                             <label id="email-label" for="email">Email</label>
                             <input type="email" name="email" class="form-control" id="email" placeholder="Email address" value="<?php $email ?>" />
+                            <small class="error-label"><?php echo $emailErr ?></small>
                         </div>
 
                         <div class="form-group">
@@ -116,11 +154,13 @@ include("../config.php");
                                     <option> <?php echo $items ?></option>
                                 <?php } ?>
                             </select>
+                            <small class="error-label"><?php echo $messageTypeErr ?></small>
                         </div>
 
                         <div class="form-group">
                             <p>Message</p>
                             <textarea id="message" class="input-textarea" name="message" placeholder="Enter your message here..." value="<?php $message ?>"></textarea>
+                            <small class="error-label"><?php echo $messageErr ?></small>
                         </div>
 
                         <div class="form-group">

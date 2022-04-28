@@ -93,7 +93,7 @@ if ($_SESSION["loggedIn"]) {
                     </div>
                     <div id="footer-info">
                         <ul>
-                            <li><a href="/public/feedback/clinic_feedback.php">Clinic Feedback</a></li>
+                            <li><a href="/public/feedback/clinicFeedback.php">Clinic Feedback</a></li>
                             <li><a href="#">Customer Support</a></li>
                             <li><a href="/index.php#contact">Contact</a></li>
                         </ul>
