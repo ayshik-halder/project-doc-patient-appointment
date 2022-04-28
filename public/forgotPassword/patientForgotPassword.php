@@ -31,37 +31,40 @@
         <section id="registration">
             <div class="container">
                 <div class="card">
-                    <h2>Patient Login Form</h2>
+                    <h2>Forget Password Form</h2>
                     <div class="grid">
-                        <form id="form" action="../loginConnect/patientLoginConnect.php" method="POST">
+                        <form id="form" action="./patientForgotPassConn.php" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required/>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" required />
                             </div>
+
                             <div class="form-group">
-                                <label id="password-label" for="password"><strong>Password</strong></label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required/>
+                                <label id="dob-label" for="dob"><strong>DOB</strong></label>
+                                <input type="date" name="dob" class="form-control" id="dob" >
                             </div>
+
+                            <div class="form-group">
+                                <label id="phn-label" for="phn-no"><strong>Phone Number</strong></label>
+                                <input type="tel" name="phn_no" class="form-control" id="phn-no" placeholder="Phone Number" >
+                            </div>
+
+                            <div class="form-group">
+                                <label id="email-label" for="email"><strong>Email</strong></label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="Email address" >
+                            </div>
+
                             <div class="form-group">
                                 <div id="button-group">
                                     <label id="submit-label" for="submit"></label>
                                     <input id="submit" type="submit" value="Submit" class="btn" />
                                     <label id="back-label" for="back"></label>
-                                    <a href="/index.php">
+                                    <a href="/public/login/PatientLogin.php">
                                         <input id="back" type="back" value="back" class="btn" />
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <p>
-                                    Don't have an account?
-                                    <a href="/public/register/PatientRegister.php"><u> Register </u></a>
-                                </p>
-                                <p>
-                                    <a href="/public/forgotPassword/patientForgotPassword.php"><u> Forgot Password? </u></a>
-                                </p>
-                            </div>
                         </form>
                     </div>
                 </div>

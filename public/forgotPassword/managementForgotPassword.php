@@ -1,3 +1,6 @@
+<?php
+require_once "../config.php"
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,35 +36,48 @@
                 <div class="card">
                     <h2>Management Login Form</h2>
                     <div class="grid">
-                        <form id="form" action="../loginConnect/managementLoginConnect.php" method="POST">
+                        <form id="form" action="./managementForgotPassConn.php" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" required />
                             </div>
+                            
                             <div class="form-group">
-                                <label id="password-label" for="password"><strong>Password</strong></label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required />
-                            </div>
+                                    <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
+                                    <select name="clinic_name" id="clinic-name" , class="form-control">
+                                        <option selected>Choose Clinic Name</option>
+
+                                        <?php
+                                        $query_clinic = "SELECT * FROM clinic";
+                                        $result_clinic = $conn->query($query_clinic);
+                                        while ($row = $result_clinic->fetch_array()) {
+                                        ?>
+                                            <option><?php echo $row['clinic_name']; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label id="phn-label" for="phn-no"><strong>Phone Number</strong></label>
+                                    <input type="tel" name="phn_no" class="form-control" id="phn-no" placeholder="Phone Number" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label id="email-label" for="email"><strong>Email</strong></label>
+                                    <input type="email" name="Email" class="form-control" id="email" placeholder="Email address" />
+                                </div>
+
                             <div class="form-group">
                                 <div id="button-group">
                                     <label id="submit-label" for="submit"></label>
                                     <input id="submit" type="submit" value="Submit" class="btn" />
                                     <label id="back-label" for="back"></label>
-                                    <a href="/index.php">
+                                    <a href="/public/login/ManagementLogin.php">
                                         <input id="back" type="back" value="back" class="btn" />
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <p>
-                                    Don't have an account?
-                                    <a href="/index.php#contact"><u> Contact Admin </u></a>
-                                </p>
-                                <p>
-                                    <a href="/public/forgotPassword/managementForgotPassword.php"><u> Forget Password? </u></a>
-                                </p>
-                            </div>
                         </form>
                     </div>
                 </div>

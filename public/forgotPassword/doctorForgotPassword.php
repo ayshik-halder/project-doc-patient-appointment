@@ -1,3 +1,7 @@
+<?php
+require_once "../config.php"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,37 +35,58 @@
         <section id="registration">
             <div class="container">
                 <div class="card">
-                    <h2>Doctor Login Form</h2>
+                    <h2>Forget Password Form</h2>
                     <div class="grid">
-                        <form id="form" action="../loginConnect/doctorLoginConnect.php" method="POST">
+                        <form id="form" action="./doctorForgotPassConn.php" method="POST">
                             <div class="form-group">
                                 <label id="username-label" for="username"><strong>Username</strong></label>
                                 <input type="text" name="username" class="form-control" id="username" placeholder="Username" />
                             </div>
+
                             <div class="form-group">
-                                <label id="password-label" for="password"><strong>Password</strong></label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="Password" />
+                                <label id="dob-label" for="dob"><strong>DOB</strong></label>
+                                <input type="date" name="dob" class="form-control" id="dob" />
                             </div>
+
+                            <div class="form-group">
+                                <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
+                                <select name="clinic_name" id="clinic-name" class="form-control">
+                                    <option selected>Choose Clinic</option>
+                                    <?php
+                                    $query_clinic = "SELECT * FROM clinic";
+                                    $result_clinic = $conn->query($query_clinic);
+                                    while ($row = $result_clinic->fetch_array()) {
+                                    ?>
+                                        <option><?php echo $row['clinic_name']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label id="specialization-label" for="specialization"><strong>Specialization</strong></label>
+                                <select name="specialization" id="specialization" class="form-control">
+                                    <option selected>Choose your specialized Department</option>
+                                    <?php
+                                    $query_specialization = "SELECT DISTINCT specialization FROM doctor";
+                                    $result_specialization = $conn->query($query_specialization);
+                                    while ($row = $result_specialization->fetch_array()) {
+                                    ?>
+                                        <option><?php echo $row['specialization']; ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+
                             <div class="form-group">
                                 <div id="button-group">
                                     <label id="submit-label" for="submit"></label>
                                     <input id="submit" type="submit" value="Submit" class="btn" />
                                     <label id="back-label" for="back"></label>
-                                    <a href="/index.php">
+                                    <a href="/public/login/DocLogin.php">
                                         <input id="back" type="back" value="back" class="btn" />
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <p>
-                                    Don't have an account?
-                                    <a href="/public/register/DocRegister.php"><u> Register </u></a>
-                                </p>
-                                <p>
-                                    <a href="/public/forgotPassword/doctorForgotPassword.php"><u> Forgot Password? </u></a>
-                                </p>
-                            </div>
                         </form>
                     </div>
                 </div>
