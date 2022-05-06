@@ -23,11 +23,11 @@ if ($_SESSION["loggedIn"]) {
                 FROM test, clinic, management 
                 WHERE clinic.id = management.clinic_id AND clinic.id = test.clinic_id AND management.username='$uname' 
                 ORDER BY test_type";
-        
+
 
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
-        
+
         if ($row) {
         ?>
             <header id="header">
@@ -51,7 +51,7 @@ if ($_SESSION["loggedIn"]) {
                         <div class="card">
                             <table>
                                 <tr>
-                                   
+
                                     <th>TEST TYPE</th>
                                     <th>START TIME</th>
                                     <th>END TIME</th>
@@ -60,30 +60,32 @@ if ($_SESSION["loggedIn"]) {
                                 </tr>
 
                                 <?php
-                                                               
+
                                 while ($row = $result->fetch_assoc()) {
                                 ?>
                                     <tr>
-                                    <td> <?php echo $row["test_type"]; ?> </td>
-                                    <td> <?php echo $row["end_time"]; ?> </td>
-                                    <td> <?php echo $row["start_time"]; ?> </td>
-                                    <td> <?php echo $row["minimum_fee"]; ?> </td>
-                                    <td> <?php echo $row["maximum_fee"]; ?> </td>
+                                        <td> <?php echo $row["test_type"]; ?> </td>
+                                        <td> <?php echo $row["end_time"]; ?> </td>
+                                        <td> <?php echo $row["start_time"]; ?> </td>
+                                        <td> <?php echo $row["minimum_fee"]; ?> </td>
+                                        <td> <?php echo $row["maximum_fee"]; ?> </td>
                                     </tr>
-                                   
-                                <?php } 
+
+                                <?php }
                                 ?>
-                               
+
                             </table>
                         </div>
                     </div>
                 </section>
-                
+
 
             </main>
     </body>
 
 <?php
+        } else {
+            echo "No record found";
         }
     } else {
         header("Location: /public/login/ManagementLogin.php");

@@ -62,6 +62,7 @@ if ($_SESSION["loggedIn"]) {
 
                                 <?php
                                 while ($row = $result->fetch_assoc()) {
+                                    $ticket_no = $row["ticket_no"];
                                 ?>
                                     <tr>
                                         <td> <?php echo $row["date"]; ?> </td>
@@ -70,7 +71,15 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["test_type"]; ?> </td>
                                         <td> <?php echo $row["minimum_fee"] . "-" . $row["maximum_fee"]; ?> </td>
                                         <td> <?php echo $row["approval_status"]; ?> </td>
-                                        <td></td>
+                                        <?php
+                                        $query_report = "SELECT * FROM book_test, test_report WHERE book_test.ticket_no = test_report.ticket_no AND test_report.ticket_no = $ticket_no";
+                                        $result_report = $conn->query($query_report);
+                                        $row_report = $result_report->fetch_assoc();
+                                        if ($row_report) { ?>
+                                            <td> <?php echo $row_report["report"]; ?> </td>
+                                        <?php } else { ?>
+                                            <td></td>
+                                        <?php } ?>
                                         <td> <button> <a href="./PatientTestDelete.php?id=<?php echo $row["ticket_no"] ?>" onclick='return checkDelete()'> Cancel </a> </button> </td>
                                     </tr>
                                 <?php } ?>
@@ -90,6 +99,8 @@ if ($_SESSION["loggedIn"]) {
     </body>
 
 <?php
+        } else {
+            echo "No record found";
         }
     } else {
         header("Location: /public/login/PatientLogin.php");

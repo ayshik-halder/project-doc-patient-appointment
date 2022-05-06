@@ -73,13 +73,13 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["patient_gender"]; ?> </td>
                                         <td> <?php echo $row["marital_status"]; ?> </td>
                                         <td>
-                                        <?php
-                                    $sql_document = "SELECT * FROM patient, patient_document WHERE patient.p_id = patient_document.patient_id AND patient_id = $patient_id ";
+                                            <?php
+                                            $sql_document = "SELECT * FROM patient, patient_document WHERE patient.p_id = patient_document.patient_id AND patient_id = $patient_id ";
 
-                                    $result_document = $conn->query($sql_document);
-                                    while ($row_document = $result_document->fetch_array()) { ?>
-                                         <?php echo $row_document["report"]; ?>
-                                    <?php } ?> </td>
+                                            $result_document = $conn->query($sql_document);
+                                            while ($row_document = $result_document->fetch_array()) { ?>
+                                                <?php echo $row_document["report"]; ?>
+                                            <?php } ?> </td>
                                         <td> <?php echo $row["problem"]; ?> </td>
                                         <td> <?php echo $row["allergic"]; ?> </td>
                                         <td> <?php echo $row["approval_status"]; ?> </td>
@@ -102,6 +102,8 @@ if ($_SESSION["loggedIn"]) {
     </body>
 
 <?php
+        } else {
+            echo "No record found";
         }
     } else {
         header("Location: /public/login/DocLogin.php");

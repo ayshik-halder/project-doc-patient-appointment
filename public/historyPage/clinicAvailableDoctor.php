@@ -93,6 +93,8 @@ if ($_SESSION["loggedIn"]) {
     </body>
 
 <?php
+        } else {
+            echo "No record found";
         }
     } else {
         header("Location: /public/login/ManagementLogin.php");
