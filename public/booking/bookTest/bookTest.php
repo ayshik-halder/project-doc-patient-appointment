@@ -35,6 +35,7 @@ if ($_SESSION["logged_In"]) {
                 $flag = true;
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    $payment = $_POST['payment'];
 
                     if ($payment == "Choose Payment Type") {
                         $paymentErr = "Mention Payment Type";
@@ -52,7 +53,12 @@ if ($_SESSION["logged_In"]) {
                                             WHERE patient_id = '$patient_id' AND test_id = '$test_id' AND date = '$date';";
 
                             if ($conn->query($query_status)) {
-                                header("Location:/public/dashboard/patientDash.php");
+                                $message = 'Your Diagnosis Appointment is booked successfully';
+
+                                echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/patientDash.php');
+                                </SCRIPT>";
                             } else {
                                 echo "failed" . $conn->error;
                             }

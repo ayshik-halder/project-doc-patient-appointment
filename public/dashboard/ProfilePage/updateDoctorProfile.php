@@ -146,6 +146,20 @@ if ($_SESSION["loggedIn"]) {
 
                             <div class="column-50">
                                 <div class="form-group">
+                                    <label id="username-label" for="username"><strong>Username</strong></label>
+                                    <input type="text" name="username" class="form-control" id="username" value="<?php echo $row["username"] ?>" disabled />
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="mci-no-label" for="mci-no"><strong>MCI No</strong></label>
+                                    <input type="number" name="mci_no" class="form-control" id="mci-no" value="<?php echo $row["mci_no"] ?>" disabled/>
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
                                     <label id="dob-label" for="dob"><strong>DOB</strong></label>
                                     <input type="date" name="dob" class="form-control" id="dob" value="<?php echo $row["dob"] ?>" />
                                     <small class="error-label"><?php echo $dobErr ?></small>

@@ -58,7 +58,12 @@ if ($_SESSION["logged_in"]) {
                                         WHERE patient_id = '$patient_id' AND doctor_id = '$doctor_id' AND date = '$date';";
 
                             if ($conn->query($query_status)) {
-                                header("Location:/public/dashboard/patientDash.php");
+                                $message = 'Your Doctor Appointment is booked successfully';
+
+                                echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/patientDash.php');
+                                </SCRIPT>";
                             } else {
                                 echo "failed" . $conn->error;
                             }

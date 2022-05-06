@@ -52,6 +52,7 @@ if ($_SESSION["loggedIn"]) {
                             <table>
                                 <tr>
                                     <th>DOCTOR NAME</th>
+                                    <th>MCI No</th>
                                     <th>SPECIALIZATION</th>
                                     <th>DEGREE</th>
                                     <th>DEGREE PROOF</th>
@@ -68,6 +69,7 @@ if ($_SESSION["loggedIn"]) {
                                 ?>
                                     <tr>
                                         <td> <?php echo $row["doctor_name"]; ?> </td>
+                                        <td> <?php echo $row["mci_no"]; ?> </td>
                                         <td> <?php echo $row["specialization"]; ?> </td>
                                         <td> <?php echo $row["degree"]; ?> </td>
                                         <td> <?php echo $row["degree_proof"]; ?> </td>

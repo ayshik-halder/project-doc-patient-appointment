@@ -30,15 +30,16 @@
 
         require_once('../config.php');
 
-        $full_name = $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
+        $full_name = $mciNo =  $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
-        $nameErr = $dobErr = $ageErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+        $nameErr = $mciNoErr =  $dobErr = $ageErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
         $flag = true;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $full_name = $_POST['full_name'];
+            $mciNo = $_POST['mci_no'];
             $dob = $_POST['dob'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
@@ -62,6 +63,15 @@
                 test_input($full_name);
             }
 
+            if (!$mciNo) {
+                $mciNoErr = "MCI Registration Number is required";
+                $flag = false;
+            } elseif (strlen($mciNo) != 12) {
+                $mciNoErr = "MCI Registration Number must be contain 12 digit";
+                $flag = false;
+            } else {
+                test_input($mciNo);
+            }
 
             $today_date = strtotime(date('Y-m-d'));
             $date_of_birth = strtotime($dob);
@@ -178,8 +188,8 @@
             // submit form if validated successfully
             if ($flag) {
 
-                $query = "INSERT INTO doctor(full_name, dob, age, gender, specialization, experience, phn_no, email, username, password)
-                VALUES('$full_name', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$username', '$password' )";
+                $query = "INSERT INTO doctor(full_name, mci_no, dob, age, gender, specialization, experience, phn_no, email, username, password)
+                VALUES('$full_name', '$mciNo', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$username', '$password' )";
 
                 if ($conn->query($query)) {
 
@@ -221,6 +231,14 @@
                             <label id="name-label" for="full-name"><strong>Full Name</strong></label>
                             <input type="text" name="full_name" class="form-control" id="full-name" placeholder="Full Name" value="<?php $full_name; ?>" />
                             <small class="error-label"><?php echo $nameErr ?></small>
+                        </div>
+                    </div>
+
+                    <div class="column-100">
+                        <div class="form-group">
+                            <label id="mci-no-label" for="mci-no"><strong>Medical Council of India Registration Number</strong></label>
+                            <input type="number" name="mci_no" class="form-control" id="mci-no" placeholder="MCI Registration Number" value="<?php $mciNo; ?>" />
+                            <small class="error-label"><?php echo $mciNoErr ?></small>
                         </div>
                     </div>
 

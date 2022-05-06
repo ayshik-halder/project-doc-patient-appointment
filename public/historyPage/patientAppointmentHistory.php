@@ -20,7 +20,8 @@ if ($_SESSION["loggedIn"]) {
         $uname =  $_SESSION["uname"];
         $patient_id =  $_SESSION["patient_id"];
 
-        $sql = "SELECT *, doctor.full_name AS doctor_name, book_appointment.id AS booking_id 
+        $sql = "SELECT *,
+                doctor.full_name AS doctor_name, book_appointment.id AS booking_id 
                 FROM patient, book_appointment, doctor, clinic 
                 WHERE patient.p_id = book_appointment.patient_id AND doctor.d_id = book_appointment.doctor_id AND clinic.id = book_appointment.clinic_id AND p_id='$patient_id'
                 ORDER BY date DESC, doctor_name";
@@ -53,11 +54,10 @@ if ($_SESSION["loggedIn"]) {
                                     <th>DATE</th>
                                     <th>TIME</th>
                                     <th>CLINIC</th>
+                                    <th>DEPARTMENT</th>
                                     <th>DOCTOR NAME</th>
                                     <th>PROBLEM</th>
                                     <th>STATUS</th>
-                                    <th>DOCTOR MESSAGE</th>
-                                    <th>YOUR MESSAGE</th>
                                     <th>ACTION</th>
                                 </tr>
 
@@ -68,11 +68,10 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["date"]; ?> </td>
                                         <td> <?php echo $row["start_time"] . "-" . $row["end_time"]; ?> </td>
                                         <td> <?php echo $row["clinic_name"]; ?> </td>
+                                        <td> <?php echo $row["specialization"]; ?> </td>
                                         <td> <?php echo $row["doctor_name"]; ?> </td>
                                         <td> <?php echo $row["problem"]; ?> </td>
                                         <td> <?php echo $row["approval_status"]; ?> </td>
-                                        <td> <?php echo $row["doctor_message"]; ?> </td>
-                                        <td> <?php echo $row["patient_message"]; ?> </td>
                                         <td> <button> <a href="./PatientAppointmentDelete.php?id=<?php echo $row['booking_id'] ?>" onclick='return checkDelete()'> Cancel </a> </button> </td>
                                     </tr>
                                 <?php } ?>

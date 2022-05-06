@@ -31,6 +31,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
+                        <li><a class="nav-link" href="./patientDocuments.php">Documents</a></li>
                         <li><a class="nav-link" href="./changePassword/PatientpasswordUpdate.php">Change Password</a></li>
                         <li><a class="nav-link" href="/public/logout/patietLogout.php">Logout</a></li>
                     </ul>
@@ -54,8 +55,6 @@ if ($_SESSION["loggedIn"]) {
                     $city = $_POST['city'];
                     $pin_code = $_POST['pin_code'];
                     $allergy = $_POST['allergic'];
-                    $report_type = $_POST['report_type'];
-                    $report = $_POST['report'];
 
 
                     if (!$full_name) {
@@ -104,12 +103,12 @@ if ($_SESSION["loggedIn"]) {
                     if (!$address) {
                         $addressErr = "Address is required";
                         $flag = false;
-                    } 
+                    }
 
                     if (!$city) {
                         $cityErr = "City is required";
                         $flag = false;
-                    } 
+                    }
 
                     if (!$pin_code) {
                         $pinCodeErr = "Pin Code is required";
@@ -123,20 +122,10 @@ if ($_SESSION["loggedIn"]) {
                     if ($flag) {
                         $query1 = "UPDATE patient SET full_name = '$full_name', dob = '$dob', age = '$age', phn_no = '$phn_no', email = '$email', address = '$address', city = '$city', pin_code = '$pin_code', allergic = '$allergy' WHERE p_id = '$patient_id'";
 
-                        $query2 = "INSERT INTO patient_document(patient_id, report_type, report)
-                        VALUES('$patient_id', '$report_type', '$report')";
-
-                        $query3 = "DELETE FROM patient_document WHERE patient_id = '$patient_id' AND report_type = '' AND report = '' ";
-
                         if ($conn->query($query1)) {
-                            if ($conn->query($query2)) {
-                                if ($conn->query($query3)) {
-
-                                    header("location:../patientDash.php");
-                                } else {
-                                    echo "failed" . $conn->error;
-                                }
-                            }
+                            header("location:../patientDash.php");
+                        } else {
+                            echo "failed" . $conn->error;
                         }
                     }
                 }
@@ -152,6 +141,20 @@ if ($_SESSION["loggedIn"]) {
                                     <label id="name-label" for="full-name"><strong>Full Name</strong></label>
                                     <input type="text" name="full_name" class="form-control" id="full-name" placeholder="Full Name" value="<?php echo $row["full_name"] ?>" />
                                     <small class="error-label"><?php echo $nameErr ?></small>
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="username-label" for="username"><strong>Username</strong></label>
+                                    <input type="text" name="username" class="form-control" id="username" value="<?php echo $row["username"] ?>" disabled />
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="aadhar-label" for="aadhar"><strong>Aadhar No</strong></label>
+                                    <input type="number" name="aadhar_no" class="form-control" id="aadhar" value="<?php echo $row["aadhar_no"] ?>" disabled />
                                 </div>
                             </div>
 
@@ -217,20 +220,6 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="allergy-label" for="allergy"><strong>Allergy</strong></label>
                                     <input type="text" name="allergic" class="form-control" id="allergy" placeholder="If your are allergic to something mention it (OPTIONAL)" value="<?php echo $row["allergic"] ?>" />
-                                </div>
-                            </div>
-
-                            <div class="column-100">
-                                <div class="form-group">
-                                    <label id="report-label" for="report"><strong>Report</strong></label>
-                                    <input type="file" name="report" class="form-control" id="report" value="<?php $report ?>" />
-                                </div>
-                            </div>
-
-                            <div class="column-100">
-                                <div class="form-group">
-                                    <label id="report_type-label" for="report_type"><strong>Report Type</strong></label>
-                                    <input type="text" name="report_type" class="form-control" id="report_type" placeholder="Mention report type if you attach any report" value="<?php $report_type ?>" />
                                 </div>
                             </div>
 

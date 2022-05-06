@@ -30,15 +30,16 @@
 
         require('../config.php');
 
-        $full_name = $dob = $age = $gender = $marital_status = $phn_no = $email = $address = $city = $pin_code = $username = $password = $confirm_password = '';
+        $full_name = $aadhar_no = $dob = $age = $gender = $marital_status = $phn_no = $email = $address = $city = $pin_code = $username = $password = $confirm_password = '';
 
-        $nameErr = $dobErr = $ageErr = $genderErr = $maritalStatusErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+        $nameErr = $aadharNoErr = $dobErr = $ageErr = $genderErr = $maritalStatusErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
         $flag = true;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $full_name = $_POST['full_name'];
+            $aadhar_no = $_POST['aadhar_no'];
             $dob = $_POST['dob'];
             $age = $_POST['age'];
             $gender = $_POST['gender'];
@@ -62,6 +63,15 @@
                 test_input($full_name);
             }
 
+            if (!$aadhar_no) {
+                $aadharNoErr = "Aadhar Number is required";
+                $flag = false;
+            } elseif (strlen($aadhar_no) != 9) {
+                $aadharNoErr = "Aadhar Number must be contain 9 digit";
+                $flag = false;
+            } else {
+                test_input($aadhar_no);
+            }
 
             $today_date = strtotime(date('Y-m-d'));
             $date_of_birth = strtotime($dob);
@@ -184,8 +194,8 @@
             // submit form if validated successfully
             if ($flag) {
 
-                $query = "INSERT INTO patient(full_name, dob, age, gender, marital_status, phn_no, email, address, city, pin_code, username, password)
-                VALUES('$full_name', '$dob', '$age', '$gender', '$marital_status', '$phn_no', '$email', '$address', '$city', '$pin_code', '$username', '$password' )";
+                $query = "INSERT INTO patient(full_name, aadhar_no, dob, age, gender, marital_status, phn_no, email, address, city, pin_code, username, password)
+                VALUES('$full_name', '$aadhar_no', '$dob', '$age', '$gender', '$marital_status', '$phn_no', '$email', '$address', '$city', '$pin_code', '$username', '$password' )";
 
                 if ($conn->query($query)) {
                     header("location:../login/patientLogin.php");
@@ -214,6 +224,14 @@
                             <label id="name-label" for="full-name"><strong>Full Name</strong></label>
                             <input type="text" name="full_name" class="form-control" id="full-name" placeholder="Full Name" value="<?php $full_name; ?>" />
                             <small class="error-label"><?php echo $nameErr ?></small>
+                        </div>
+                    </div>
+
+                    <div class="column-100">
+                        <div class="form-group">
+                            <label id="aadhar-label" for="aadhar"><strong>Aadhar Card Number</strong></label>
+                            <input type="number" name="aadhar_no" class="form-control" id="aadhar" placeholder="0000 0000 0000" value="<?php $aadhar_no; ?>" />
+                            <small class="error-label"><?php echo $aadharNoErr ?></small>
                         </div>
                     </div>
 
