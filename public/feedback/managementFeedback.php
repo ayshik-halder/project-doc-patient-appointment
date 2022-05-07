@@ -87,6 +87,8 @@ if ($_SESSION["loggedIn"]) {
 
 
 <?php
+        } else {
+            echo "No Record Found";
         }
     } else {
         header("Location: ../login/adminLogin.php");

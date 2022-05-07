@@ -16,7 +16,7 @@ if ($_SESSION["loggedIn"]) {
     <body>
         <?php
         $sql = "SELECT * FROM doceasy_feedback";
-        
+
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();
         if ($row) {
@@ -53,10 +53,10 @@ if ($_SESSION["loggedIn"]) {
                                 while ($row = $result->fetch_assoc()) {
                                 ?>
                                     <tr>
-                                    <td> <?php echo $row["date_time"]; ?> </td>
-                                    <td> <?php echo $row["name"]; ?> </td>
-                                    <td> <?php echo $row["email"]; ?> </td>
-                                    <td> <?php echo $row["message"]; ?> </td>
+                                        <td> <?php echo $row["date_time"]; ?> </td>
+                                        <td> <?php echo $row["name"]; ?> </td>
+                                        <td> <?php echo $row["email"]; ?> </td>
+                                        <td> <?php echo $row["message"]; ?> </td>
 
                                     </tr>
 
@@ -73,6 +73,8 @@ if ($_SESSION["loggedIn"]) {
 
 
 <?php
+        } else {
+            echo "No Record Found";
         }
     } else {
         header("Location: ../login/adminLogin.php");

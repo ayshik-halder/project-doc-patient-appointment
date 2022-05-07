@@ -65,8 +65,8 @@ if ($_SESSION["loggedIn"]) {
                                 ?>
                                     <tr>
                                         <td> <?php echo $row["test_type"]; ?> </td>
-                                        <td> <?php echo $row["end_time"]; ?> </td>
                                         <td> <?php echo $row["start_time"]; ?> </td>
+                                        <td> <?php echo $row["end_time"]; ?> </td>
                                         <td> <?php echo $row["minimum_fee"]; ?> </td>
                                         <td> <?php echo $row["maximum_fee"]; ?> </td>
                                     </tr>

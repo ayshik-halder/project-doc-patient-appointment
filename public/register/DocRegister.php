@@ -66,8 +66,8 @@
             if (!$mciNo) {
                 $mciNoErr = "MCI Registration Number is required";
                 $flag = false;
-            } elseif (strlen($mciNo) != 12) {
-                $mciNoErr = "MCI Registration Number must be contain 12 digit";
+            } elseif (strlen($mciNo) != 9) {
+                $mciNoErr = "MCI Registration Number must be contain 9 digit";
                 $flag = false;
             } else {
                 test_input($mciNo);
@@ -113,9 +113,6 @@
 
             if (!$experience) {
                 $experienceErr = "Experience Year is required";
-                $flag = false;
-            } elseif (strlen($experience) > (strlen($age) / 3)) {
-                $experienceErr = "Mention your proper experience year";
                 $flag = false;
             } else {
                 test_input($experience);

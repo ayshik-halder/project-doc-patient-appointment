@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2022 at 06:23 PM
+-- Generation Time: May 07, 2022 at 07:06 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -78,6 +78,18 @@ CREATE TABLE `book_test` (
   `test_appointment_slip` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `book_test`
+--
+
+INSERT INTO `book_test` (`ticket_no`, `test_id`, `patient_id`, `clinic_id`, `date`, `approval_status`, `test_appointment_slip`) VALUES
+(33, 27, 53, 8, '2022-05-11', 'APPROVED', NULL),
+(34, 27, 53, 8, '2022-05-10', 'APPROVED', NULL),
+(35, 29, 53, 8, '2022-05-10', 'APPROVED', NULL),
+(36, 30, 55, 8, '2022-05-12', 'APPROVED', NULL),
+(37, 30, 55, 8, '2022-05-12', 'APPROVED', NULL),
+(38, 27, 55, 8, '2022-05-08', 'APPROVED', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -100,8 +112,10 @@ CREATE TABLE `clinic` (
 --
 
 INSERT INTO `clinic` (`id`, `clinic_name`, `address`, `city`, `pin_code`, `contact_no`, `email`, `clinic_upi_id`) VALUES
-(6, 'Burdwan Hospital', 'Burdwan Medical College and Hospital, West Bengal', 'Burdwan', 713101, 1234567890, 'burdwanHospital@gmail.com', 'something@oksbi'),
-(7, 'Kolkata Nursing Home', 'Rajarhat Main Road, Atghara, Newtown, Kolkata, West Bengal', 'Newtown', 700136, 4294967295, 'KolkataHospital@gmail.com', 'anything@oksbi');
+(8, 'Burdwan Medical College And Hospital', 'Khosbagan, Burdwan, West Bengal 713104', 'Burdwan', 713104, 3427962200, 'burdwanHospital@gmail.com', 'burdwanHospital@oksbi'),
+(9, 'Bengal Faith Hospital', 'Health City, Goda, Burdwan, West Bengal 713102', 'Burdwan', 713102, 8420382000, 'bengalfaithhospital@gmail.com', 'bengalFaithHospital@okaxis'),
+(10, 'Kisholoy Children Hospital', '69, Grand Trunk Road, Purbachal, Sripally, Kanainatsal, Burdwan, West Bengal 713103', 'Burdwan', 713103, 6296055055, 'kisholoyHospital@gmail.com', 'kisholoyHospital@okaxis'),
+(11, 'Apollo Nursing Home', 'Shyamlal Colony, Khosbagan, Burdwan, West Bengal 713101', 'Burdwan', 713101, 9501032383, 'apolloNursingHome@gmail.com', 'apolloNursinghome@oksbi');
 
 -- --------------------------------------------------------
 
@@ -121,6 +135,14 @@ CREATE TABLE `clinic_feedback` (
   `attach_file` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `clinic_feedback`
+--
+
+INSERT INTO `clinic_feedback` (`id`, `clinic_id`, `date_time`, `user_type`, `name`, `email`, `message_type`, `message`, `attach_file`) VALUES
+(3, 8, '07-05-2022 10:26:17', 'PATIENT', 'Rimi', 'rimi22@gmail.com', 'QUERY', 'can i cancel appointment from here?', ''),
+(4, 8, '07-05-2022 10:27:10', 'PATIENT', 'Rimi', 'rimi22@gmail.com', 'QUERY', 'Can i cancel appointment anytime from here?', '');
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +156,16 @@ CREATE TABLE `doceasy_feedback` (
   `message` varchar(500) NOT NULL,
   `date_time` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `doceasy_feedback`
+--
+
+INSERT INTO `doceasy_feedback` (`feedback_no`, `name`, `email`, `message`, `date_time`) VALUES
+(4, 'Rupa Roy', 'rupa321@gmail.com', 'This is a very good website', '07-05-2022 10:20:04'),
+(5, 'Rimi Mondal', 'rimi22@gmail.com', 'Please give more clinic to your website', '07-05-2022 10:21:04'),
+(6, 'Anubhav ', 'anuvab1982@gmail.com', 'This is a useful website for booking appointment.', '07-05-2022 10:22:30'),
+(7, 'Rupa', 'rupa21@gmail.com', 'This is a very good website', '07-05-2022 10:23:40');
 
 -- --------------------------------------------------------
 
@@ -167,21 +199,10 @@ CREATE TABLE `doctor` (
 --
 
 INSERT INTO `doctor` (`d_id`, `clinic_id`, `username`, `password`, `full_name`, `mci_no`, `dob`, `age`, `gender`, `specialization`, `degree`, `degree_proof`, `experience`, `phn_no`, `email`, `start_time`, `end_time`, `fee`) VALUES
-(29, 7, 'anuvab5', 123654, 'Anuvab Roy', 0, '1990-03-23', 32, 'MALE', 'Cardiology', NULL, NULL, 5, 4294967295, 'anuvab1990@gmail.com', '09:00:01', '13:30:00', 300),
-(30, 6, 'chitra3', 2580, 'Chitra Mondal', 0, '1993-10-02', 29, 'FEMALE', 'Gynaecology', NULL, NULL, 3, 4294967295, 'chitra93@gmail.com', '10:30:00', '12:30:00', 250),
-(31, 6, 'maya31', 78965, 'Maya Sen', 0, '1990-02-03', 32, 'FEMALE', 'Cardiology', 'MBBS', 0x536368656d612e706466, 5, 4294967295, 'maya91@gmail.com', '11:00:00', '16:00:00', 300);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `doc_appointment_schedule`
---
-
-CREATE TABLE `doc_appointment_schedule` (
-  `id` int(5) UNSIGNED NOT NULL,
-  `doctor_id` int(4) UNSIGNED NOT NULL,
-  `date_time` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(34, 8, 'anuvab7', 34210, 'Anubhav Roy', 314765420, '1985-05-12', 37, 'MALE', 'Cardiology', NULL, NULL, 7, 7895421110, 'anuvab1985@gmail.com', NULL, NULL, NULL),
+(35, 8, 'maya32', 1254, 'Maya Sen', 498765200, '1990-02-14', 32, 'FEMALE', 'Gynaecology', NULL, NULL, 5, 9862349978, 'maya1990@gmail.com', NULL, NULL, NULL),
+(36, 9, 'tulsi9', 59870, 'Tulsi Kumar Sen', 198776549, '1980-11-23', 42, 'MALE', 'Neurology', NULL, NULL, 9, 8546922177, 'tulsi80@gmail.com', NULL, NULL, NULL),
+(37, 10, 'sandeep9', 12345, 'Sandeep Dey', 199878546, '1982-08-25', 40, 'MALE', 'Immunology', NULL, NULL, 9, 7986285460, 'sandeep82@gmail.com', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -198,6 +219,16 @@ CREATE TABLE `management` (
   `phn_no` bigint(10) UNSIGNED NOT NULL,
   `Email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `management`
+--
+
+INSERT INTO `management` (`m_id`, `clinic_id`, `username`, `password`, `full_name`, `phn_no`, `Email`) VALUES
+(27, 8, 'mayank21', 34210, 'Mayank Kumar', 9544310780, 'mayank21@gmail.com'),
+(28, 10, 'aditya1', 12345, 'Aditya Biswas', 6423819701, 'aditya123@gmail.com'),
+(29, 11, 'sucheta34', 78965, 'Sucheta Sen', 7444566241, 'sucheta34@gmail.com'),
+(30, 9, 'koushik9', 1230, 'Koushik Sarkar', 8975411340, 'koushik1992@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -228,8 +259,9 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `aadhar_no`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
-(51, 'rimi22', 34210, 'Rimi Mondal', 0, '2000-05-20', 22, 'FEMALE', 'MARRIED', 4294967295, 'rimi22@gmail.com', 'Khosbagan, Burdwan, West bengal', 'Burdwan', 713103, ''),
-(52, 'rdolon', 25896, 'Dolon Roy', 0, '2002-02-12', 20, 'FEMALE', 'UNMARRIED', 4294967295, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
+(53, 'rimi24', 34210, 'Rimi Mondal', 254465419870, '1998-11-19', 24, 'FEMALE', 'UNMARRIED', 9876549874, 'rimi98@gmail.com', 'Khosbagan, Burdwan, West Bengal', 'Burdwan', 713101, 'Egg'),
+(54, 'arun22', 4560, 'Arun Saha', 598621436557, '2000-02-13', 22, 'MALE', 'UNMARRIED', 8854921504, 'arun57@gmail.com', 'Police Line Bazar, Burdwan , West Bengal', 'Burdwan', 713103, NULL),
+(55, 'biplab90', 123456, 'Biplab Biswas', 985234217894, '1990-05-29', 32, 'MALE', 'MARRIED', 9877765542, 'biplab1990@gmail.com', 'Memari, Burdwan, West Bengal', 'Burdwan', 713153, NULL);
 
 -- --------------------------------------------------------
 
@@ -265,8 +297,20 @@ CREATE TABLE `test` (
 --
 
 INSERT INTO `test` (`t_id`, `clinic_id`, `test_type`, `start_time`, `end_time`, `minimum_fee`, `maximum_fee`) VALUES
-(25, 6, 'Blood Test', '06:00:00', '20:00:00', 500, 3000),
-(26, 6, 'ECG', '07:00:00', '16:00:00', 800, 1500);
+(27, 8, 'Blood Test', '05:00:00', '20:00:00', 300, 3000),
+(28, 8, 'CT Scan', '07:30:00', '16:00:00', 2000, 7000),
+(29, 8, 'Urine Test', '08:00:00', '14:00:00', 100, 350),
+(30, 8, 'X-rays', '06:00:00', '16:30:00', 200, 4000),
+(31, 8, 'Ultrasonography', '07:00:00', '15:00:00', 800, 2500),
+(32, 8, 'Blood Test', '05:00:00', '20:00:00', 300, 2000),
+(33, 10, 'Blood Test', '06:00:00', '13:00:00', 300, 2000),
+(34, 10, 'Blood Test', '06:00:00', '13:00:00', 300, 2000),
+(35, 10, 'Urine Test', '06:00:00', '13:00:00', 100, 200),
+(36, 10, 'X-rays', '06:00:00', '15:00:00', 400, 1000),
+(37, 11, 'ECG', '08:00:00', '15:00:00', 150, 500),
+(39, 11, 'CT Scan', '07:30:00', '16:00:00', 2500, 7000),
+(40, 11, 'Blood Test', '06:00:00', '16:30:00', 250, 2500),
+(41, 11, 'Blood Test', '07:30:00', '16:00:00', 250, 2500);
 
 -- --------------------------------------------------------
 
@@ -336,13 +380,6 @@ ALTER TABLE `doctor`
   ADD KEY `clinic_id` (`clinic_id`);
 
 --
--- Indexes for table `doc_appointment_schedule`
---
-ALTER TABLE `doc_appointment_schedule`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `doctor_id` (`doctor_id`,`date_time`);
-
---
 -- Indexes for table `management`
 --
 ALTER TABLE `management`
@@ -397,49 +434,43 @@ ALTER TABLE `book_appointment`
 -- AUTO_INCREMENT for table `book_test`
 --
 ALTER TABLE `book_test`
-  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `clinic`
 --
 ALTER TABLE `clinic`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `clinic_feedback`
 --
 ALTER TABLE `clinic_feedback`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `doceasy_feedback`
 --
 ALTER TABLE `doceasy_feedback`
-  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `doctor`
 --
 ALTER TABLE `doctor`
-  MODIFY `d_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
---
--- AUTO_INCREMENT for table `doc_appointment_schedule`
---
-ALTER TABLE `doc_appointment_schedule`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `d_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `management`
 --
 ALTER TABLE `management`
-  MODIFY `m_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `m_id` int(2) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `p_id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `p_id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `patient_document`
@@ -451,7 +482,7 @@ ALTER TABLE `patient_document`
 -- AUTO_INCREMENT for table `test`
 --
 ALTER TABLE `test`
-  MODIFY `t_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `t_id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `test_report`
@@ -469,8 +500,7 @@ ALTER TABLE `test_report`
 ALTER TABLE `book_appointment`
   ADD CONSTRAINT `book_appointment_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE,
   ADD CONSTRAINT `book_appointment_ibfk_2` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`p_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_appointment_ibfk_3` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `book_appointment_ibfk_4` FOREIGN KEY (`schedule_id`) REFERENCES `doc_appointment_schedule` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `book_appointment_ibfk_3` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `book_test`
@@ -491,12 +521,6 @@ ALTER TABLE `clinic_feedback`
 --
 ALTER TABLE `doctor`
   ADD CONSTRAINT `doctor_ibfk_1` FOREIGN KEY (`clinic_id`) REFERENCES `clinic` (`id`) ON UPDATE CASCADE;
-
---
--- Constraints for table `doc_appointment_schedule`
---
-ALTER TABLE `doc_appointment_schedule`
-  ADD CONSTRAINT `doc_appointment_schedule_ibfk_1` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`d_id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `management`

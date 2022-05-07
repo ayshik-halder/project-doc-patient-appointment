@@ -53,6 +53,7 @@ if ($_SESSION["loggedIn"]) {
                                     <th>DATE</th>
                                     <th>TIME</th>
                                     <th>CLINIC</th>
+                                    <th>CLINIC ADDRESS</th>
                                     <th>TEST</th>
                                     <th>FEE</th>
                                     <th>STATUS</th>
@@ -68,6 +69,7 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["date"]; ?> </td>
                                         <td> <?php echo $row["start_time"] . "-" . $row["end_time"]; ?> </td>
                                         <td> <?php echo $row["clinic_name"]; ?> </td>
+                                        <td> <?php echo $row["address"]; ?> </td>
                                         <td> <?php echo $row["test_type"]; ?> </td>
                                         <td> <?php echo $row["minimum_fee"] . "-" . $row["maximum_fee"]; ?> </td>
                                         <td> <?php echo $row["approval_status"]; ?> </td>

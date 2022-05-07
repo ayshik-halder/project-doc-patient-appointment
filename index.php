@@ -138,7 +138,7 @@
         </div>
       </div>
     </section>
-    
+
     <section id="features">
       <h2>Awesome Key Features</h2>
       <div class="grid">
@@ -293,7 +293,7 @@
               <label id="submit-label" for="submit"></label>
               <input id="submit" type="submit" value="Submit" class="btn" />
             </div>
-            
+
           </form>
         </div>
 
@@ -312,7 +312,6 @@
       <div id="footer-info">
         <ul>
           <li><a href="/public/login/adminLogin.php">Admin Login</a></li>
-          <li><a href="/public/login/ManagementLogin.php">Management Login</a></li>
           <li><a href="#">Customer Support</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>

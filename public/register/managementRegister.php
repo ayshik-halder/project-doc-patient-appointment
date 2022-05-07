@@ -193,7 +193,7 @@ if ($_SESSION["loggedIn"]) {
                             <div class="column-100">
                                 <div class="form-group">
                                     <label id="cname-label" for="clinic-name"><strong>Clinic Name</strong></label>
-                                    <select name="clinic_name" id="clinic-name" , class="form-control">
+                                    <select name="clinic_name" id="clinic-name" class="form-control">
                                         <option selected>Choose Clinic Name</option>
 
                                         <?php

@@ -66,8 +66,8 @@
             if (!$aadhar_no) {
                 $aadharNoErr = "Aadhar Number is required";
                 $flag = false;
-            } elseif (strlen($aadhar_no) != 9) {
-                $aadharNoErr = "Aadhar Number must be contain 9 digit";
+            } elseif (strlen($aadhar_no) != 12) {
+                $aadharNoErr = "Aadhar Number must be contain 12 digit";
                 $flag = false;
             } else {
                 test_input($aadhar_no);
