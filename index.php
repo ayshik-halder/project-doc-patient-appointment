@@ -312,7 +312,7 @@
       <div id="footer-info">
         <ul>
           <li><a href="/public/login/adminLogin.php">Admin Login</a></li>
-          <li><a href="#">Customer Support</a></li>
+          
           <li><a href="#contact">Contact</a></li>
         </ul>
         <div id="copyright"> Copyright &#169; DocEasy 2022</div>

@@ -28,30 +28,8 @@
 
     <main>
         <section id="register">
-            <h2>Login at DocEasy</h2>
+            <h2>View History</h2>
             <div class="container">
-                <!-- Patient Login  -->
-                <div class="card" id="patient">
-                    <div class="product-logo">
-                        <img class="logo-img" src="/assets/images/doceasy/doceasy-patient-logo.svg"
-                            alt="DocEasy logo" />
-                    </div>
-                    <div class="desc">
-                        <h3>Features</h3>
-                        <ol>
-                            <li>Easily personalise your details</li>
-                            <li>Every Doctor you choose is well approved</li>
-                            <li>Easy to use dashboard for accessibility</li>
-                            <li>Track multiple appointments for various departments</li>
-                            <li>Weekly & monthly reports to share with your doctor</li>
-                        </ol>
-                    </div>
-                    <a href="PatientLogin.php">
-                        <button class="btn">Login</button>
-                    </a>
-                </div>
-
-
                 <!-- Doctor Login  -->
                 <div class="card" id="doctor">
                     <div class="product-logo">
@@ -59,17 +37,15 @@
                             alt="DocEasy for doctors logo" />
                     </div>
                     <div class="desc">
-                        <h3>Features</h3>
+                        <h3>Appointments</h3>
                         <ol>
-                            <li>Know your Patients</li>
-                            <li>Manage and keep track of patient's appointments</li>
-                            <li>Choose your clinic address</li>
-                            <li>Personalise area of expertise and qualifications</li>
-                            <li>Cross-device syncing</li>
+                            <li>View Appointments booked in your clinic</li>
+                            <li>Keep track of patient's appointments</li>
+                            <li>Cancel appointments</li>
                         </ol>
                     </div>
-                    <a href="DocLogin.php">
-                        <button class="btn">Login</button>
+                    <a href="/public/historyPage/managementAppointmentHistory.php">
+                        <button class="btn">View</button>
                     </a>
                 </div>
                 <div class="card" id="management">
@@ -78,16 +54,16 @@
                             alt="DocEasy logo" />
                     </div>
                     <div class="desc">
-                        <h3>Features</h3>
+                        <h3>Lab Tests</h3>
                         <ol>
-                            <li>Manage your Clinic</li>
-                            <li>Analyse booked appointments and tests</li>
+                            <li>View Booked Tests</li>
+                            <li>Add Reports</li>
                             <li>View history and cancelled appointments</li>
                             <li>Add new Tests to your clinic</li>
                             <li>Respond to Patient queries</li>
                         </ol>
                     </div>
-                    <a href="ManagementLogin.php">
+                    <a href="/public/historyPage/managementTestHistory.php">
                         <button class="btn">Login</button>
                     </a>
                 </div>
@@ -102,7 +78,7 @@
             <div id="footer-info">
               <ul>
                 <li><a href="#">Privacy Policy</a></li>
-                
+                <li><a href="/index.php#contact" target="_blank">Contact</a></li>
                 <li><a href="/index.php#contact" target="_blank">Contact</a></li>
               </ul>
               <div id="copyright">Copyright &#169; DocEasy 2022</div>
