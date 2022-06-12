@@ -33,6 +33,7 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="./patientDocuments.php">Documents</a></li>
                         <li><a class="nav-link" href="./changePassword/PatientpasswordUpdate.php">Change Password</a></li>
+                        <li><a class="nav-link" href="/public/dashboard/patientDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/patietLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -41,12 +42,13 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
                 $patient_id = $row["p_id"];
-                $nameErr = $dobErr = $ageErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = '';
+                $nameErr = $aadharNoErr = $dobErr = $ageErr = $phnNoErr = $emailErr = $addressErr = $cityErr = $pinCodeErr = '';
                 $flag = true;
 
                 if (isset($_POST["update"])) {
 
                     $full_name = $_POST['full_name'];
+                    $aadhar_no = $_POST['aadhar_no'];
                     $dob = $_POST['dob'];
                     $age = $_POST['age'];
                     $phn_no = $_POST['phn_no'];
@@ -62,6 +64,14 @@ if ($_SESSION["loggedIn"]) {
                         $flag = false;
                     } elseif (!preg_match("/^[a-zA-Z ]*$/", $full_name)) {
                         $nameErr = "only letters and white spaces allowed";
+                        $flag = false;
+                    }
+
+                    if (!$aadhar_no) {
+                        $aadharNoErr = "Aadhar Number is required";
+                        $flag = false;
+                    } elseif (strlen($aadhar_no) != 12) {
+                        $aadharNoErr = "Aadhar Number must be contain 12 digit";
                         $flag = false;
                     }
 
@@ -120,10 +130,15 @@ if ($_SESSION["loggedIn"]) {
 
 
                     if ($flag) {
-                        $query1 = "UPDATE patient SET full_name = '$full_name', dob = '$dob', age = '$age', phn_no = '$phn_no', email = '$email', address = '$address', city = '$city', pin_code = '$pin_code', allergic = '$allergy' WHERE p_id = '$patient_id'";
+                        $query1 = "UPDATE patient SET full_name = '$full_name', aadhar_no = '$aadhar_no', dob = '$dob', age = '$age', phn_no = '$phn_no', email = '$email', address = '$address', city = '$city', pin_code = '$pin_code', allergic = '$allergy' WHERE p_id = '$patient_id'";
 
                         if ($conn->query($query1)) {
-                            header("location:../patientDash.php");
+                            $message = 'Your Information is updated successfully';
+
+                            echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/patientDash.php');
+                                </SCRIPT>";
                         } else {
                             echo "failed" . $conn->error;
                         }
@@ -154,7 +169,8 @@ if ($_SESSION["loggedIn"]) {
                             <div class="column-50">
                                 <div class="form-group">
                                     <label id="aadhar-label" for="aadhar"><strong>Aadhar No</strong></label>
-                                    <input type="number" name="aadhar_no" class="form-control" id="aadhar" value="<?php echo $row["aadhar_no"] ?>" disabled />
+                                    <input type="number" name="aadhar_no" class="form-control" id="aadhar" value="<?php echo $row["aadhar_no"] ?>" />
+                                    <small class="error-label"><?php echo $aadharNoErr ?></small>
                                 </div>
                             </div>
 

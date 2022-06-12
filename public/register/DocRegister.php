@@ -30,15 +30,16 @@
 
         require_once('../config.php');
 
-        $full_name = $mciNo =  $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
+        $full_name = $aadhar_no = $mciNo =  $dob = $age = $gender = $specialization = $experience = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
-        $nameErr = $mciNoErr =  $dobErr = $ageErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+        $nameErr = $aadharNoErr = $mciNoErr =  $dobErr = $ageErr = $genderErr = $specializationErr = $experienceErr = $phnNoErr = $emailErr = $clinicErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
         $flag = true;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $full_name = $_POST['full_name'];
+            $aadhar_no = $_POST['aadhar_no'];
             $mciNo = $_POST['mci_no'];
             $dob = $_POST['dob'];
             $age = $_POST['age'];
@@ -61,6 +62,16 @@
                 $flag = false;
             } else {
                 test_input($full_name);
+            }
+
+            if (!$aadhar_no) {
+                $aadharNoErr = "Aadhar Number is required";
+                $flag = false;
+            } elseif (strlen($aadhar_no) != 12) {
+                $aadharNoErr = "Aadhar Number must be contain 12 digit";
+                $flag = false;
+            } else {
+                test_input($aadhar_no);
             }
 
             if (!$mciNo) {
@@ -185,8 +196,8 @@
             // submit form if validated successfully
             if ($flag) {
 
-                $query = "INSERT INTO doctor(full_name, mci_no, dob, age, gender, specialization, experience, phn_no, email, username, password)
-                VALUES('$full_name', '$mciNo', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$username', '$password' )";
+                $query = "INSERT INTO doctor(full_name, aadhar_no, mci_no, dob, age, gender, specialization, experience, phn_no, email, username, password)
+                VALUES('$full_name', '$aadhar_no', '$mciNo', '$dob', '$age', '$gender', '$specialization', '$experience', '$phn_no', '$email', '$username', '$password' )";
 
                 if ($conn->query($query)) {
 
@@ -231,7 +242,15 @@
                         </div>
                     </div>
 
-                    <div class="column-100">
+                    <div class="column-50">
+                        <div class="form-group">
+                            <label id="aadhar-label" for="aadhar"><strong>Aadhar Card Number</strong></label>
+                            <input type="number" name="aadhar_no" class="form-control" id="aadhar" placeholder="0000 0000 0000" value="<?php $aadhar_no; ?>" />
+                            <small class="error-label"><?php echo $aadharNoErr ?></small>
+                        </div>
+                    </div>
+
+                    <div class="column-50">
                         <div class="form-group">
                             <label id="mci-no-label" for="mci-no"><strong>Medical Council of India Registration Number</strong></label>
                             <input type="number" name="mci_no" class="form-control" id="mci-no" placeholder="MCI Registration Number" value="<?php $mciNo; ?>" />
@@ -377,7 +396,7 @@
             <div id="footer-info">
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
-                    
+
                     <li><a href="/index.php#contact" target="_blank">Contact</a></li>
                 </ul>
                 <div id="copyright">Copyright &#169; DocEasy 2022</div>

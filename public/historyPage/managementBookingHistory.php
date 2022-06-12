@@ -20,8 +20,8 @@
     
         <nav id="nav-bar">
           <ul>
-            <p>Not yet a user?</p>
-            <li><a class="nav-link" href="/index.php#register"><u>Register</u></a></li>
+            <li><a class="nav-link" href="/public/dashboard/managementDash.php">Exit</a></li>
+            <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
           </ul>
         </nav>
       </header>
@@ -64,7 +64,7 @@
                         </ol>
                     </div>
                     <a href="/public/historyPage/managementTestHistory.php">
-                        <button class="btn">Login</button>
+                        <button class="btn">View</button>
                     </a>
                 </div>
                 
@@ -78,7 +78,6 @@
             <div id="footer-info">
               <ul>
                 <li><a href="#">Privacy Policy</a></li>
-                <li><a href="/index.php#contact" target="_blank">Contact</a></li>
                 <li><a href="/index.php#contact" target="_blank">Contact</a></li>
               </ul>
               <div id="copyright">Copyright &#169; DocEasy 2022</div>

@@ -33,7 +33,8 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
-                        <li><a class="nav-link" href="../logout/adminLogout.php">Logout</a></li>
+                        <li><a class="nav-link" href="/public/dashboard/adminDash.php">Exit</a></li>
+                        <li><a class="nav-link" href="/public/logout/adminLogout.php">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -42,11 +43,12 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
 
-                $clinic_name = $address = $city = $pin_code = $contact_no = $email = $clinic_upi_id = '';
+                $clinic_name = $licence_no = $address = $city = $pin_code = $contact_no = $email = $clinic_upi_id = '';
 
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $clinic_name = $_POST['clinic_name'];
+                    $licence_no = $_POST['licence_no'];
                     $address = $_POST['address'];
                     $city = $_POST['city'];
                     $pin_code = $_POST['pin_code'];
@@ -54,8 +56,8 @@ if ($_SESSION["loggedIn"]) {
                     $email = $_POST['email'];
                     $clinic_upi_id = $_POST['clinic_upi_id'];
 
-                    $query = "INSERT INTO clinic(clinic_name, address, city, pin_code, contact_no, email, clinic_upi_id)
-                    VALUES('$clinic_name', '$address', '$city', '$pin_code', '$contact_no', '$email', '$clinic_upi_id' )";
+                    $query = "INSERT INTO clinic(clinic_name, licence_no, address, city, pin_code, contact_no, email, clinic_upi_id)
+                    VALUES('$clinic_name', '$licence_no', '$address', '$city', '$pin_code', '$contact_no', '$email', '$clinic_upi_id' )";
 
                     if ($conn->query($query)) {
                         header("location:../dashboard/adminDash.php");
@@ -69,10 +71,17 @@ if ($_SESSION["loggedIn"]) {
                     <h2>Clinic Registration Form</h2>
                     <div class="grid">
                         <form id="form" action="" method="POST">
-                            <div class="column-100">
+                            <div class="column-50">
                                 <div class="form-group">
                                     <label id="clinic-name-label" for="clinic-name"><strong>Clinic Name</strong></label>
                                     <input type="text" name="clinic_name" class="form-control" id="Clinic-name" placeholder="Clinic Name" value="<?php $clinic_name; ?>" required />
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="licence-no-label" for="licence-no"><strong>Clinic Licence Number</strong></label>
+                                    <input type="number" name="licence_no" class="form-control" id="licence-no" placeholder="Clinic Licence Number" value="<?php $licence_no; ?>" required />
                                 </div>
                             </div>
 

@@ -31,6 +31,7 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="./changePassword/DoctorPasswordUpdate.php">Change Password</a></li>
+                        <li><a class="nav-link" href="/public/dashboard/doctorDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/docLogout.php">Logout</a></li>
                     </ul>
                 </nav>
@@ -39,12 +40,14 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
                 $doctor_id = $row["d_id"];
-                $nameErr = $dobErr = $ageErr = $experienceErr = $phnNoErr = $emailErr = $feeErr = $timeErr =  '';
+                $nameErr = $aadharNoErr = $mciNoErr = $dobErr = $ageErr = $experienceErr = $phnNoErr = $emailErr = $feeErr = $timeErr =  '';
                 $flag = true;
 
                 if (isset($_POST["update"])) {
 
                     $full_name = $_POST['full_name'];
+                    $aadhar_no = $_POST['aadhar_no'];
+                    $mci_no = $_POST['mci_no'];
                     $dob = $_POST['dob'];
                     $age = $_POST['age'];
                     $degree = $_POST['degree'];
@@ -65,6 +68,21 @@ if ($_SESSION["loggedIn"]) {
                         $flag = false;
                     }
 
+                    if (!$aadhar_no) {
+                        $aadharNoErr = "Aadhar Number is required";
+                        $flag = false;
+                    } elseif (strlen($aadhar_no) != 12) {
+                        $aadharNoErr = "Aadhar Number must be contain 12 digit";
+                        $flag = false;
+                    }
+        
+                    if (!$mci_no) {
+                        $mciNoErr = "MCI Registration Number is required";
+                        $flag = false;
+                    } elseif (strlen($mci_no) != 9) {
+                        $mciNoErr = "MCI Registration Number must be contain 9 digit";
+                        $flag = false;
+                    } 
 
                     $today_date = strtotime(date('Y-m-d'));
                     $date_of_birth = strtotime($dob);
@@ -114,16 +132,21 @@ if ($_SESSION["loggedIn"]) {
                         $flag = false;
                     }
 
-                    if($start_time >= $end_time) {
+                    if ($start_time >= $end_time) {
                         $timeErr = "Mention Proper Timing";
                         $flag = false;
                     }
 
                     if ($flag) {
-                        $query1 = "UPDATE doctor SET full_name = '$full_name', dob = '$dob', age = '$age', degree = '$degree', degree_proof = '$degree_proof', experience = '$experience', phn_no = '$phn_no', email = '$email', start_time = '$start_time', end_time = '$end_time', fee = '$fee' WHERE d_id = '$doctor_id'";
+                        $query1 = "UPDATE doctor SET full_name = '$full_name', aadhar_no = '$aadhar_no', mci_no = '$mci_no', dob = '$dob', age = '$age', degree = '$degree', degree_proof = '$degree_proof', experience = '$experience', phn_no = '$phn_no', email = '$email', start_time = '$start_time', end_time = '$end_time', fee = '$fee' WHERE d_id = '$doctor_id'";
 
                         if ($conn->query($query1)) {
-                            header("location:../doctorDash.php");
+                            $message = 'Your Information is updated successfully';
+
+                            echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/doctorDash.php');
+                                </SCRIPT>";
                         } else {
                             echo "failed" . $conn->error;
                         }
@@ -144,7 +167,7 @@ if ($_SESSION["loggedIn"]) {
                                 </div>
                             </div>
 
-                            <div class="column-50">
+                            <div class="column-100">
                                 <div class="form-group">
                                     <label id="username-label" for="username"><strong>Username</strong></label>
                                     <input type="text" name="username" class="form-control" id="username" value="<?php echo $row["username"] ?>" disabled />
@@ -153,8 +176,17 @@ if ($_SESSION["loggedIn"]) {
 
                             <div class="column-50">
                                 <div class="form-group">
+                                    <label id="aadhar-label" for="aadhar"><strong>Aadhar Card Number</strong></label>
+                                    <input type="number" name="aadhar_no" class="form-control" id="aadhar" placeholder="0000 0000 0000" value="<?php echo $row["aadhar_no"] ?>" />
+                                    <small class="error-label"><?php echo $aadharNoErr ?></small>
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
                                     <label id="mci-no-label" for="mci-no"><strong>MCI No</strong></label>
-                                    <input type="number" name="mci_no" class="form-control" id="mci-no" value="<?php echo $row["mci_no"] ?>" disabled/>
+                                    <input type="number" name="mci_no" class="form-control" id="mci-no" value="<?php echo $row["mci_no"] ?>" />
+                                    <small class="error-label"><?php echo $mciNoErr ?></small>
                                 </div>
                             </div>
 

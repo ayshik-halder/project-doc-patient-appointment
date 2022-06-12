@@ -65,8 +65,12 @@ if ($_SESSION["loggedIn"]) {
 
                         if ($conn->query($query2)) {
                             if ($conn->query($query3)) {
+                                $message = 'Your Document is submitted successfully';
 
-                                header("location:../patientDash.php");
+                            echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/patientDash.php');
+                                </SCRIPT>";
                             } else {
                                 echo "failed" . $conn->error;
                             }

@@ -33,7 +33,8 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
-                        <li><a class="nav-link" href="../logout/adminLogout.php">Logout</a></li>
+                        <li><a class="nav-link" href="/public/dashboard/adminDash.php">Exit</a></li>
+                        <li><a class="nav-link" href="/public/logout/adminLogout.php">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -42,9 +43,9 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
 
-                $full_name = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
+                $full_name = $aadhar_no = $phn_no = $email = $clinic_name = $username = $password = $confirm_password = '';
 
-                $nameErr = $phnNoErr = $emailErr = $clinicNameErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
+                $nameErr = $aadharNoErr = $phnNoErr = $emailErr = $clinicNameErr = $usernameErr = $passwordErr = $confirmPasswordErr = '';
 
                 $flag = true;
 
@@ -59,6 +60,7 @@ if ($_SESSION["loggedIn"]) {
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     $full_name = $_POST['full_name'];
+                    $aadhar_no = $_POST['aadhar_no'];
                     $phn_no = $_POST['phn_no'];
                     $email = $_POST['Email'];
                     $clinic_name = $_POST['clinic_name'];
@@ -75,6 +77,16 @@ if ($_SESSION["loggedIn"]) {
                         $flag = false;
                     } else {
                         test_input($full_name);
+                    }
+
+                    if (!$aadhar_no) {
+                        $aadharNoErr = "Aadhar Number is required";
+                        $flag = false;
+                    } elseif (strlen($aadhar_no) != 12) {
+                        $aadharNoErr = "Aadhar Number must be contain 12 digit";
+                        $flag = false;
+                    } else {
+                        test_input($aadhar_no);
                     }
 
                     if (!$phn_no) {
@@ -135,8 +147,8 @@ if ($_SESSION["loggedIn"]) {
 
                     if ($flag) {
 
-                        $query = "INSERT INTO management(full_name, phn_no, Email, username, password)
-                VALUES('$full_name', '$phn_no', '$email', '$username', '$password' )";
+                        $query = "INSERT INTO management(full_name, aadhar_no, phn_no, Email, username, password)
+                VALUES('$full_name', '$aadhar_no', '$phn_no', '$email', '$username', '$password' )";
 
                         if ($conn->query($query)) {
 
@@ -166,11 +178,19 @@ if ($_SESSION["loggedIn"]) {
                     <div class="grid">
                         <form id="form" action="" method="POST">
 
-                            <div class="column-100">
+                            <div class="column-50">
                                 <div class="form-group">
                                     <label id="name-label" for="full-name"><strong>Full Name</strong></label>
                                     <input type="text" name="full_name" class="form-control" id="full-name" placeholder="Full Name" value="<?php $full_name; ?>" />
                                     <small class="error-label"><?php echo $nameErr ?></small>
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="aadhar-label" for="aadhar"><strong>Aadhar Card Number</strong></label>
+                                    <input type="number" name="aadhar_no" class="form-control" id="aadhar" placeholder="0000 0000 0000" value="<?php $aadhar_no; ?>" />
+                                    <small class="error-label"><?php echo $aadharNoErr ?></small>
                                 </div>
                             </div>
 

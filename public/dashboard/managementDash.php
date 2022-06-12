@@ -37,10 +37,9 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $clinic_name  ?></a></li>
-                        <li><a class="nav-link" href="#"><?php echo $full_name  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $full_name ?></a></li>
                         <li><a class="nav-link" href="/public/historyPage/clinicAvailableDoctor.php">Available Doctor</a></li>
                         <li><a class="nav-link" href="/public/historyPage/ClinicAvailableTest.php">Available Test facility</a></li>
-                        <li><a class="nav-link" href="/public/historyPage/managementTestHistory.php">Test History</a></li>
                         <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
                         
                     </ul>
@@ -68,12 +67,12 @@ if ($_SESSION["loggedIn"]) {
 
                         <div class="card">
                             <div class="icon">
-                                <a href="/public/dashboard/managementViewHistory.php">
+                                <a href="/public/historyPage/managementBookingHistory.php">
                                     <img src="/assets/images/mySchedule.png" alt="History" />
                                 </a>
                             </div>
                             <div class="desc">
-                                <h3>Clinic Appointments</h3>
+                                <h3>Clinic Booking History</h3>
                                 <p>
                                     Manage and view your appointment and diagnosis history here. Appointments once
                                     confirmed can only be deleted as per your discretion.

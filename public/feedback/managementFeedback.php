@@ -38,6 +38,7 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $clinic_name  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $full_name  ?></a></li>
+                        <li><a class="nav-link" href="/public/dashboard/managementDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
                     </ul>
                 </nav>

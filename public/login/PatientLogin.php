@@ -59,7 +59,7 @@
                                     <a href="/public/register/PatientRegister.php"><u> Register </u></a>
                                 </p>
                                 <p>
-                                    <a href="/public/forgotPassword/patientForgotPassword.php"><u> Forgot Password? </u></a>
+                                    <a href="/public/forgotPassword/patientForgotPassword.php"><u> Forgot Password / Username? </u></a>
                                 </p>
                             </div>
                         </form>
@@ -75,7 +75,6 @@
             <div id="footer-info">
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
-                    
                     <li><a href="/index.php#contact" target="_blank">Contact</a></li>
                 </ul>
                 <div id="copyright">Copyright &#169; DocEasy 2022</div>

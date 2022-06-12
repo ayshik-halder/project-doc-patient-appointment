@@ -20,7 +20,7 @@ if ($_SESSION["loggedIn"]) {
         $uname =  $_SESSION["uname"];
 
         $sql = "SELECT *,
-                patient.full_name AS p_name, patient.email AS p_email, patient.phn_no AS p_contact 
+                patient.full_name AS p_name, patient.email AS p_email, patient.phn_no AS p_contact, management.full_name AS m_name
                 FROM test, clinic, management, patient, book_test 
                 WHERE clinic.id = book_test.clinic_id AND test.t_id = book_test.test_id AND patient.p_id = book_test.patient_id AND clinic.id = management.clinic_id AND management.username='$uname'
                 ORDER BY date, test_type, p_name";
@@ -39,7 +39,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
-                        <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["m_name"];  ?></a></li>
                         <li><a class="nav-link" href="/public/dashboard/managementDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
                     </ul>
@@ -52,6 +52,7 @@ if ($_SESSION["loggedIn"]) {
                             <table>
                                 <tr>
                                     <th>DATE</th>
+                                    <th>tICKET NO</th>
                                     <th>TEST</th>
                                     <th>PATIENT NAME</th>
                                     <th>PATIENT CONTACT INFO</th>
@@ -68,6 +69,7 @@ if ($_SESSION["loggedIn"]) {
                                 ?>
                                     <tr>
                                         <td> <?php echo $row["date"]; ?> </td>
+                                        <td> <?php echo $row["ticket_no"]; ?> </td>
                                         <td> <?php echo $row["test_type"]; ?> </td>
                                         <td> <?php echo $row["p_name"]; ?> </td>
                                         <td> <?php echo $row["p_contact"]; ?> </td>

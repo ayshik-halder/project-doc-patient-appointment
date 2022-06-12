@@ -32,8 +32,9 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["username"];  ?></a></li>
+                        <li><a class="nav-link" href="/public/dashboard/patientDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/patietLogout.php">Logout</a></li>
-                        <li><a class="nav-link" href="../../patientDash.php">Exit</a></li>
                     </ul>
                 </nav>
             </header>
@@ -41,23 +42,13 @@ if ($_SESSION["loggedIn"]) {
 
                 <?php
                 $patient_id = $row["p_id"];
-                $oldPasswordErr = $passwordErr = $confirmPasswordErr = '';
+                $passwordErr = $confirmPasswordErr = '';
                 $flag = true;
 
                 if (isset($_POST["update"])) {
 
-                    $oldPassword = $_POST['old_password'];
                     $password = $_POST['password'];
                     $confirm_password = $_POST['confirm_password'];
-
-
-                    if (!$oldPassword) {
-                        $oldPasswordErr = "Password is required";
-                        $flag = false;
-                    } elseif ($oldPassword != $row["password"]) {
-                        $oldPasswordErr = "Only numbers are allowed";
-                        $flag = false;
-                    }
 
                     if (!$password) {
                         $passwordErr = "Password is required";
@@ -80,7 +71,12 @@ if ($_SESSION["loggedIn"]) {
                         $query1 = "UPDATE patient SET password = '$password' WHERE p_id = '$patient_id'";
 
                         if ($conn->query($query1)) {
-                            header("location:../../patientDash.php");
+                            $message = 'Your Password is updated successfully';
+
+                            echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/patientDash.php');
+                                </SCRIPT>";
                         } else {
                             echo "failed" . $conn->error;
                         }
@@ -92,14 +88,6 @@ if ($_SESSION["loggedIn"]) {
                     <h2>Change Password</h2>
                     <div class="grid">
                         <form id="form" action="" method="POST">
-
-                            <div class="column-100">
-                                <div class="form-group">
-                                    <label id="0ld-password-label" for="old-password"><strong>Password</strong></label>
-                                    <input type="password" name="old_password" class="form-control" id="old-password" placeholder="Old Password" value="<?php $oldPassword; ?>" />
-                                    <small class="error-label"><?php echo $oldPasswordErr ?></small>
-                                </div>
-                            </div>
 
                             <div class="column-100">
                                 <div class="form-group">

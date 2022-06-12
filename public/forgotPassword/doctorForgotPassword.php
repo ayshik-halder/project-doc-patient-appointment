@@ -38,14 +38,15 @@ require_once "../config.php"
                     <h2>Forget Password Form</h2>
                     <div class="grid">
                         <form id="form" action="./doctorForgotPassConn.php" method="POST">
+
                             <div class="form-group">
-                                <label id="username-label" for="username"><strong>Username</strong></label>
-                                <input type="text" name="username" class="form-control" id="username" placeholder="Username" />
+                                <label id="aadhar-label" for="aadhar"><strong>Aadhar Card Number</strong></label>
+                                <input type="number" name="aadhar_no" class="form-control" id="aadhar" placeholder="0000 0000 0000" />
                             </div>
 
                             <div class="form-group">
-                                <label id="dob-label" for="dob"><strong>DOB</strong></label>
-                                <input type="date" name="dob" class="form-control" id="dob" />
+                                <label id="mci-no-label" for="mci-no"><strong>Medical Council of India Registration Number</strong></label>
+                                <input type="number" name="mci_no" class="form-control" id="mci-no" placeholder="MCI Registration Number" value="<?php $mciNo; ?>" />
                             </div>
 
                             <div class="form-group">
@@ -58,20 +59,6 @@ require_once "../config.php"
                                     while ($row = $result_clinic->fetch_array()) {
                                     ?>
                                         <option><?php echo $row['clinic_name']; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label id="specialization-label" for="specialization"><strong>Specialization</strong></label>
-                                <select name="specialization" id="specialization" class="form-control">
-                                    <option selected>Choose your specialized Department</option>
-                                    <?php
-                                    $query_specialization = "SELECT DISTINCT specialization FROM doctor";
-                                    $result_specialization = $conn->query($query_specialization);
-                                    while ($row = $result_specialization->fetch_array()) {
-                                    ?>
-                                        <option><?php echo $row['specialization']; ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
@@ -100,7 +87,7 @@ require_once "../config.php"
             <div id="footer-info">
                 <ul>
                     <li><a href="#">Privacy Policy</a></li>
-                    
+
                     <li><a href="/index.php#contact" target="_blank">Contact</a></li>
                 </ul>
                 <div id="copyright">Copyright &#169; DocEasy 2022</div>

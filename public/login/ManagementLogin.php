@@ -59,7 +59,7 @@
                                     <a href="/index.php#contact"><u> Contact Admin </u></a>
                                 </p>
                                 <p>
-                                    <a href="/public/forgotPassword/managementForgotPassword.php"><u> Forget Password? </u></a>
+                                    <a href="/public/forgotPassword/managementForgotPassword.php"><u> Forget Password / Username? </u></a>
                                 </p>
                             </div>
                         </form>

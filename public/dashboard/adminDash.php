@@ -33,7 +33,7 @@ if ($_SESSION["loggedIn"]) {
                 <nav id="nav-bar">
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
-                        <li><a class="nav-link" href="../logout/adminLogout.php">Logout</a></li>
+                        <li><a class="nav-link" href="/public/logout/adminLogout.php">Logout</a></li>
                     </ul>
                 </nav>
             </header>

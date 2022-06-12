@@ -31,6 +31,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
+                        <li><a class="nav-link" href="#"><?php echo $row["full_name"]; ?></a></li>
                         <li><a class="nav-link" href="../managementDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
                     </ul>
@@ -72,6 +73,13 @@ if ($_SESSION["loggedIn"]) {
                                 <div class="form-group">
                                     <label id="clinic-name-label" for="clinic-name"><strong>Clinic Name</strong></label>
                                     <input type="text" name="clinic_name" class="form-control" id="Clinic-name" placeholder="Clinic Name" value="<?php echo $row['clinic_name']; ?>" required />
+                                </div>
+                            </div>
+
+                            <div class="column-50">
+                                <div class="form-group">
+                                    <label id="licence-no-label" for="licence-no"><strong>Clinic Licence Number</strong></label>
+                                    <input type="number" name="licence_no" class="form-control" id="licence-no" placeholder="Clinic Licence Number" value="<?php echo $row['licence_no']; ?>" required />
                                 </div>
                             </div>
 

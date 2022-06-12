@@ -33,7 +33,8 @@ if ($_SESSION["loggedIn"]) {
                     <ul>
                         <li><a class="nav-link" href="#"><?php echo $row["clinic_name"];  ?></a></li>
                         <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
-                        <li><a class="nav-link" href="../logout/managementLogout.php">Logout</a></li>
+                        <li><a class="nav-link" href="/public/dashboard/managementDash.php">Exit</a></li>
+                        <li><a class="nav-link" href="/public/logout/managementLogout.php">Logout</a></li>
                     </ul>
                 </nav>
             </header>
@@ -203,7 +204,6 @@ if ($_SESSION["loggedIn"]) {
                     </div>
                     <div id="footer-info">
                         <ul>
-                            <li><a href="#">Diagnosis Register</a></li>
                             <li><a href="/index.php#contact">Contact Admin</a></li>
                         </ul>
                         <div id="copyright">Copyright &#169; DocEasy 2022</div>

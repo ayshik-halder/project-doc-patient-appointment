@@ -59,7 +59,7 @@
                                     <a href="/public/register/DocRegister.php"><u> Register </u></a>
                                 </p>
                                 <p>
-                                    <a href="/public/forgotPassword/doctorForgotPassword.php"><u> Forgot Password? </u></a>
+                                    <a href="/public/forgotPassword/doctorForgotPassword.php"><u> Forgot Password / Username? </u></a>
                                 </p>
                             </div>
                         </form>
