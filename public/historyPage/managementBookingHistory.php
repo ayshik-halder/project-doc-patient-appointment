@@ -37,7 +37,7 @@
                             alt="DocEasy for doctors logo" />
                     </div>
                     <div class="desc">
-                        <h3>Appointments</h3>
+                        <h3>Appointments Booking</h3>
                         <ol>
                             <li>View Appointments booked in your clinic</li>
                             <li>Keep track of patient's appointments</li>
@@ -54,7 +54,7 @@
                             alt="DocEasy logo" />
                     </div>
                     <div class="desc">
-                        <h3>Lab Tests</h3>
+                        <h3>Lab Tests Booking</h3>
                         <ol>
                             <li>View Booked Tests</li>
                             <li>Add Reports</li>

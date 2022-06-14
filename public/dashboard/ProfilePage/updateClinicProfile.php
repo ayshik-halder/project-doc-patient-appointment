@@ -46,6 +46,7 @@ if ($_SESSION["loggedIn"]) {
                 if (isset($_POST["update"])) {
 
                     $clinic_name = $_POST['clinic_name'];
+                    $licence_no = $_POST['licence_no'];
                     $address = $_POST['address'];
                     $city = $_POST['city'];
                     $pin_code = $_POST['pin_code'];
@@ -54,10 +55,15 @@ if ($_SESSION["loggedIn"]) {
                     $clinic_upi_id = $_POST['clinic_upi_id'];
 
 
-                    $query1 = "UPDATE clinic SET clinic_name = '$clinic_name', address = '$address', city = '$city', pin_code = '$pin_code', contact_no = '$contact_no', email = '$email', clinic_upi_id = '$clinic_upi_id' WHERE id = '$clinic_id'";
+                    $query1 = "UPDATE clinic SET clinic_name = '$clinic_name', licence_no = '$licence_no', address = '$address', city = '$city', pin_code = '$pin_code', contact_no = '$contact_no', email = '$email', clinic_upi_id = '$clinic_upi_id' WHERE id = '$clinic_id'";
 
                     if ($conn->query($query1)) {
-                        header("location:../managementDash.php");
+                        $message = 'Your Information is updated successfully';
+
+                        echo "<SCRIPT>
+                                alert('$message')
+                                window.location.replace('/public/dashboard/managementDash.php');
+                                </SCRIPT>";
                     } else {
                         echo "failed" . $conn->error;
                     }
@@ -65,7 +71,7 @@ if ($_SESSION["loggedIn"]) {
                 ?>
 
                 <section id="registration">
-                    <h2>Clinic Registration Form</h2>
+                    <h2>Clinic Details</h2>
                     <div class="grid">
                         <form id="form" action="" method="POST">
 

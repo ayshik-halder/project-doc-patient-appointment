@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2022 at 11:41 AM
+-- Generation Time: Jun 14, 2022 at 08:15 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -114,7 +114,7 @@ INSERT INTO `book_test` (`ticket_no`, `test_id`, `patient_id`, `clinic_id`, `dat
 CREATE TABLE `clinic` (
   `id` int(4) UNSIGNED NOT NULL,
   `clinic_name` varchar(100) NOT NULL,
-  `licence_no` bigint(15) UNSIGNED NOT NULL,
+  `licence_no` int(8) UNSIGNED NOT NULL,
   `address` varchar(200) NOT NULL,
   `city` varchar(50) NOT NULL,
   `pin_code` int(6) UNSIGNED NOT NULL,
@@ -128,10 +128,10 @@ CREATE TABLE `clinic` (
 --
 
 INSERT INTO `clinic` (`id`, `clinic_name`, `licence_no`, `address`, `city`, `pin_code`, `contact_no`, `email`, `clinic_upi_id`) VALUES
-(8, 'Burdwan Medical College And Hospital', 0, 'Khosbagan, Burdwan, West Bengal 713104', 'Burdwan', 713104, 3427962200, 'burdwanHospital@gmail.com', 'burdwanHospital@oksbi'),
-(9, 'Bengal Faith Hospital', 0, 'Health City, Goda, Burdwan, West Bengal 713102', 'Burdwan', 713102, 8420382000, 'bengalfaithhospital@gmail.com', 'bengalFaithHospital@okaxis'),
-(10, 'Kisholoy Children Hospital', 0, '69, Grand Trunk Road, Purbachal, Sripally, Kanainatsal, Burdwan, West Bengal 713103', 'Burdwan', 713103, 6296055055, 'kisholoyHospital@gmail.com', 'kisholoyHospital@okaxis'),
-(11, 'Apollo Nursing Home', 0, 'Shyamlal Colony, Khosbagan, Burdwan, West Bengal 713101', 'Burdwan', 713101, 9501032383, 'apolloNursingHome@gmail.com', 'apolloNursinghome@oksbi');
+(8, 'Burdwan Medical College And Hospital', 10023122, 'Khosbagan, Burdwan, West Bengal 713104', 'Burdwan', 713104, 3427962200, 'burdwanHospital@gmail.com', 'burdwanHospital@oksbi'),
+(9, 'Bengal Faith Hospital', 42509662, 'Health City, Goda, Burdwan, West Bengal 713102', 'Burdwan', 713102, 8420382000, 'bengalfaithhospital@gmail.com', 'bengalFaithHospital@okaxis'),
+(10, 'Kisholoy Children Hospital', 52479826, '69, Grand Trunk Road, Purbachal, Sripally, Kanainatsal, Burdwan, West Bengal 713103', 'Burdwan', 713103, 6296055055, 'kisholoyHospital@gmail.com', 'kisholoyHospital@okaxis'),
+(11, 'Apollo Nursing Home', 39978354, 'Shyamlal Colony, Khosbagan, Burdwan, West Bengal 713101', 'Burdwan', 713101, 9501032383, 'apolloNursingHome@gmail.com', 'apolloNursinghome@oksbi');
 
 -- --------------------------------------------------------
 
