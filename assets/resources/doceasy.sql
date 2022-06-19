@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2022 at 08:15 PM
+-- Generation Time: Jun 19, 2022 at 08:37 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -67,13 +67,16 @@ CREATE TABLE `book_appointment` (
 --
 
 INSERT INTO `book_appointment` (`id`, `patient_id`, `clinic_id`, `doctor_id`, `schedule_id`, `date`, `approval_status`, `problem`, `doctor_appointment_slip`, `transaction_id`) VALUES
-(29, 53, 8, 34, NULL, '2022-05-19', 'APPROVED', '', NULL, '526395'),
-(31, 53, 8, 35, NULL, '2022-05-25', 'APPROVED', 'PCOD', NULL, ''),
-(32, 53, 8, 35, NULL, '2022-05-24', 'APPROVED', 'PCOD', NULL, ''),
+(32, 53, 8, 35, NULL, '2022-05-24', 'EXPIRE', 'PCOD', NULL, ''),
 (33, 53, 8, 34, NULL, '12-04-2022', 'EXPIRE', NULL, NULL, NULL),
-(34, 54, 8, 34, NULL, '2022-05-17', 'APPROVED', '', NULL, ''),
-(35, 55, 8, 34, NULL, '2022-05-20', 'APPROVED', '', NULL, ''),
-(36, 55, 8, 34, NULL, '12-04-2022', 'EXPIRE', NULL, NULL, NULL);
+(34, 54, 8, 34, NULL, '2022-05-17', 'EXPIRE', '', NULL, ''),
+(35, 55, 8, 34, NULL, '2022-05-20', 'EXPIRE', '', NULL, ''),
+(36, 55, 8, 34, NULL, '12-04-2022', 'EXPIRE', NULL, NULL, NULL),
+(38, 53, 8, 35, NULL, '2022-06-25', 'APPROVED', 'PCOD', NULL, ''),
+(39, 53, 8, 34, NULL, '2022-06-29', 'APPROVED', '', NULL, ''),
+(40, 53, 8, 34, NULL, '2022-06-30', 'APPROVED', '', NULL, ''),
+(41, 54, 8, 34, NULL, '2022-06-26', 'APPROVED', '', NULL, ''),
+(42, 55, 8, 34, NULL, '2022-06-26', 'APPROVED', '', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -96,14 +99,18 @@ CREATE TABLE `book_test` (
 --
 
 INSERT INTO `book_test` (`ticket_no`, `test_id`, `patient_id`, `clinic_id`, `date`, `approval_status`, `test_appointment_slip`) VALUES
-(33, 27, 53, 8, '2022-05-11', 'APPROVED', NULL),
-(34, 27, 53, 8, '2022-05-10', 'APPROVED', NULL),
-(35, 29, 53, 8, '2022-05-10', 'APPROVED', NULL),
-(36, 30, 55, 8, '2022-05-12', 'APPROVED', NULL),
-(37, 30, 55, 8, '2022-05-12', 'APPROVED', NULL),
-(38, 27, 55, 8, '2022-05-08', 'APPROVED', NULL),
-(39, 39, 53, 11, '2022-05-25', 'APPROVED', NULL),
-(40, 31, 53, 8, '2022-05-18', 'APPROVED', NULL);
+(33, 27, 53, 8, '2022-05-11', 'EXPIRE', NULL),
+(36, 30, 55, 8, '2022-05-12', 'EXPIRE', NULL),
+(37, 30, 55, 8, '2022-05-12', 'EXPIRE', NULL),
+(38, 27, 55, 8, '2022-05-08', 'EXPIRE', NULL),
+(40, 31, 53, 8, '2022-05-18', 'EXPIRE', NULL),
+(41, 30, 53, 8, '2022-06-24', 'APPROVED', NULL),
+(42, 39, 53, 11, '2022-06-30', 'APPROVED', NULL),
+(43, 35, 53, 10, '2022-06-28', 'APPROVED', NULL),
+(44, 27, 53, 8, '2022-06-30', 'APPROVED', NULL),
+(45, 27, 54, 8, '2022-06-26', 'APPROVED', NULL),
+(46, 30, 54, 8, '2022-06-25', 'APPROVED', NULL),
+(48, 31, 55, 8, '2022-06-30', 'APPROVED', NULL);
 
 -- --------------------------------------------------------
 
@@ -159,7 +166,8 @@ INSERT INTO `clinic_feedback` (`id`, `clinic_id`, `date_time`, `user_type`, `nam
 (3, 8, '07-05-2022 10:26:17', 'PATIENT', 'Rimi', 'rimi22@gmail.com', 'QUERY', 'can i cancel appointment from here?', ''),
 (4, 8, '07-05-2022 10:27:10', 'PATIENT', 'Rimi', 'rimi22@gmail.com', 'QUERY', 'Can i cancel appointment anytime from here?', ''),
 (5, 8, '16-05-2022 18:43:34', 'PATIENT', 'Dolon Roy', 'rdolon321@gmail.com', 'QUERY', 'Can i book appointment for next month?', ''),
-(6, 8, '16-05-2022 18:47:42', 'PATIENT', 'Rimi Mondal', 'rimi22@gmail.com', 'FEEDBACK', 'Service is very good', '');
+(6, 8, '16-05-2022 18:47:42', 'PATIENT', 'Rimi Mondal', 'rimi22@gmail.com', 'FEEDBACK', 'Service is very good', ''),
+(7, 10, '18-06-2022 21:20:22', 'PATIENT', 'Dolon Roy', 'rdolon321@gmail.com', 'FEEDBACK', 'very good hospitality', '');
 
 -- --------------------------------------------------------
 
@@ -186,7 +194,8 @@ INSERT INTO `doceasy_feedback` (`feedback_no`, `name`, `email`, `message`, `date
 (7, 'Rupa', 'rupa21@gmail.com', 'This is a very good website', '07-05-2022 10:23:40'),
 (8, 'Arun Roy', 'arun812@gmail.com', 'Your Service is very good', '16-05-2022 13:36:05'),
 (9, 'Sanjeev Mondal', 'sanjeev321@gmail.com', 'I want to register myself as a management of Kisholoy Children Hospital', '16-05-2022 13:38:08'),
-(10, 'Maya Biswas', 'maya1990@gmail.com', 'I want to register my hospital. Please Contact me Back.', '16-05-2022 13:39:19');
+(10, 'Maya Biswas', 'maya1990@gmail.com', 'I want to register my hospital. Please Contact me Back.', '16-05-2022 13:39:19'),
+(11, 'sutista', 'rdolon321@gmail.com', 'hiii', '18-06-2022 21:09:05');
 
 -- --------------------------------------------------------
 
@@ -288,9 +297,10 @@ CREATE TABLE `patient` (
 --
 
 INSERT INTO `patient` (`p_id`, `username`, `password`, `full_name`, `aadhar_no`, `dob`, `age`, `gender`, `marital_status`, `phn_no`, `email`, `address`, `city`, `pin_code`, `allergic`) VALUES
-(53, 'rimi24', 34210, 'Rimi Mondal', 254465419870, '1998-11-19', 24, 'FEMALE', 'UNMARRIED', 9876549874, 'rimi98@gmail.com', 'Khosbagan, Burdwan, West Bengal', 'Burdwan', 713101, 'Egg'),
+(53, 'rimi24', 34210, 'Rimi Mondol', 254465419870, '1998-11-19', 24, 'FEMALE', 'UNMARRIED', 9876549874, 'rimi98@gmail.com', 'Khosbagan, Burdwan, West Bengal', 'Burdwan', 713101, 'Egg, mustard oil'),
 (54, 'arun22', 4560, 'Arun Saha', 598621436557, '2000-02-13', 22, 'MALE', 'UNMARRIED', 8854921504, 'arun57@gmail.com', 'Police Line Bazar, Burdwan , West Bengal', 'Burdwan', 713103, NULL),
-(55, 'biplab90', 123456, 'Biplab Biswas', 985234217894, '1990-05-29', 32, 'MALE', 'MARRIED', 9877765542, 'biplab1990@gmail.com', 'Memari, Burdwan, West Bengal', 'Burdwan', 713153, NULL);
+(55, 'biplab90', 123456, 'Biplab Biswas', 985234217894, '1990-05-29', 32, 'MALE', 'MARRIED', 9877765542, 'biplab1990@gmail.com', 'Memari, Burdwan, West Bengal', 'Burdwan', 713153, NULL),
+(56, 'dolon123', 1234, 'Dolon Roy', 123456789012, '2022-06-16', 1, 'FEMALE', 'UNMARRIED', 7908612662, 'rdolon321@gmail.com', 'Vill. - Maheshdanga Camp, Post - Maheshdanga, district - Purba Bardhaman, pin - 713151', 'Memari', 713151, NULL);
 
 -- --------------------------------------------------------
 
@@ -304,13 +314,6 @@ CREATE TABLE `patient_document` (
   `report_type` varchar(50) NOT NULL,
   `report` mediumblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `patient_document`
---
-
-INSERT INTO `patient_document` (`id`, `patient_id`, `report_type`, `report`) VALUES
-(14, 53, 'allergy', 0x616c6c657267792e706466);
 
 -- --------------------------------------------------------
 
@@ -464,13 +467,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `book_appointment`
 --
 ALTER TABLE `book_appointment`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `book_test`
 --
 ALTER TABLE `book_test`
-  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `ticket_no` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `clinic`
@@ -482,13 +485,13 @@ ALTER TABLE `clinic`
 -- AUTO_INCREMENT for table `clinic_feedback`
 --
 ALTER TABLE `clinic_feedback`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `doceasy_feedback`
 --
 ALTER TABLE `doceasy_feedback`
-  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `feedback_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `doctor`
@@ -506,13 +509,13 @@ ALTER TABLE `management`
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `p_id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `p_id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `patient_document`
 --
 ALTER TABLE `patient_document`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -524,7 +527,7 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `test_report`
 --
 ALTER TABLE `test_report`
-  MODIFY `report_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `report_no` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables

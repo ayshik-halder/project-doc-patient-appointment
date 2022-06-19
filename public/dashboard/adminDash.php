@@ -110,7 +110,7 @@ if ($_SESSION["loggedIn"]) {
                     <div id="footer-info">
                         <ul>
                             <?php include_once "../config.php"; ?>
-                            <li><a href="http://localhost/phpmyadmin">PhpMyAdmin</a></li>
+                            <li><a href="/public/dashboard/ProfilePage/updateAppointmentStatus.php">Update Appointment Status</a></li>
                             <li><a href="/public/register/clinicRegister.php">Clinic Registration</a></li>
                             <li><a href="/public/register/managementRegister.php">Management Registration</a></li>
                         </ul>

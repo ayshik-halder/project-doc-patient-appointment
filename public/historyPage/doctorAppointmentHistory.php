@@ -23,7 +23,8 @@ if ($_SESSION["loggedIn"]) {
         $sql = "SELECT *, 
         patient.full_name AS patient_name, patient.age AS patient_age, patient.gender AS patient_gender, doctor.full_name AS doctor_name, book_appointment.id AS booking_id  
         FROM doctor, clinic, book_appointment, patient
-        WHERE book_appointment.clinic_id = clinic.id AND patient.p_id = book_appointment.patient_id AND doctor.d_id = book_appointment.doctor_id AND d_id = '$doctor_id'";
+        WHERE book_appointment.clinic_id = clinic.id AND patient.p_id = book_appointment.patient_id AND doctor.d_id = book_appointment.doctor_id AND d_id = '$doctor_id'
+        ORDER BY date DESC";
 
         $result = $conn->query($sql);
         $row = $result->fetch_assoc();

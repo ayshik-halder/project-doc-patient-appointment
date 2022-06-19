@@ -23,7 +23,7 @@ if ($_SESSION["loggedIn"]) {
                 patient.full_name AS p_name, patient.email AS p_email, patient.phn_no AS p_contact, management.full_name AS m_name
                 FROM test, clinic, management, patient, book_test 
                 WHERE clinic.id = book_test.clinic_id AND test.t_id = book_test.test_id AND patient.p_id = book_test.patient_id AND clinic.id = management.clinic_id AND management.username='$uname'
-                ORDER BY date, test_type, p_name";
+                ORDER BY date DESC, test_type, p_name";
 
 
         $result = $conn->query($sql);
