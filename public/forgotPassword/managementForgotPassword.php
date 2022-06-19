@@ -34,7 +34,7 @@ require_once "../config.php"
         <section id="registration">
             <div class="container">
                 <div class="card">
-                    <h2>Management Login Form</h2>
+                    <h2>Forgot Password Form</h2>
                     <div class="grid">
                         <form id="form" action="./managementForgotPassConn.php" method="POST">
                             <div class="form-group">

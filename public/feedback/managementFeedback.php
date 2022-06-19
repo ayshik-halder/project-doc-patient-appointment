@@ -19,8 +19,10 @@ if ($_SESSION["loggedIn"]) {
         $clinic_name =  $_SESSION["clinic_name"];
         $full_name =  $_SESSION["full_name"];
 
-        $sql = "SELECT * FROM clinic_feedback, clinic 
-                WHERE clinic.id = clinic_feedback.clinic_id
+        $sql = "SELECT * ,
+                clinic_feedback.email AS EMAIL
+                FROM clinic_feedback, clinic 
+                WHERE clinic.id = clinic_feedback.clinic_id AND clinic_name = '$clinic_name'
                 ORDER BY message_type, clinic_name, user_type, name";
 
         $result = $conn->query($sql);
@@ -52,7 +54,6 @@ if ($_SESSION["loggedIn"]) {
                             <table>
                                 <tr>
                                     <th>DATE & TIME</th>
-                                    <th>CLINIC NAME</th>
                                     <th>USER TYPE</th>
                                     <th>NAME</th>
                                     <th>EMAIL</th>
@@ -66,10 +67,9 @@ if ($_SESSION["loggedIn"]) {
                                 ?>
                                     <tr>
                                         <td> <?php echo $row["date_time"]; ?> </td>
-                                        <td> <?php echo $row["clinic_name"]; ?> </td>
                                         <td> <?php echo $row["user_type"]; ?> </td>
                                         <td> <?php echo $row["name"]; ?> </td>
-                                        <td> <?php echo $row["email"]; ?> </td>
+                                        <td> <?php echo $row["EMAIL"]; ?> </td>
                                         <td> <?php echo $row["message_type"]; ?> </td>
                                         <td> <?php echo $row["message"]; ?> </td>
                                         <td> <?php echo $row["attach_file"]; ?> </td>
