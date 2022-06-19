@@ -21,7 +21,7 @@ if ($_SESSION["loggedIn"]) {
         $patient_id =  $_SESSION["patient_id"];
 
         $sql = "SELECT *,
-                doctor.full_name AS doctor_name, book_appointment.id AS booking_id 
+                doctor.full_name AS doctor_name, patient.full_name AS p_name, book_appointment.id AS booking_id 
                 FROM patient, book_appointment, doctor, clinic 
                 WHERE patient.p_id = book_appointment.patient_id AND doctor.d_id = book_appointment.doctor_id AND clinic.id = book_appointment.clinic_id AND p_id='$patient_id'
                 ORDER BY date DESC, doctor_name";
@@ -39,7 +39,7 @@ if ($_SESSION["loggedIn"]) {
 
                 <nav id="nav-bar">
                     <ul>
-                        <li><a class="nav-link" href="#"><?php echo $row["full_name"];  ?></a></li>
+                        <li><a class="nav-link" href="#"><?php echo $row["p_name"];  ?></a></li>
                         <li><a class="nav-link" href="/public/dashboard/patientDash.php">Exit</a></li>
                         <li><a class="nav-link" href="/public/logout/patietLogout.php">Logout</a></li>
                     </ul>
