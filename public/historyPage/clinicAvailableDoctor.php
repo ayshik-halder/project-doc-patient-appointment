@@ -19,7 +19,7 @@ if ($_SESSION["loggedIn"]) {
         <?php
         $uname =  $_SESSION["uname"];
 
-        $sql = "SELECT *, doctor.full_name AS doctor_name, doctor.email AS d_email
+        $sql = "SELECT *, doctor.full_name AS doctor_name, doctor.email AS d_email, doctor.phn_no AS d_phno
                 FROM doctor, clinic, management 
                 WHERE clinic.id = management.clinic_id AND clinic.id = doctor.clinic_id AND management.username='$uname'
                 ORDER BY doctor.full_name";
@@ -77,7 +77,7 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["start_time"] . "-" . $row["end_time"]; ?> </td>
                                         <td> <?php echo $row["fee"]; ?> </td>
                                         <td> <?php echo $row["d_email"]; ?> </td>
-                                        <td> <?php echo $row["phn_no"]; ?> </td>
+                                        <td> <?php echo $row["d_phno"]; ?> </td>
                                     </tr>
 
                                 <?php }
