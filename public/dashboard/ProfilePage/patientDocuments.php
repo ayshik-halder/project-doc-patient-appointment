@@ -67,7 +67,7 @@ if ($_SESSION["loggedIn"]) {
                             if ($conn->query($query3)) {
                                 $message = 'Your Document is submitted successfully';
 
-                            echo "<SCRIPT>
+                                echo "<SCRIPT>
                                 alert('$message')
                                 window.location.replace('/public/dashboard/patientDash.php');
                                 </SCRIPT>";
@@ -94,8 +94,69 @@ if ($_SESSION["loggedIn"]) {
                                     while ($row_document = $result_document->fetch_array()) { ?>
                                         <input name="report" class="form-control" id="document" value="<?php echo $row_document["report"] ?>" disabled />
                                     <?php } ?>
+                                    <table>
+                                        <tr>
+                                            <th>Report TYPE</th>
+                                            <th>Report</th>
+                                            <th>Action</th>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Lab Test</td>
+                                            <td>Blood Report</td>
+                                            <td><button> <a href="/assets/pdf/Blood_Report.pdf"> Download </a> </button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Lab Test</td>
+                                            <td>CT Scan</td>
+                                            <td><button> <a href="/assets/pdf/CT _Scan.pdf"> Download </a> </button></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Lab Test</td>
+                                            <td>X-Ray</td>
+                                            <td><button> <a href="/assets/pdf/X_Ray.pdf"> Download </a> </button></td>
+                                        </tr>
+
+                                    </table>
                                 </div>
                             </div>
+
+
+                            <style>
+                                /* Table formating */
+                                #table {
+                                    padding: 12em 1rem;
+                                    text-align: center;
+                                    color: #2f1e84;
+                                }
+
+                                td {
+                                    text-align: center;
+                                    width: 12em;
+                                    padding: 1em;
+                                }
+
+                                th {
+                                    text-align: center;
+                                    padding: 1em;
+                                    background-color: #2f1e84;
+                                    color: white;
+                                }
+
+                                tr {
+                                    height: 0.7em;
+                                }
+
+                                table tr:nth-child(even) {
+                                    background-color: #eee;
+                                }
+
+                                table tr:nth-child(odd) {
+                                    background-color: #fff;
+                                }
+                            </style>
 
                             <div class="column-50">
                                 <div class="form-group">
