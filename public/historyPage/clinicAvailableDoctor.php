@@ -80,7 +80,7 @@ if ($_SESSION["loggedIn"]) {
                                         <td> <?php echo $row["d_phno"]; ?> </td>
                                     </tr>
 
-                                <?php }
+                                <?php }23
                                 ?>
 
                             </table>
