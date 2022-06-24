@@ -45,7 +45,7 @@ if ($_SESSION["loggedIn"]) {
                     <div class="container">
                         <div class="card">
                             <div class="icon">
-                                <a href="http://localhost/phpmyadmin/index.php?route=/database/structure&server=1&db=doceasy" target="blank">
+                                <a href="http://localhost:8001/phpmyadmin/index.php?route=/database/structure&server=1&db=doceasy" target="blank">
                                     <img src="/assets/images/myData.png" alt="Profile icon" />
                                 </a>
                             </div>
